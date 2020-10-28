@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.LoginActivity">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="176dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/ds40"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/gray_radiu_20_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <ImageView
+            android:layout_width="@dimen/ds15"
+            android:layout_height="@dimen/ds15"
+            android:layout_marginStart="@dimen/sp16"
+            android:src="@mipmap/login_login_icon" />
+
+        <EditText
+            android:id="@+id/login_phone_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/ds12"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请输入用户名"
+            android:inputType="number"
+            android:textColor="@color/color_333333"
+            android:textColorHighlight="@color/color_c9c9c9"
+            android:textSize="@dimen/sp14">
+
+            <requestFocus />
+        </EditText>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ds40"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center_vertical"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <ImageView
+            android:id="@+id/login_password_image"
+            android:layout_width="@dimen/ds15"
+            android:layout_height="@dimen/ds15"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/sp16"
+            android:src="@mipmap/login_password_icon" />
+
+
+        <EditText
+            android:id="@+id/login_code_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/ds12"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="短信验证码"
+            android:inputType="textPassword"
+            android:textColor="@color/color_333333"
+            android:textColorHighlight="@color/color_c9c9c9"
+            android:textSize="@dimen/sp14" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:layout_editor_absoluteX="-37dp">
+
+        <TextView
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/ds41"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@mipmap/login_button_icon"
+            android:gravity="center"
+            android:text="@string/login" />
+
+        <TextView
+            android:id="@+id/button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/ds41"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:background="@mipmap/login_button_icon"
+            android:gravity="center"
+            android:text="@string/register" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
