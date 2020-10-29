@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".views.RegisterActivity">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/register_cancel"
+                android:layout_width="@dimen/ds50"
+                android:layout_height="@dimen/ds50"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/ds15"
+                android:text="@string/cancel"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp14"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/register_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/by_phone"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp18"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/register_change"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/ds50"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/ds15"
+                android:text="@string/by_emil"
+                android:textColor="@color/color_1689FF"
+                android:textSize="@dimen/sp14"
+                android:textStyle="bold"
+                tools:ignore="RelativeOverlap,RtlSymmetry" />
+        </RelativeLayout>
+
+
+        <EditText
+            android:id="@+id/register_password_input"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/ds45"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/gray_radiu_8_bg"
+            android:hint="@string/set_password"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/ds15"
+            android:textColor="@color/color_333333"
+            android:textColorHighlight="@color/color_999999"
+            android:textSize="@dimen/sp14"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/register_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/ds41"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:background="@mipmap/login_button_icon"
+            android:gravity="center"
+            android:text="@string/register_right_now"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_password_input" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/login_password"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/sp12"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+
+        <LinearLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/relativeLayout"
+            app:layout_constraintStart_toStartOf="@+id/relativeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+            <!--手机号注册-->
+            <LinearLayout
+                android:id="@+id/phone_register_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phone_number"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp12"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/register_phone_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/ds45"
+                    android:layout_marginTop="@dimen/ds10"
+                    android:background="@drawable/gray_radiu_8_bg"
+                    android:hint="@string/writ_phone_number"
+                    android:inputType="number"
+                    android:paddingStart="@dimen/ds15"
+                    android:textColor="@color/color_333333"
+                    android:textColorHighlight="@color/color_999999"
+                    android:textSize="@dimen/sp14"
+                    tools:ignore="RtlSymmetry,TextFields">
+
+                    <requestFocus />
+                </EditText>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/sp20"
+                    android:text="@string/verification"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp12"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ds10"
+                    android:background="@drawable/gray_radiu_8_bg">
+
+                    <EditText
+                        android:id="@+id/register_code_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ds45"
+                        android:background="@null"
+                        android:hint="@string/six_number"
+                        android:inputType="number"
+                        android:paddingStart="@dimen/ds15"
+                        android:textColor="@color/color_333333"
+                        android:textColorHighlight="@color/color_999999"
+                        android:textSize="@dimen/sp14"
+                        tools:ignore="RtlSymmetry" />
+
+                    <TextView
+                        android:id="@+id/login_getcode_button"
+                        android:layout_width="@dimen/ds90"
+                        android:layout_height="@dimen/ds30"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/ds8"
+                        android:background="@mipmap/getcode_button_icon"
+                        android:gravity="center"
+                        android:text="@string/get_verification_code"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp13" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!--邮箱注册-->
+            <LinearLayout
+                android:id="@+id/email_register_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/emil_stress"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp12" />
+
+                <EditText
+                    android:id="@+id/register_email_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/ds45"
+                    android:layout_marginTop="@dimen/ds10"
+                    android:background="@drawable/gray_radiu_8_bg"
+                    android:hint="@string/enter_email_address"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="@dimen/ds15"
+                    android:textColor="@color/color_333333"
+                    android:textColorHighlight="@color/color_999999"
+                    android:textSize="@dimen/sp14"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/sp20"
+                    android:text="@string/confirm_email_address"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp12" />
+
+                <EditText
+                    android:id="@+id/register_email_again_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/ds45"
+                    android:layout_marginTop="@dimen/ds10"
+                    android:background="@drawable/gray_radiu_8_bg"
+                    android:hint="@string/confirm_your_email_address"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="@dimen/ds15"
+                    android:textColor="@color/color_333333"
+                    android:textColorHighlight="@color/color_999999"
+                    android:textSize="@dimen/sp14"
+                    tools:ignore="RtlSymmetry" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

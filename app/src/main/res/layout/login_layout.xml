@@ -49,7 +49,7 @@
 
 
             <EditText
-                android:id="@+id/login_code_input"
+                android:id="@+id/login_pass_word_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/ds12"
