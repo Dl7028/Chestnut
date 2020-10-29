@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import com.stx.xhb.androidx.XBanner
 import com.stx.xhb.androidx.entity.LocalImageInfo
+import com.yks.chestnutyun.MainActivity
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.app.BaseActivity
 import com.yks.chestnutyun.databinding.ActivityLoginBinding
@@ -31,9 +32,9 @@ class LoginActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         //轮播图图片
         val localImageInfoList:MutableList<LocalImageInfo> = ArrayList<LocalImageInfo>()
-        localImageInfoList.add(LocalImageInfo(R.drawable.banner_car))
-        localImageInfoList.add(LocalImageInfo(R.drawable.banner_xiaoqiche))
-        localImageInfoList.add(LocalImageInfo(R.drawable.banner_xingqiu))
+        localImageInfoList.add(LocalImageInfo(R.mipmap.banner_car))
+        localImageInfoList.add(LocalImageInfo(R.mipmap.banner_chaojimali))
+        localImageInfoList.add(LocalImageInfo(R.mipmap.banner_xingqiu))
         Log.d("", "" + localImageInfoList.size)
         binding.banner.setBannerData(localImageInfoList)
     }
@@ -41,8 +42,14 @@ class LoginActivity : BaseActivity() {
 
 
     override fun initListener() {
+        //跳转到注册
         binding.loginRegisterButton.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+        }
+        //跳转到主页
+        binding.loginButton.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+
         }
         //加载轮播图
         binding.banner.loadImage { banner: XBanner, model, view: View, position ->

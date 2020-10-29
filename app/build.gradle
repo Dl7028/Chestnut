@@ -41,5 +41,7 @@ dependencies {
 
     //轮播图
     implementation 'com.github.xiaohaibin:XBanner:androidx_v1.1.2'
+    //导航栏
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
 
 }
