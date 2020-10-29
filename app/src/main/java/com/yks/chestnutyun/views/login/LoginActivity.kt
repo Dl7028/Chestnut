@@ -1,21 +1,16 @@
 package com.yks.chestnutyun.views.login
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.renderscript.ScriptGroup
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import com.stx.xhb.androidx.XBanner
+import com.stx.xhb.androidx.entity.LocalImageInfo
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.app.BaseActivity
 import com.yks.chestnutyun.databinding.ActivityLoginBinding
-import com.yks.chestnutyun.views.RegisterActivity
 
 /**
   * @Description:    登录界面的Activity
@@ -33,14 +28,27 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun initView() {
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_login)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        //轮播图图片
+        val localImageInfoList:MutableList<LocalImageInfo> = ArrayList<LocalImageInfo>()
+        localImageInfoList.add(LocalImageInfo(R.drawable.banner_car))
+        localImageInfoList.add(LocalImageInfo(R.drawable.banner_xiaoqiche))
+        localImageInfoList.add(LocalImageInfo(R.drawable.banner_xingqiu))
+        Log.d("", "" + localImageInfoList.size)
+        binding.banner.setBannerData(localImageInfoList)
     }
 
-    override fun initListener() {
 
+
+    override fun initListener() {
         binding.loginRegisterButton.setOnClickListener {
-            startActivity(Intent(this,RegisterActivity::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
+        //加载轮播图
+        binding.banner.loadImage { banner: XBanner, model, view: View, position ->
+            (view as ImageView).setImageResource((model as LocalImageInfo).xBannerUrl)
+        }
+
     }
 
 }
