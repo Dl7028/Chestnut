@@ -31,7 +31,12 @@ class HomeViewPagerFragment :BaseFragment() {
 
     override fun initView() {
         val pagerAdapter  = ChestnutPagerAdapter(this)
-        viewPagerBinding.viewPager.adapter = pagerAdapter
+        viewPagerBinding.viewPager.apply {
+            adapter = pagerAdapter
+            isUserInputEnabled = false //禁止ViewPager的滑动
+        }
+
+
 
         }
 
@@ -39,7 +44,9 @@ class HomeViewPagerFragment :BaseFragment() {
         //监听底部点击事件
         viewPagerBinding.bottomNavigationMain.setNavigationChangeListener { _, position ->
             viewPagerBinding.viewPager.setCurrentItem(position, true)
+
+            }
         }
-    }
+
 
 }

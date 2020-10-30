@@ -12,22 +12,101 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_main"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"
+            app:navGraph="@navigation/nav_graph" />
 
-
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/nav_graph" />
+            android:background="@color/blue_active"
+            app:layout_scrollFlags="scroll|snap"
+            app:toolbarId="@id/toolbar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="parallax">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textSize="16sp"
+                    android:textAppearance="?attr/textAppearanceHeadline5" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 
+        <com.gauravk.bubblenavigation.BubbleNavigationLinearView
+            android:id="@+id/bottom_navigation_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="8dp"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_mine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_active="true"
+                app:bt_colorActive="@color/purple_active"
+                app:bt_colorInactive="@color/default_inactive"
+                app:bt_icon="@drawable/ic_photos"
+                app:bt_shape="@drawable/file_background_stroke"
+                app:bt_title="文件" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_home"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_active="true"
+                app:bt_colorActive="@color/blue_active"
+                app:bt_colorInactive="@color/default_inactive"
+                app:bt_shape="@drawable/shop_background_stroke"
+                app:bt_title="主页" />
+
+
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_file"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_active="true"
+                app:bt_colorActive="@color/green_active"
+                app:bt_colorInactive="@color/default_inactive"
+                app:bt_icon="@drawable/ic_person"
+                app:bt_shape="@drawable/mine_background_stroke"
+                app:bt_title="我的" />
+
+
+        </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

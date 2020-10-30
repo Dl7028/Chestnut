@@ -36,8 +36,8 @@ class ChestnutPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
      * 将ViewPager页面索引映射到各自的片段
      */
     private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(  //将fragments放进map中
-            HOME_PAGE_INDEX to { HomeFragment() },
-            FILE_PAGE_INDEX to { FileFragment() },
+            HOME_PAGE_INDEX to { FileFragment() },
+            FILE_PAGE_INDEX to { HomeFragment() },
             MINE_PAGE_INDEX to { MineFragment() }
 
     ) as Map<Int, () -> Fragment>

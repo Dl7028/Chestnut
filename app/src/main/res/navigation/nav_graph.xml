@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/home_view_pager_fragment">
+    app:startDestination="@id/nav_file_fragment">
 
     <fragment
         android:id="@+id/home_view_pager_fragment"
@@ -12,26 +12,26 @@
 
     </fragment>
     <fragment
-        android:id="@+id/home_fragment"
+        android:id="@+id/nav_home_fragment"
         android:name="com.yks.chestnutyun.views.home.HomeFragment"
-        tools:layout="@layout/fragment_home">
-
-        <action
-            android:id="@+id/action_home_fragment_to_mine_fragment"
-            app:destination="@id/mine_fragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home"/>
 
     <fragment
-        android:id="@+id/file_fragment"
+        android:id="@+id/nav_file_fragment"
         android:name="com.yks.chestnutyun.views.file.FileFragment"
-        tools:layout="@layout/fragment_file">
-
-    </fragment>
+        tools:layout="@layout/fragment_file"/>
 
     <fragment
-        android:id="@+id/mine_fragment"
+        android:id="@+id/nav_mine_fragment"
         android:name="com.yks.chestnutyun.views.mine.MineFragment"
-        tools:layout="@layout/fragment_mine">
+        tools:layout="@layout/fragment_mine"/>
 
-    </fragment>
+<activity
+    android:id="@+id/nav_main_activity"
+    android:name="com.yks.chestnutyun.MainActivity"
+    tools:layout="@layout/activity_main">
+
+
+
+</activity>
 </navigation>
