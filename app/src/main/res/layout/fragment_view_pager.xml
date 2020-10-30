@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingClass" />
+
+        <com.gauravk.bubblenavigation.BubbleNavigationLinearView
+            android:id="@+id/bottom_navigation_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="8dp"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_home"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_active="true"
+                app:bt_colorActive="@color/blue_active"
+                app:bt_colorInactive="@color/default_inactive"
+                app:bt_shape="@drawable/shop_background_stroke"
+                app:bt_title="主页" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_mine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_active="true"
+                app:bt_colorActive="@color/purple_active"
+                app:bt_colorInactive="@color/default_inactive"
+                app:bt_icon="@drawable/ic_photos"
+                app:bt_shape="@drawable/file_background_stroke"
+                app:bt_title="文件" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/l_item_file"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:bt_active="true"
+                app:bt_colorActive="@color/green_active"
+                app:bt_colorInactive="@color/default_inactive"
+                app:bt_icon="@drawable/ic_person"
+                app:bt_shape="@drawable/mine_background_stroke"
+                app:bt_title="我的" />
+
+
+        </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

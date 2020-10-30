@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never">
+
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".views.login.LoginActivity">
 
 
@@ -156,5 +155,5 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+
 </layout>

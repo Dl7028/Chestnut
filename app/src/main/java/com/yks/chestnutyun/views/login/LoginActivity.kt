@@ -10,7 +10,7 @@ import com.stx.xhb.androidx.XBanner
 import com.stx.xhb.androidx.entity.LocalImageInfo
 import com.yks.chestnutyun.MainActivity
 import com.yks.chestnutyun.R
-import com.yks.chestnutyun.app.BaseActivity
+import com.yks.chestnutyun.base.BaseActivity
 import com.yks.chestnutyun.databinding.ActivityLoginBinding
 
 /**

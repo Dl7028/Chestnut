@@ -82,4 +82,11 @@
     <color name="color_d2d2d2">#d2d2d2</color>
     <color name="color_dedede">#dedede</color>
     <color name="color_aaaaaa">#aaaaaa</color>
+
+    <color name="purple_active">#9c27b0</color>
+    <color name="default_inactive">#78909c</color>
+    <color name="blue_active">#03a9f4</color>
+    <color name="green_active">#4caf50</color>
+
+
 </resources>

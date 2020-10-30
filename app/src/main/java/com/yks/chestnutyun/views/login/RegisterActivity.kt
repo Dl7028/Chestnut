@@ -6,7 +6,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 
 import com.yks.chestnutyun.R
-import com.yks.chestnutyun.app.BaseActivity
+import com.yks.chestnutyun.base.BaseActivity
 import com.yks.chestnutyun.databinding.ActivityRegisterBinding
 
 class RegisterActivity : BaseActivity() {

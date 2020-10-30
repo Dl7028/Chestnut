@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.app
+package com.yks.chestnutyun.base
 
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -20,9 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 
     }
     //初始化布局
-    open fun initView(){
-
-    }
+    abstract fun initView()
     //初始化监听
     abstract fun initListener()
 }
