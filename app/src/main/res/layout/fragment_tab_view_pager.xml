@@ -33,7 +33,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabIconTint="@drawable/tab_icon_color_selector"
-            app:tabTextColor="?attr/colorPrimaryDark" />
+            app:tabTextColor="@color/purple_active"
+            app:tabIndicatorColor="@color/purple_active"
+            app:tabIndicator="@drawable/tab_indicator_share"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

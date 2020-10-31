@@ -24,8 +24,12 @@ abstract class BaseFragment : Fragment(){
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    abstract fun initView()
+    open fun initView(){
+
+    }
 
 
-    abstract fun initListener()
+    open fun initListener(){
+
+    }
 }

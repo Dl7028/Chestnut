@@ -22,4 +22,8 @@
     <string name="enter_email_address">请输入您的电子邮箱地址</string>
     <string name="confirm_email_address">确认电子邮箱地址</string>
     <string name="confirm_your_email_address">确认您的电子邮箱地址</string>
+    <string name="all_files">全部</string>
+    <string name="video">视频</string>
+    <string name="music">音乐</string>
+    <string name="picture">图片</string>
 </resources>
