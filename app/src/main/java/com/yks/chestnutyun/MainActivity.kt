@@ -15,12 +15,10 @@ class MainActivity : BaseActivity() {
 
     private lateinit var mainBinding: ActivityMainBinding
     private companion object val TAG  = "MainActivity"
-    private   var navController:NavController? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        navController =supportFragmentManager.findFragmentById(R.id.nav_host_main)?.findNavController()
         initView()
         initListener()
     }
@@ -41,7 +39,7 @@ class MainActivity : BaseActivity() {
             when(position){
                 0 -> {
                     Log.d(TAG, "点击了文件")
-                    findNavController(this,R.id.nav_host_main).navigate(R.id.nav_file_fragment)
+                    findNavController(this,R.id.nav_host_main).navigate(R.id.files_view_pager_fragment)
 
 
                 }

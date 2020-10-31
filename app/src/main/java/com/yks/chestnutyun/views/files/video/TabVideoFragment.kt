@@ -1,40 +1,29 @@
-package com.yks.chestnutyun.views.file
+package com.yks.chestnutyun.views.files.video
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.base.BaseFragment
 
 /**
- * @Description:    文件fragment
+ * @Description:    视频标签的Fragment
  * @Author:         Yu ki-r
- * @CreateDate:     2020/10/29 23:03
+ * @CreateDate:     2020/10/31 10:51
  */
-class FileFragment : BaseFragment(){
-
-
-
-
-
+class TabVideoFragment:Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_file,container,false)
+
+
+        return inflater.inflate(R.layout.fragment_video_tab,container,false)
     }
 
 
-    override fun initView() {
-        TODO("Not yet implemented")
-    }
-
-
-
-    override fun initListener() {
-        TODO("Not yet implemented")
-    }
 }
