@@ -1,8 +1,10 @@
 package com.yks.chestnutyun
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -31,31 +33,24 @@ class MainActivity : BaseActivity() {
 
     override fun initListener() {
 
-
-
         mainBinding.bottomNavigationMain.setNavigationChangeListener { _, position ->
             Log.d(TAG, "" + position)
-
             when(position){
                 0 -> {
-                    Log.d(TAG, "点击了文件")
                     findNavController(this,R.id.nav_host_main).navigate(R.id.files_view_pager_fragment)
-
-
+                    mainBinding.toolbarTitle.text = "文件"
+                    mainBinding.toolbarLayout.setBackgroundColor(Color.parseColor("#9c27b0"))
                 }
                 1 -> {
-                    Log.d(TAG, "点击了主页")
                     findNavController(this,R.id.nav_host_main).navigate(R.id.nav_home_fragment)
-
-
+                    mainBinding.toolbarTitle.text= "主页"
+                    mainBinding.toolbarLayout.setBackgroundColor(Color.parseColor("#03a9f4"))
                 }
                 2 -> {
-                    Log.d(TAG, "点击了我的")
                     findNavController(this,R.id.nav_host_main).navigate(R.id.nav_mine_fragment)
+                    mainBinding.toolbarTitle.text = "用户"
+                    mainBinding.toolbarLayout.setBackgroundColor(Color.parseColor("#4caf50"))
                 }
-
-
-
             }
         }
     }

@@ -20,7 +20,6 @@ class TabAllFilesFragment:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
         return inflater.inflate(R.layout.fragment_all_files_tab,container,false)
     }
 

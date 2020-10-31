@@ -36,6 +36,7 @@
             app:tabTextColor="@color/purple_active"
             app:tabIndicatorColor="@color/purple_active"
             app:tabIndicator="@drawable/tab_indicator_share"
+            android:textStyle="bold"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

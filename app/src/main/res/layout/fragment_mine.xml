@@ -1,18 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="我的"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ds6"
+            android:background="@drawable/top_line_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <RelativeLayout
+            android:id="@+id/mine_center_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/ds15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+            <ImageView
+                android:id="@+id/mine_picture"
+                android:layout_width="@dimen/ds50"
+                android:layout_height="@dimen/ds50"
+                android:src="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/ds10"
+                android:layout_toEndOf="@id/mine_picture"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/vip_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="板栗云盘"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/sp16"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mine_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ds3"
+                    android:text="123456789@qq.com"
+                    android:textColor="@color/color_text1"
+                    android:textSize="@dimen/sp12" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/mine_go_uses_center_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/mine_center_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="@dimen/ds2"
+                    android:text="用户中心"
+                    android:textSize="@dimen/sp12"
+                    app:drawableLeftCompat="@mipmap/mine_setting_icon"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/ds15"
+            android:background="@drawable/gray_radiu_8_bg"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/mine_center_button"
+            app:layout_constraintStart_toStartOf="@+id/mine_center_button"
+            app:layout_constraintTop_toBottomOf="@+id/mine_center_button">
+
+            <TextView
+                android:id="@+id/mine_profit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ds50"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/ds15"
+                android:paddingRight="@dimen/ds15"
+                android:text="我的分享"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp14"
+                app:drawableEndCompat="@mipmap/goto_icon" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ds1"
+                android:layout_marginLeft="@dimen/ds15"
+                android:layout_marginRight="@dimen/ds15"
+                android:background="@color/color_line" />
+
+            <TextView
+                android:id="@+id/mine_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ds50"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/ds15"
+                android:paddingRight="@dimen/ds15"
+                android:text="我的收藏"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp14"
+                app:drawableEndCompat="@mipmap/goto_icon" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ds1"
+                android:layout_marginLeft="@dimen/ds15"
+                android:layout_marginRight="@dimen/ds15"
+                android:background="@color/color_line" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/ds50"
+            android:background="@drawable/gray_radiu_8_bg"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout4"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+            <TextView
+                android:id="@+id/mine_recycle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ds50"
+                android:drawableRight="@mipmap/goto_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/ds15"
+                android:paddingRight="@dimen/ds15"
+                android:text="回收站"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ds50"
+            android:background="@drawable/gray_radiu_8_bg"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/mine_change_account"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ds50"
+                android:gravity="center"
+                android:text="切换当前账号"
+                android:textColor="@color/color_DF3131"
+                android:textSize="@dimen/sp14" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
