@@ -15,7 +15,7 @@
         <RelativeLayout
             android:id="@+id/relativeLayout2"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/ds80"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -23,8 +23,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/ds50"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="30dp">
+                android:layout_alignParentTop="true">
 
                 <ImageView
                     android:id="@+id/personal_back"
@@ -59,8 +58,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/gray_radiu_8_bg"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
-            tools:layout_editor_absoluteX="15dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
 
             <LinearLayout
                 android:id="@+id/edit_avaer_image"
@@ -249,8 +249,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/gray_radiu_8_bg"
             android:padding="@dimen/ds15"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
-            tools:layout_editor_absoluteX="15dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
             <TextView
                 android:layout_width="match_parent"

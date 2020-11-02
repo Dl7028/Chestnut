@@ -17,7 +17,7 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:defaultNavHost="true"
+            app:defaultNavHost="false"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_main"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,17 +42,47 @@
                 android:layout_height="?attr/actionBarSize"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="parallax">
-
-                <TextView
-                    android:id="@+id/toolbar_title"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:gravity="center"
-                    android:text="文件"
-                    android:textColor = "@color/white"
-                    android:textSize="16sp"
-                    android:textAppearance="?attr/textAppearanceHeadline5" />
+                    android:layout_height="wrap_content">
 
+                    <ImageView
+                        android:id="@+id/find_push"
+                        android:layout_width="@dimen/ds50"
+                        android:layout_height="@dimen/ds50"
+                        android:gravity="center_vertical"
+                        android:src="@mipmap/home_push_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical"
+                        android:text="文件"
+                        android:textAppearance="?attr/textAppearanceHeadline5"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/find_push"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/find_search"
+                        android:layout_width="@dimen/ds50"
+                        android:layout_height="@dimen/ds50"
+
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/ds12"
+                        android:src="@mipmap/home_search_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

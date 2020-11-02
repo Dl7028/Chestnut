@@ -26,4 +26,8 @@
     <string name="video">视频</string>
     <string name="music">音乐</string>
     <string name="picture">图片</string>
+    <string name="register_phone_title">手机号注册</string>
+    <string name="register_emil_title">邮箱号注册</string>
+    <string name="change_to_phone_register">切换手机号注册</string>
+    <string name="change_emil_register">切换邮箱号注册</string>
 </resources>

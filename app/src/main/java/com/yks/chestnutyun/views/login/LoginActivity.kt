@@ -49,6 +49,7 @@ class LoginActivity : BaseActivity() {
         //跳转到主页
         binding.loginButton.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
 
         }
         //加载轮播图

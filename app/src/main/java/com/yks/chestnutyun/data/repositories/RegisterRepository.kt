@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.repositories
+package com.yks.chestnutyun.data.repositories
 
 /**
  * @Description:

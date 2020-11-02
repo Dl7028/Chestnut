@@ -1,19 +1,12 @@
 package com.yks.chestnutyun.views.mine
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
         import android.view.View
         import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.yks.chestnutyun.MainActivity
-import com.yks.chestnutyun.R
-        import com.yks.chestnutyun.base.BaseFragment
+import com.yks.chestnutyun.base.BaseFragment
 import com.yks.chestnutyun.databinding.FragmentMineBinding
 import com.yks.chestnutyun.views.mine.usercenter.UserCenterActivity
 

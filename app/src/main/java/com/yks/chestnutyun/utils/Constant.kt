@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.common
+package com.yks.chestnutyun.utils
 
 /**
  * @Description:    常量

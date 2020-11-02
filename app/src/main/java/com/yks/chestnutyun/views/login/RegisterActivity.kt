@@ -42,19 +42,22 @@ class RegisterActivity : BaseActivity() {
      */
     private fun registerMethod(binding: ActivityRegisterBinding){
         when(binding.registerTitle.text){
-            "手机号注册" ->{
+            getString(R.string.register_phone_title) ->{
                 binding.phoneRegisterLayout.visibility = View.GONE
                 binding.emailRegisterLayout.visibility = View.VISIBLE
-                binding.registerChange.text = "切换手机号注册"
-                binding.registerTitle.text = "邮箱号注册"
+                binding.registerChange.text = getString(R.string.change_to_phone_register)
+                binding.registerTitle.text =  getString(R.string.register_emil_title)
             }
-            "邮箱号注册" ->{
+            getString(R.string.register_emil_title) ->{
                 binding.phoneRegisterLayout.visibility = View.VISIBLE
                 binding.emailRegisterLayout.visibility = View.GONE
-                binding.registerChange.text = "切换邮箱号注册"
-                binding.registerTitle.text = "手机号注册"
+                binding.registerChange.text = getString(R.string.change_emil_register)
+                binding.registerTitle.text =  getString(R.string.register_phone_title)
             }
 
         }
     }
+
+
+
 }
