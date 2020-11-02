@@ -28,7 +28,7 @@ class LoginActivity : BaseActivity() {
         initListener()
     }
 
-    override fun initView() {
+    private fun initView() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         //轮播图图片
         val localImageInfoList:MutableList<LocalImageInfo> = ArrayList<LocalImageInfo>()
@@ -41,7 +41,7 @@ class LoginActivity : BaseActivity() {
 
 
 
-    override fun initListener() {
+    private fun initListener() {
         //跳转到注册
         binding.loginRegisterButton.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))

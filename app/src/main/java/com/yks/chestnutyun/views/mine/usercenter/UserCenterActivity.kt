@@ -19,11 +19,11 @@ class UserCenterActivity : BaseActivity() {
 
     }
 
-    override fun initView() {
+    private fun initView() {
         TODO("Not yet implemented")
     }
 
-    override fun initListener() {
+    private fun initListener() {
         ucBinding.personalBack.setOnClickListener{
             finish()
         }

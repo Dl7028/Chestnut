@@ -22,12 +22,12 @@ class MainActivity : BaseActivity() {
     }
 
 
-    override fun initView() {
+    private fun initView() {
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
     }
 
-    override fun initListener() {
+    private fun initListener() {
 
         mainBinding.bottomNavigationMain.setNavigationChangeListener { _, position ->
             Log.d(TAG, "" + position)

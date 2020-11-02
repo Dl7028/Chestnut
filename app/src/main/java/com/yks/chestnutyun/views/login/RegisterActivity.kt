@@ -21,40 +21,47 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RegisterActivity : BaseActivity() {
 
-    private val viewModel: RegisterViewModel by viewModels()
+    private var mUsername:String? = null
+    private var mPassword:String? = null
+    private var mEmail:String? = null
+    private var mVerificationCode:String? = null
+    private val viewModel: RegisterViewModel by viewModels() //Activity 持有 ViewModel 的对象 ，Hilt 注入
 
-    private lateinit var registerBinding: ActivityRegisterBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        initView()
-        initListener()
+        val binding: ActivityRegisterBinding =  DataBindingUtil.setContentView(this,R.layout.activity_register)
+
+        initView(binding)
+        initListener(binding)
 
     }
 
-    override fun initView() {
-         registerBinding = DataBindingUtil.setContentView(this,R.layout.activity_register)
-        Log.d("tag",""+registerBinding.registerTitle.text)
+    private fun initView(binding:ActivityRegisterBinding) {
     }
 
-    override fun initListener() {
-        //点击更改注册方式
-        registerBinding.registerChange.setOnClickListener {
-            registerMethod(registerBinding)
-        }
-        //点击取消注册
-        registerBinding.registerCancel.setOnClickListener {
+    private fun initListener(binding:ActivityRegisterBinding) {
+
+        //点击退出注册
+        binding.registerCancel.setOnClickListener {
             finish()
         }
 
 
 
+        //点击注册
+        binding.registerButton.setOnClickListener {
+        }
+
+
     }
 
 
-    /**
+  /*  *//**
      * 更改注册的方式，手机号or邮箱号
-     */
+     *//*
     private fun registerMethod(binding: ActivityRegisterBinding){
         when(binding.registerTitle.text){
             getString(R.string.register_phone_title) ->{
@@ -71,10 +78,10 @@ class RegisterActivity : BaseActivity() {
             }
 
         }
-    }
+    }*/
 
-    private fun subscribeUi(){
-        viewModel.registerResult.observe(this){
+    private fun subscribeUi(username:String, password:String,verificationCode:String){
+        viewModel.toRegisters(username,password,verificationCode).observe(this){
             if (it == true){
                 //注册成功
             }else{

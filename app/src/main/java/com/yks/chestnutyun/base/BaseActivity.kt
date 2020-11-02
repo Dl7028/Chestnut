@@ -14,13 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        initView()
-        initListener()
-
 
     }
-    //初始化布局
-    abstract fun initView()
-    //初始化监听
-    abstract fun initListener()
+
 }

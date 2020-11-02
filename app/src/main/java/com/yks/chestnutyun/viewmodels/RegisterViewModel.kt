@@ -15,12 +15,11 @@ import com.yks.chestnutyun.data.repositories.RegisterRepository
 
 class RegisterViewModel @ViewModelInject constructor(
     private val registerRepository:RegisterRepository,
-    @Assisted private val username : String,
-    @Assisted private val password: String,
-    @Assisted private val verificationCode : String
 ){
 
-    val registerResult: LiveData<Boolean> = liveData{
-        registerRepository.register(username, password,verificationCode)
+
+    fun toRegisters(username:String, password:String,verificationCode:String) :LiveData<Boolean> = liveData{
+            registerRepository.register(username, password,verificationCode)
     }
+
 }
