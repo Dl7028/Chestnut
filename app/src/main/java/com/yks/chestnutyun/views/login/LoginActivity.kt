@@ -59,4 +59,8 @@ class LoginActivity : BaseActivity() {
 
     }
 
+    private fun subscribeUi(){
+
+    }
+
 }

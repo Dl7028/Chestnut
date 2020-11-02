@@ -3,13 +3,25 @@ package com.yks.chestnutyun.views.login
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.base.BaseActivity
 import com.yks.chestnutyun.databinding.ActivityRegisterBinding
+import com.yks.chestnutyun.viewmodels.RegisterViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+/**
+  * @Description:    注册功能的Activity
+  * @Author:         Yu ki-r
+  * @CreateDate:     2020/11/2 22:09
+ */
+
+@AndroidEntryPoint
 class RegisterActivity : BaseActivity() {
+
+    private val viewModel: RegisterViewModel by viewModels()
 
     private lateinit var registerBinding: ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +29,7 @@ class RegisterActivity : BaseActivity() {
         setContentView(R.layout.activity_register)
         initView()
         initListener()
+
     }
 
     override fun initView() {
@@ -33,6 +46,8 @@ class RegisterActivity : BaseActivity() {
         registerBinding.registerCancel.setOnClickListener {
             finish()
         }
+
+
 
     }
 
@@ -55,6 +70,16 @@ class RegisterActivity : BaseActivity() {
                 binding.registerTitle.text =  getString(R.string.register_phone_title)
             }
 
+        }
+    }
+
+    private fun subscribeUi(){
+        viewModel.registerResult.observe(this){
+            if (it == true){
+                //注册成功
+            }else{
+                //注册失败
+            }
         }
     }
 
