@@ -17,7 +17,8 @@ object NetWorkManager {
     private val loginImpl = ServiceCreator.create(LoginService::class.java)
 
 
-    suspend fun register(username:String,password:String,verificationCode:String):  LiveData<BaseBean<LoginData>> = loginImpl.register(username, password,password)
+    suspend fun register(username:String,password:String,verificationCode:String):  BaseBean<LoginData>
+            = loginImpl.register(username, password,verificationCode)
 
 
 }

@@ -20,5 +20,5 @@ interface LoginService {
     @POST("")
     suspend fun register(@Query("username")username: String,
                          @Query("password")password: String,
-                         @Query("verificationCode")verificationCode:String): LiveData<BaseBean<LoginData>>
+                         @Query("verificationCode")verificationCode:String): BaseBean<LoginData>
 }
