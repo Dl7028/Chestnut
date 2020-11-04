@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.google.android.play.core.internal.e
 
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.base.BaseActivity
@@ -57,27 +58,37 @@ class RegisterActivity : AppCompatActivity() {
 
         //点击注册
         binding.registerButton.setOnClickListener {
-            Log.d(TAG, "点击注册----------")
             subscribeUi(binding)
         }
-
-
     }
 
 
-
-    private fun subscribeUi(binding:ActivityRegisterBinding){
-        viewModel.result.observe(this){
-            binding.registerTitle.text =viewModel.mUserName.value
-            Log.d(TAG, "result--------"+viewModel.result.value)
+    private fun subscribeUi(binding:ActivityRegisterBinding) {
+        try {
+            // 观察是否注册成功
+            viewModel.toRegister().observe(this) {
+                Log.d(TAG, "result--------")
+            }
+            //观察进度条是否显示
+            viewModel.ifProgressShow.observe(this) {
+                if (it){
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+            }
+        } catch (e: Exception) {
+            e.message?.apply {
+                viewModel.setToast(this)
+            }
+            e.printStackTrace()
         }
 
-        viewModel.toRegisters.observe(this){
-            Log.d(TAG,"---------")
-            Toast.makeText(this,"用户名------"+viewModel.mUserName.value,Toast.LENGTH_SHORT).show()
-            binding.registerTitle.text = viewModel.mUserName.value
+        viewModel.mToastString.observe(this) {
+            if (it.isNotEmpty()) {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                viewModel.mToastString.value = ""
+            }
         }
-        }
+    }
     }
 
 
