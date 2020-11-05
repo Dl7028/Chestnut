@@ -29,40 +29,23 @@ class RegisterViewModel @ViewModelInject  constructor(
     val TAG: String = "RegisterViewModel"
 
 
-    val mUserName: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val mUserPassword: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val mVerificationCode: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val mConfirmPassword: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val mToastString: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val ifProgressShow: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>()
-    }
-    val checkResult: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>()
-    }
 
 
-
-
-    private var result: Boolean = false
-
-
-
+    /**
+     * 注册
+     */
     fun toRegister(name: String,password:String,verificationCode:String): LiveData<Boolean> = liveData {
-
-//            注册返回的结果
-        result = registerRepository.register(name, password, verificationCode)
+        //  注册返回的结果
+        val result = registerRepository.register(name, password, verificationCode)
         emit(result)
+    }
+
+    /**
+     * 获取验证码
+     */
+    fun getCode(userName:String):LiveData<String> = liveData{
+        val code = registerRepository.getCode(userName)
+        emit(code)
     }
 }
 

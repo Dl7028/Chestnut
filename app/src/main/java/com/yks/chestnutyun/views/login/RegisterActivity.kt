@@ -67,10 +67,22 @@ class RegisterActivity : AppCompatActivity() {
 
         }
         binding.loginEmailGetcodeButton.setOnClickListener {
-            
+            val name = binding.registerEmailPhoneInput.text.toString()
+            Log.d(TAG,name)
+            if(name.isNotEmpty()){
+                viewModel.getCode(name).observe(this){
+                    if (it != null){
+                        Log.d(TAG,"获取验证码成功")
+                    }
+                }
+
+            }
+
+
         }
 
     }
+
 
 
 

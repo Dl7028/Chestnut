@@ -152,7 +152,6 @@
                         android:textColor="@color/color_333333"
                         android:textColorHighlight="@color/color_999999"
                         android:textSize="@dimen/sp14"
-                        android:text = "@={viewModel.mUserName}"
                         tools:ignore="RtlSymmetry" />
 
 

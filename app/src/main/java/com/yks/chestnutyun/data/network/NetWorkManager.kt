@@ -1,11 +1,8 @@
 package com.yks.chestnutyun.data.network
 
-import androidx.lifecycle.LiveData
 import com.yks.chestnutyun.api.LoginService
 import com.yks.chestnutyun.base.BaseBean
 import com.yks.chestnutyun.data.bean.LoginData
-import com.yks.chestnutyun.utils.ServiceCreator
-import java.lang.Exception
 
 /**
  * @Description:    管理接口请求的类
@@ -20,7 +17,7 @@ object NetWorkManager {
     suspend fun register(username:String,password:String,verificationCode:String):  BaseBean<LoginData>
             = loginImpl.register(username, password,verificationCode)
 
-    suspend fun getCode():BaseBean<String> = loginImpl.getCode()
+    suspend fun getCode(userName:String):BaseBean<String> = loginImpl.getCode(userName)
 
 
 }

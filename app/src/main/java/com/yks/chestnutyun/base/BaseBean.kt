@@ -8,5 +8,7 @@ package com.yks.chestnutyun.base
 data class BaseBean<T>(
     val data: T,
     val code: Int = 0,
-    val msg: String = ""
+    val message: String = ""
+
+
 )
