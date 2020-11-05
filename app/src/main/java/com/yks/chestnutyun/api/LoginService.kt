@@ -3,6 +3,7 @@ package com.yks.chestnutyun.api
 import androidx.lifecycle.LiveData
 import com.yks.chestnutyun.base.BaseBean
 import com.yks.chestnutyun.data.bean.LoginData
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -21,4 +22,10 @@ interface LoginService {
     suspend fun register(@Query("username")username: String,
                          @Query("password")password: String,
                          @Query("verificationCode")verificationCode:String): BaseBean<LoginData>
+
+    /**
+     * 获取验证码
+     */
+    @GET()
+    suspend fun getCode(): BaseBean<String>
 }

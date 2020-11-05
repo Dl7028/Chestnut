@@ -16,9 +16,9 @@ import javax.inject.Singleton
 class RegisterRepository @Inject constructor(){
 
     //获取登录请求返回的数据并判断是否注册成功
-     fun register(username:String,password:String,verificationCode:String): LiveData<Boolean> { //返回一个布尔值的liveData对象
+    suspend fun register(username:String,password:String,verificationCode:String):Boolean  { //返回一个布尔值的liveData对象
 
-        return liveData {
+//        return liveData {
         /*    val baseBean = NetWorkManager.register(username, password, verificationCode)
             baseBean.code == 0
             if (baseBean.code == 0) {
@@ -30,8 +30,9 @@ class RegisterRepository @Inject constructor(){
                 throw Exception(baseBean.msg)
             }*/
 
-            emit(true)
+//            emit(true)
+        return true
         }
+
     }
 
-}

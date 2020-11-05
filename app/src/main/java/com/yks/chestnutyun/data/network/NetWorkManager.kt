@@ -8,7 +8,7 @@ import com.yks.chestnutyun.utils.ServiceCreator
 import java.lang.Exception
 
 /**
- * @Description:
+ * @Description:    管理接口请求的类
  * @Author:         Yu ki-r
  * @CreateDate:     2020/11/2 15:59
  */
@@ -19,6 +19,8 @@ object NetWorkManager {
 
     suspend fun register(username:String,password:String,verificationCode:String):  BaseBean<LoginData>
             = loginImpl.register(username, password,verificationCode)
+
+    suspend fun getCode():BaseBean<String> = loginImpl.getCode()
 
 
 }
