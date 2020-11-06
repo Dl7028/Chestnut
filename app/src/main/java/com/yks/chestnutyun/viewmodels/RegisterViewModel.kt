@@ -43,7 +43,7 @@ class RegisterViewModel @ViewModelInject  constructor(
     /**
      * 获取验证码
      */
-    fun getCode(userName:String):LiveData<String> = liveData{
+    fun getCode(userName:String):LiveData<Boolean> = liveData{
         val code = registerRepository.getCode(userName)
         emit(code)
     }

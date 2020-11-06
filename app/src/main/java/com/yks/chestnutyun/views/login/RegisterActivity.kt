@@ -3,7 +3,6 @@ package com.yks.chestnutyun.views.login
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -13,8 +12,6 @@ import com.yks.chestnutyun.utils.RegExpUtils
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 /**
   * @Description:    注册功能的Activity
@@ -25,27 +22,16 @@ import java.util.regex.Pattern
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
 
-
-    private companion object
-
-    val TAG: String? = "RegisterActivity"
+    private companion object val TAG: String? = "RegisterActivity"
     private val viewModel: RegisterViewModel by viewModels()   //Activity 持有 ViewModel 的对象 ，Hilt 注入
-    private val patternMailBox: Pattern =
-        Pattern.compile("/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+\$/") // 正则表达的式匹配邮箱
-    private val patternTell: Pattern = Pattern.compile("^1[0-9]{10}") // 正则表达式匹配手机号
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        val binding: ActivityRegisterBinding =
-            DataBindingUtil.setContentView<ActivityRegisterBinding>(
-                this,
-                R.layout.activity_register
-            )
+        val binding: ActivityRegisterBinding = DataBindingUtil.setContentView<ActivityRegisterBinding>(this, R.layout.activity_register)
         initView(binding)
         initListener(binding)
-
     }
 
     private fun initView(binding: ActivityRegisterBinding) {
@@ -63,37 +49,48 @@ class RegisterActivity : AppCompatActivity() {
 
         //点击注册
         binding.registerButton.setOnClickListener {
-            subscribeUi(binding)
+            subscribeRegisters(binding)
 
         }
+        //获取验证码
         binding.loginEmailGetcodeButton.setOnClickListener {
-            val name = binding.registerEmailPhoneInput.text.toString()
-            Log.d(TAG,name)
-            if(name.isNotEmpty()){
-                viewModel.getCode(name).observe(this){
-                    if (it != null){
-                        Log.d(TAG,"获取验证码成功")
-                    }
-                }
-
-            }
+            subscribeGetCode(binding)
 
 
         }
 
     }
 
+    // 获取验证码
+    private fun subscribeGetCode(binding: ActivityRegisterBinding) {
+        binding.loginEmailGetcodeButton.isClickable = false
+        val ifPhoneNumber = RegExpUtils.checkPhone(binding.registerEmailPhoneInput.text.toString())
+        val ifEmailAddress = RegExpUtils.checkEmail(binding.registerEmailPhoneInput.text.toString())
+
+        if (ifPhoneNumber || ifEmailAddress) {
+            binding.loginEmailGetcodeButton.start()
+            viewModel.getCode(binding.registerEmailPhoneInput.text.toString()).observe(this) {
+                if (it == true) {
+                    Log.d(TAG, "获取验证码成功")
+                    binding.loginEmailGetcodeButton.isClickable = true
+                    ToastUtils.showToast(this, "验证码已发送，请注意查收")
+                }
+            }
+        } else {
+            ToastUtils.showToast(this, "请输入正确的用户名")
+            binding.loginEmailGetcodeButton.isClickable = true
+
+        }
+    }
 
 
-
-
-
-    private fun subscribeUi(binding: ActivityRegisterBinding) {
+    private fun subscribeRegisters(binding: ActivityRegisterBinding) {
         val name = binding.registerEmailPhoneInput.text.toString()
         val verificationCode = binding.registerEmailCodeInput.text.toString()
         val password = binding.registerPasswordInput.text.toString()
-        if (checkMessage(name, verificationCode, password, binding)) {
-
+        val rePassword = binding.registerConfirmPasswordInput.text.toString()
+        //检查信息格式是否合法
+        if (checkMessage(name, verificationCode, password,rePassword)) {
             //显示加载框
             binding.progressBar.visibility = View.VISIBLE
             // 观察是否注册成功
@@ -110,8 +107,6 @@ class RegisterActivity : AppCompatActivity() {
 
                 }
             }
-        } else {
-            //信息错误
         }
     }
 
@@ -119,23 +114,23 @@ class RegisterActivity : AppCompatActivity() {
     /**
      * 检查信息输入是否合法
      */
-    private fun checkMessage(username:String,password:String,verificationCode:String,binding: ActivityRegisterBinding): Boolean {
-        val ifPhoneNumber = RegExpUtils.checkPhone(binding.registerEmailPhoneInput.text.toString())
-        val ifEmailAddress = RegExpUtils.checkEmail(binding.registerEmailPhoneInput.text.toString())
-        val rePassword = binding.registerConfirmPasswordInput.text.toString()
+    private fun checkMessage(username:String,verificationCode:String,password:String,rePassword:String): Boolean {
+        val ifPhoneNumber = RegExpUtils.checkPhone(username)
+        val ifEmailAddress = RegExpUtils.checkEmail(username)
 
-        if (!ifPhoneNumber && !ifEmailAddress) {
-            ToastUtils.showToast(this, "用户名不能为空")
-            return false
-        }
-        if (verificationCode.isEmpty()) {
-            ToastUtils.showToast(this, "验证码不能为空")
-            return false
-
-        }
-        if (password != rePassword) {         //判断两次密码是否相同
-            ToastUtils.showToast(this, "密码不一样")
-            return false
+        when{
+            !ifPhoneNumber && !ifEmailAddress -> {
+                ToastUtils.showToast(this, "用户名格式不合法")
+                return false
+            }
+            verificationCode.isEmpty() -> {
+                ToastUtils.showToast(this, "验证码不能为空")
+                return false
+            }
+            password != rePassword -> {
+                ToastUtils.showToast(this, "密码不一样")
+                return false
+            }
 
         }
         return true

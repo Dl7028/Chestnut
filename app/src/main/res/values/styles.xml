@@ -16,4 +16,13 @@
         <item name="tabTextColor" >@color/light</item>
         <item name="tabRippleColor" >@color/light</item>
     </style>
+
+    <declare-styleable name="TimingButton">
+        <!--结束后的文字-->
+        <attr name="tb_psText" format="string" />
+        <!--计时总时长，毫秒-->
+        <attr name="tb_totalTime" format="integer" />
+        <!--计时时间间隔，毫秒-->
+        <attr name="tb_timeInterval" format="integer" />
+    </declare-styleable>
 </resources>

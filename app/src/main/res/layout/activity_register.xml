@@ -58,11 +58,14 @@
             android:background="@drawable/gray_radiu_8_bg"
             android:hint="@string/set_password"
             android:importantForAutofill="no"
-            android:inputType="textPassword"
+            android:inputType="textVisiblePassword"
             android:paddingStart="@dimen/ds15"
             android:textColor="@color/color_333333"
             android:textColorHighlight="@color/color_999999"
             android:textSize="@dimen/sp14"
+            android:singleLine="true"
+            android:maxLength="20"
+
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -152,6 +155,8 @@
                         android:textColor="@color/color_333333"
                         android:textColorHighlight="@color/color_999999"
                         android:textSize="@dimen/sp14"
+                        android:singleLine="true"
+                        android:maxLength="20"
                         tools:ignore="RtlSymmetry" />
 
 
@@ -171,21 +176,23 @@
                     android:background="@drawable/gray_radiu_8_bg">
 
 
+                    <EditText
+                        android:id="@+id/register_email_code_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/ds45"
+                        android:background="@null"
+                        android:hint="@string/six_number"
+                        android:inputType="number"
+                        android:paddingStart="@dimen/ds15"
+                        android:textColor="@color/color_333333"
+                        android:textColorHighlight="@color/color_999999"
+                        android:textSize="@dimen/sp14"
+                        android:singleLine="true"
+                        android:maxLength="20"
 
-                        <EditText
-                            android:id="@+id/register_email_code_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/ds45"
-                            android:background="@null"
-                            android:hint="@string/six_number"
-                            android:inputType="number"
-                            android:paddingStart="@dimen/ds15"
-                            android:textColor="@color/color_333333"
-                            android:textColorHighlight="@color/color_999999"
-                            android:textSize="@dimen/sp14"
-                            tools:ignore="RtlSymmetry,TextFields" />
+                        tools:ignore="RtlSymmetry,TextFields" />
 
-                    <TextView
+                    <com.yks.chestnutyun.customView.TimingButton
                         android:id="@+id/login_email_getcode_button"
                         android:layout_width="@dimen/ds90"
                         android:layout_height="@dimen/ds30"
@@ -196,7 +203,9 @@
                         android:gravity="center"
                         android:text="@string/get_verification_code"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/sp13" />
+                        android:textSize="@dimen/sp13"
+                        app:tb_psText="重新获取"
+                        app:tb_totalTime="60000"/>
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
@@ -219,11 +228,14 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/gray_radiu_8_bg"
             android:hint="确认登录密码"
-            android:inputType="textPassword"
+            android:inputType="textVisiblePassword"
             android:paddingStart="@dimen/ds15"
             android:textColor="@color/color_333333"
             android:textColorHighlight="@color/color_999999"
             android:textSize="@dimen/sp14"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:maxLength="20"
             app:layout_constraintEnd_toEndOf="@+id/register_password_input"
             app:layout_constraintStart_toStartOf="@+id/register_password_input"
             app:layout_constraintTop_toBottomOf="@+id/textView2"

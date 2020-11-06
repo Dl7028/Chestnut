@@ -30,13 +30,11 @@ class RegisterRepository @Inject constructor(){
      }
 
     //获取注册的验证码
-    suspend fun getCode(userName:String): String{
+    suspend fun getCode(userName:String): Boolean{
         val baseBean = NetWorkManager.getCode(userName)
-        Log.d("获取验证码","验证码--------------->   "+baseBean.code+"------" +baseBean.data+"------"+baseBean.message)
-        if (baseBean.code==200){
-            return baseBean.data
+        if (baseBean.code==1){
+            return true
         }else{
-            Log.d("异常---------------------",""+baseBean.message)
             throw Exception(baseBean.message)
         }
     }
