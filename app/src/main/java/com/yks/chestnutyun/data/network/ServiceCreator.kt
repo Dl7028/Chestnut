@@ -1,6 +1,6 @@
 package com.yks.chestnutyun.data.network
 
-import com.yks.chestnutyun.utils.BASE_URL
+import com.yks.chestnutyun.common.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

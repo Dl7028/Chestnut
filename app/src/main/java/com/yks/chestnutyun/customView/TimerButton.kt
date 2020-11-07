@@ -10,12 +10,21 @@ import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import com.yks.chestnutyun.R
 
 
-@SuppressLint("AppCompatCustomView")
-class TimingButton(context: Context?, attrs: AttributeSet?) : Button(context, attrs) {
+@SuppressLint("AppCompatCustomView", "CustomViewStyleable")
+class TimerButton(context: Context?, attrs: AttributeSet?) : Button(context, attrs) {
     private val total: Int
     private val interval: Int
     private val psText: String?
 
+    init {
+        // 获取自定义属性，并赋值
+        val typedArray: TypedArray = getContext().obtainStyledAttributes(attrs, R.styleable.TimingButton)
+        total = typedArray.getInteger(R.styleable.TimingButton_tb_totalTime, 60000)
+        interval = typedArray.getInteger(R.styleable.TimingButton_tb_timeInterval, 1000)
+        psText = typedArray.getString(R.styleable.TimingButton_tb_psText)
+        setBackgroundResource(R.drawable.timing_button) //设置默认样式
+        typedArray.recycle()
+    }
     //执行
     fun start() {
         val time: TimeCount = TimeCount(total.toLong(), interval.toLong())
@@ -36,14 +45,6 @@ class TimingButton(context: Context?, attrs: AttributeSet?) : Button(context, at
         }
     }
 
-    init {
-        // 获取自定义属性，并赋值
-        val typedArray: TypedArray = getContext().obtainStyledAttributes(attrs, R.styleable.TimingButton)
-        total = typedArray.getInteger(R.styleable.TimingButton_tb_totalTime, 60000)
-        interval = typedArray.getInteger(R.styleable.TimingButton_tb_timeInterval, 1000)
-        psText = typedArray.getString(R.styleable.TimingButton_tb_psText)
-        setBackgroundResource(R.drawable.timing_button) //设置默认样式
-        typedArray.recycle()
-    }
+
 }
 

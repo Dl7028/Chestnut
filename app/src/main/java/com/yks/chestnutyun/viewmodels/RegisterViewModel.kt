@@ -8,9 +8,15 @@ import androidx.databinding.BindingAdapter
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.yks.chestnutyun.BR
+import com.yks.chestnutyun.base.BaseBean
+import com.yks.chestnutyun.common.ResultState
 import com.yks.chestnutyun.data.repositories.RegisterRepository
 import com.yks.chestnutyun.utils.RegExpUtils
 import com.yks.chestnutyun.utils.ToastUtils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 import java.util.regex.Pattern
 
@@ -23,21 +29,43 @@ import java.util.regex.Pattern
 
 class RegisterViewModel @ViewModelInject  constructor(
     private val registerRepository: RegisterRepository,
-): ViewModel() {
+): ViewModel()  {
     private companion object
 
     val TAG: String = "RegisterViewModel"
+    val errorResult = MutableLiveData<String>()
+    val successResult = MutableLiveData<Boolean>()
 
-
-
+    val registerResult = MutableLiveData<ResultState<Boolean>>()
 
     /**
      * 注册
      */
-    fun toRegister(name: String,password:String,verificationCode:String): LiveData<Boolean> = liveData {
-        //  注册返回的结果
-        val result = registerRepository.register(name, password, verificationCode)
-        emit(result)
+ /*  suspend fun toRegister(name: String,password:String,verificationCode:String) :ResultState {
+
+        return withContext<ResultState>(context = Dispatchers.IO){
+            val baseBean = registerRepository.register(name,password,verificationCode)
+            if (baseBean.code==1){
+                return@withContext ResultState.Success
+            }else{
+                return@withContext ResultState.Failure("注册失败")
+            }
+        }
+    }*/
+
+    fun toRegister(name: String,password:String,verificationCode:String){
+        viewModelScope.launch(Dispatchers.IO){
+          val result =  try {
+              registerRepository.toRegister(name,password,verificationCode)
+          }catch (e: Exception){
+              ResultState.Error(Exception(e.message))
+          }
+
+            when(result){
+                is ResultState.Success<Boolean> -> Log.d(TAG, "注册成功")
+                    else -> Log.d(TAG, "注册失败")
+            }
+        }
     }
 
     /**

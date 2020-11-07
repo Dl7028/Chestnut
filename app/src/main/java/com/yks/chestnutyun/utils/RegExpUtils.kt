@@ -11,7 +11,9 @@ import java.util.regex.Pattern
 object RegExpUtils {
 
 
-
+    /**
+     * 验证邮箱
+     */
     fun checkEmail(email: String?): Boolean {
         val regExp =
             "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"
@@ -20,6 +22,9 @@ object RegExpUtils {
         return m.matches()
     }
 
+    /**
+     * 验证手机号
+     */
     fun checkPhone(phone: String?): Boolean {
         val regExp = "^1[0-9]{10}"
         val p = Pattern.compile(regExp)
