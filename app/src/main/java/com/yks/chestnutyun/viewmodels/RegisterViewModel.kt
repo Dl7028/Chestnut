@@ -1,24 +1,13 @@
 package com.yks.chestnutyun.viewmodels
 
-import android.util.Log
-import android.view.View
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
-import androidx.databinding.BindingAdapter
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.yks.chestnutyun.BR
-import com.yks.chestnutyun.base.BaseBean
 import com.yks.chestnutyun.common.ResultState
 import com.yks.chestnutyun.data.repositories.RegisterRepository
-import com.yks.chestnutyun.utils.RegExpUtils
-import com.yks.chestnutyun.utils.ToastUtils
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.lang.Exception
-import java.util.regex.Pattern
+import kotlin.math.E
 
 /**
  * @Description:    注册功能的ViewModel类
@@ -58,13 +47,10 @@ class RegisterViewModel @ViewModelInject  constructor(
           val result =  try {
               registerRepository.toRegister(name,password,verificationCode)
           }catch (e: Exception){
-              ResultState.Error(Exception(e.message))
+              ResultState.Error(e.message.toString())
           }
+            registerResult.postValue(result)
 
-            when(result){
-                is ResultState.Success<Boolean> -> Log.d(TAG, "注册成功")
-                    else -> Log.d(TAG, "注册失败")
-            }
         }
     }
 

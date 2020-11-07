@@ -43,7 +43,7 @@ class RegisterRepository @Inject constructor(){
             if (baseBean.code==1){       //注册成功
                 return@withContext ResultState.Success(true)
             }else{
-                return@withContext ResultState.Error(Exception(baseBean.message)) //注册失败
+                return@withContext ResultState.Error(baseBean.message) //注册失败
             }
 
         }

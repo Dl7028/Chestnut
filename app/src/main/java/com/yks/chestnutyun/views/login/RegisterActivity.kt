@@ -1,17 +1,20 @@
 package com.yks.chestnutyun.views.login
 
 import android.os.Bundle
+import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import com.yks.chestnutyun.R
+import com.yks.chestnutyun.common.ResultState
 import com.yks.chestnutyun.utils.RegExpUtils
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_register.*
+import java.util.Arrays.toString
 
 /**
   * @Description:    注册功能的Activity
@@ -104,7 +107,16 @@ class RegisterActivity : AppCompatActivity() {
     ) {
 
         viewModel.registerResult.observe(this){
-
+            when(it){
+                is ResultState.Success<Boolean> ->{
+                    ToastUtils.showToast(this,"注册成功")
+                    Log.d(TAG, "注册成功")
+                }
+                else -> {
+                    ToastUtils.showToast(this,it.toString())
+                    Log.d(TAG, "注册失败$it")
+                }
+            }
         }
 
     }
@@ -121,7 +133,7 @@ class RegisterActivity : AppCompatActivity() {
     ) {
         val ifPhoneNumber = RegExpUtils.checkPhone(username)
         val ifEmailAddress = RegExpUtils.checkEmail(username)
-        /*  when{
+          when{
             !ifPhoneNumber && !ifEmailAddress -> {
                 ToastUtils.showToast(this, "用户名格式不合法")
 
@@ -137,11 +149,11 @@ class RegisterActivity : AppCompatActivity() {
             password != rePassword   -> {
                 ToastUtils.showToast(this, "密码不一样")
             }
-              else -> {*/
+              else -> {
                   viewModel.toRegister(username, password, verificationCode)
-                  progressBar.visibility = View.VISIBLE
-//              }
-//        }
+//                  progressBar.visibility = View.VISIBLE
+              }
+        }
     }
 
 }
