@@ -1,20 +1,19 @@
 package com.yks.chestnutyun.views.login
 
+import android.app.ProgressDialog.show
 import android.os.Bundle
-import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.snackbar.Snackbar
 import com.yks.chestnutyun.R
-import com.yks.chestnutyun.common.ResultState
+import com.yks.chestnutyun.base.BaseActivity
 import com.yks.chestnutyun.utils.RegExpUtils
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_register.*
-import java.util.Arrays.toString
 
 /**
   * @Description:    注册功能的Activity
@@ -23,7 +22,7 @@ import java.util.Arrays.toString
  */
 
 @AndroidEntryPoint
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
 
     private companion object
 
@@ -31,13 +30,27 @@ class RegisterActivity : AppCompatActivity() {
     private val viewModel: RegisterViewModel by viewModels()   //Activity 持有 ViewModel 的对象 ，Hilt 注入
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-        initView()
+
+    override fun startObserve() {
+
+        viewModel.mRegisterStatus.observe(this){
+
+            if (it.showLoading) showProgressDialog(R.string.register) else dismissProgressDialog()
+            if (it.showEnd) {
+                ToastUtils.showToast(this,"注册成功"+it.showEnd)
+            }
+            it.showError?.let { errorMsg ->
+                ToastUtils.showToast(this,"注册失败"+it.showError)
+            }
+        }
     }
 
-    private fun initView() {
+
+    override fun setLayoutId(): Int {
+        return R.layout.activity_register
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
         //点击退出注册
         registerCancel.setOnClickListener {
             finish()
@@ -91,39 +104,9 @@ class RegisterActivity : AppCompatActivity() {
         val rePassword = registerConfirmPasswordInput.text.toString()
         //检查信息格式是否合法
         checkMessage(name, password, verificationCode, rePassword)
-            //显示加载框
-
-            // 观察是否注册成功
-        subscribeRegister(name, password, verificationCode)
-
     }
 
 
-    //观察注册结果
-    private fun subscribeRegister(
-        name: String,
-        password: String,
-        verificationCode: String,
-    ) {
-
-        viewModel.registerResult.observe(this){
-            when(it){
-                is ResultState.Success<String> ->{
-                    ToastUtils.showToast(this,"注册成功")
-                    progressBar.visibility = View.GONE
-
-                    Log.d(TAG, "注册成功$it")
-                }
-                else -> {
-                    ToastUtils.showToast(this,it.toString())
-                    progressBar.visibility = View.GONE
-
-                    Log.d(TAG, "注册失败$it")
-                }
-            }
-        }
-
-    }
 
 
     /**
@@ -154,8 +137,7 @@ class RegisterActivity : AppCompatActivity() {
                 ToastUtils.showToast(this, "密码不一样")
             }
               else -> {
-                  viewModel.toRegister(username, password, verificationCode)
-                  progressBar.visibility = View.VISIBLE
+                  viewModel.register(username, password, verificationCode)
               }
         }
     }

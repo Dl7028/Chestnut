@@ -30,4 +30,6 @@
     <string name="register_emil_title">邮箱号注册</string>
     <string name="change_to_phone_register">切换手机号注册</string>
     <string name="change_emil_register">切换邮箱号注册</string>
+    <string name="loading">正在加载中&#8230;</string>
+
 </resources>

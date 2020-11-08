@@ -6,13 +6,12 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
+import androidx.appcompat.app.AppCompatActivity
 import com.stx.xhb.androidx.XBanner
 import com.stx.xhb.androidx.entity.LocalImageInfo
 import com.yks.chestnutyun.MainActivity
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.base.BaseActivity
-import com.yks.chestnutyun.common.ResultState
 import com.yks.chestnutyun.utils.RegExpUtils
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.LoginViewModel
@@ -26,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_login.*
  */
 
 @AndroidEntryPoint
-class LoginActivity : BaseActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private companion object val TAG: String?="LoginActivity"
     private val viewModel: LoginViewModel by viewModels()
@@ -78,7 +77,7 @@ class LoginActivity : BaseActivity() {
         val username = loginPhoneInput.text.toString()
         val password = loginPasswordInput.text.toString()
         checkMessage(username, password)
-        viewModel.loginResult.observe(this){
+        /*viewModel.loginResult.observe(this){
             when(it){
                 is ResultState.Success<String> ->{
                     ToastUtils.showToast(this,"登录成功")
@@ -89,7 +88,7 @@ class LoginActivity : BaseActivity() {
                     Log.d(TAG, "登录失败$it")
                 }
             }
-        }
+        }*/
     }
 
     /**

@@ -2,12 +2,12 @@ package com.yks.chestnutyun.viewmodels
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.yks.chestnutyun.common.ResultState
 import com.yks.chestnutyun.data.repositories.RegisterRepository
+import com.yks.chestnutyun.utils.ListModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.Exception
-import kotlin.math.E
 
 /**
  * @Description:    注册功能的ViewModel类
@@ -22,13 +22,14 @@ class RegisterViewModel @ViewModelInject  constructor(
     private companion object val TAG: String = "RegisterViewModel"
 
 
-    val registerResult = MutableLiveData<ResultState<String>>()
+//    val registerResult = MutableLiveData<ResultState<String>>()
+val mRegisterStatus = MutableLiveData<ListModel<Int>>()
 
 
     /**
      * 注册
      */
-    fun toRegister(name: String,password:String,verificationCode:String){
+/*    fun toRegister(name: String,password:String,verificationCode:String){
         viewModelScope.launch(Dispatchers.IO){
           val result =  try {
               registerRepository.toRegister(name,password,verificationCode)
@@ -37,7 +38,7 @@ class RegisterViewModel @ViewModelInject  constructor(
           }
             registerResult.postValue(result)
         }
-    }
+    }*/
 
     /**
      * 获取验证码
@@ -46,7 +47,24 @@ class RegisterViewModel @ViewModelInject  constructor(
         val code = registerRepository.getCode(userName)
         emit(code)
     }
-}
+
+    /**
+     * 获取验证码
+     */
+    fun register(username: String, password: String, verificationCode: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            registerRepository.register(
+                    username,
+                    password,
+                    verificationCode,
+                    mRegisterStatus
+                )
+            }
+        }
+    }
+
+
+
 
 
 

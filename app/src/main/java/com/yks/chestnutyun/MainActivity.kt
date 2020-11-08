@@ -3,13 +3,14 @@ package com.yks.chestnutyun
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation.findNavController
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.base.BaseActivity
 import com.yks.chestnutyun.databinding.ActivityMainBinding
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var mainBinding: ActivityMainBinding
     private companion object val TAG  = "MainActivity"

@@ -58,7 +58,6 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="@string/user_name"
-            android:inputType="number"
             android:textColor="@color/color_333333"
             android:textColorHighlight="@color/color_c9c9c9"
             android:textSize="@dimen/sp14"
@@ -99,7 +98,6 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="@string/password"
-            android:inputType="textPassword"
             android:textColor="@color/color_333333"
             android:textColorHighlight="@color/color_c9c9c9"
             android:textSize="@dimen/sp14" />

@@ -1,12 +1,11 @@
 package com.yks.chestnutyun.api
 
 import com.yks.chestnutyun.base.BaseBean
-import com.yks.chestnutyun.data.bean.LoginData
 import com.yks.chestnutyun.common.REGISTER_GET_CODE
 import com.yks.chestnutyun.common.USER_LOGIN
 import com.yks.chestnutyun.common.USER_REGISTER
+import com.yks.chestnutyun.data.bean.User
 import retrofit2.http.GET
-import retrofit2.http.POST
 import retrofit2.http.Query
 
 /**
@@ -15,15 +14,13 @@ import retrofit2.http.Query
  * @CreateDate:     2020/11/2 16:01
  */
 interface LoginService {
-
-    
     /**
      * 注册接口
      */
     @GET(USER_REGISTER)
     suspend fun register(@Query("username")username: String,
                          @Query("password")password: String,
-                         @Query("verificationCode")verificationCode:String): BaseBean<String>
+                         @Query("verificationCode")verificationCode:String): BaseBean<User>
 
     /**
      * 获取验证码
@@ -32,6 +29,9 @@ interface LoginService {
     suspend fun getCode(@Query("username") userName:String): BaseBean<String>
 
 
+    /**
+     * 登录
+     */
     @GET(USER_LOGIN)
     suspend fun login(@Query("username")userName:String,@Query("password")password:String):BaseBean<String>
 }

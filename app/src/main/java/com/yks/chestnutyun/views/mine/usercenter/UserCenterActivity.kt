@@ -7,7 +7,7 @@ import com.yks.chestnutyun.R
 import com.yks.chestnutyun.base.BaseActivity
 import com.yks.chestnutyun.databinding.ActivityUserCenterBinding
 
-class UserCenterActivity : BaseActivity() {
+class UserCenterActivity : AppCompatActivity() {
 
     private lateinit var ucBinding:ActivityUserCenterBinding
 
