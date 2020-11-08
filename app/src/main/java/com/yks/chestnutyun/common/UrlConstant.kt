@@ -11,3 +11,5 @@ const val BASE_URL = "http://47.102.212.18:50010"
 const val USER_REGISTER = "/user/register"
 //注册获取 的验证码
 const val REGISTER_GET_CODE = "/user/register/getCode"
+//用户登录
+const val USER_LOGIN = "/user/login"

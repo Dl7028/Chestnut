@@ -3,6 +3,7 @@ package com.yks.chestnutyun.api
 import com.yks.chestnutyun.base.BaseBean
 import com.yks.chestnutyun.data.bean.LoginData
 import com.yks.chestnutyun.common.REGISTER_GET_CODE
+import com.yks.chestnutyun.common.USER_LOGIN
 import com.yks.chestnutyun.common.USER_REGISTER
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -29,4 +30,8 @@ interface LoginService {
      */
     @GET(REGISTER_GET_CODE)
     suspend fun getCode(@Query("username") userName:String): BaseBean<String>
+
+
+    @GET(USER_LOGIN)
+    suspend fun login(@Query("username")userName:String,@Query("password")password:String):BaseBean<String>
 }

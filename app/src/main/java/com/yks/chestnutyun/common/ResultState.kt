@@ -7,9 +7,13 @@ package com.yks.chestnutyun.common
  */
 sealed class ResultState<out R> {
     data class Success<out T>(val data: T) : ResultState<T>()
-    data class Error(val errorStr: String) : ResultState<Nothing>(){
+
+
+    data class Error(val s: String) : ResultState<Nothing>(){
+
+
         override fun toString(): String {
-            return errorStr
+            return s
         }
     }
 }

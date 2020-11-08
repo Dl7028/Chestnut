@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data/>
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".views.login.LoginActivity">
+    tools:context=".views.login.LoginActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <com.stx.xhb.androidx.XBanner
@@ -54,7 +51,7 @@
             android:src="@mipmap/login_login_icon" />
 
         <EditText
-            android:id="@+id/login_phone_input"
+            android:id="@+id/loginPhoneInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/ds12"
@@ -95,7 +92,7 @@
             android:src="@mipmap/login_password_icon" />
 
         <EditText
-            android:id="@+id/login_pass_word_input"
+            android:id="@+id/loginPasswordInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/ds12"
@@ -118,7 +115,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <TextView
-            android:id="@+id/login_register_button"
+            android:id="@+id/loginRegisterButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -128,7 +125,7 @@
             android:textSize="@dimen/sp12" />
 
         <TextView
-            android:id="@+id/login_forget_button"
+            android:id="@+id/loginForgetButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -141,7 +138,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/login_button"
+        android:id="@+id/loginButton"
         android:layout_width="0dp"
         android:layout_height="@dimen/ds41"
         android:layout_marginTop="32dp"
@@ -156,4 +153,3 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-</layout>

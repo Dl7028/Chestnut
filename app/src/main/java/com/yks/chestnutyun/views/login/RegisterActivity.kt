@@ -45,7 +45,6 @@ class RegisterActivity : AppCompatActivity() {
 
         //获取验证码
         loginEmailGetCodeButton.setOnClickListener {
-            loginEmailGetCodeButton.start() //获取成功，计时开始
             getCode()
         }
 
@@ -61,6 +60,7 @@ class RegisterActivity : AppCompatActivity() {
         val ifPhoneNumber = RegExpUtils.checkPhone(registerEmailPhoneInput.text.toString())
         val ifEmailAddress = RegExpUtils.checkEmail(registerEmailPhoneInput.text.toString())
         if (ifPhoneNumber || ifEmailAddress) {  //用户名合法，获取验证码并观察结果
+            loginEmailGetCodeButton.start() //获取成功，计时开始
             subscribeGetCode()
         } else {
             ToastUtils.showToast(this, "请输入正确的用户名") //用户名不合法
@@ -108,12 +108,16 @@ class RegisterActivity : AppCompatActivity() {
 
         viewModel.registerResult.observe(this){
             when(it){
-                is ResultState.Success<Boolean> ->{
+                is ResultState.Success<String> ->{
                     ToastUtils.showToast(this,"注册成功")
-                    Log.d(TAG, "注册成功")
+                    progressBar.visibility = View.GONE
+
+                    Log.d(TAG, "注册成功$it")
                 }
                 else -> {
                     ToastUtils.showToast(this,it.toString())
+                    progressBar.visibility = View.GONE
+
                     Log.d(TAG, "注册失败$it")
                 }
             }
@@ -151,7 +155,7 @@ class RegisterActivity : AppCompatActivity() {
             }
               else -> {
                   viewModel.toRegister(username, password, verificationCode)
-//                  progressBar.visibility = View.VISIBLE
+                  progressBar.visibility = View.VISIBLE
               }
         }
     }

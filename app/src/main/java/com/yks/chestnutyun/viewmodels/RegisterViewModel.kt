@@ -19,29 +19,15 @@ import kotlin.math.E
 class RegisterViewModel @ViewModelInject  constructor(
     private val registerRepository: RegisterRepository,
 ): ViewModel()  {
-    private companion object
+    private companion object val TAG: String = "RegisterViewModel"
 
-    val TAG: String = "RegisterViewModel"
-    val errorResult = MutableLiveData<String>()
-    val successResult = MutableLiveData<Boolean>()
 
-    val registerResult = MutableLiveData<ResultState<Boolean>>()
+    val registerResult = MutableLiveData<ResultState<String>>()
+
 
     /**
      * 注册
      */
- /*  suspend fun toRegister(name: String,password:String,verificationCode:String) :ResultState {
-
-        return withContext<ResultState>(context = Dispatchers.IO){
-            val baseBean = registerRepository.register(name,password,verificationCode)
-            if (baseBean.code==1){
-                return@withContext ResultState.Success
-            }else{
-                return@withContext ResultState.Failure("注册失败")
-            }
-        }
-    }*/
-
     fun toRegister(name: String,password:String,verificationCode:String){
         viewModelScope.launch(Dispatchers.IO){
           val result =  try {
@@ -50,7 +36,6 @@ class RegisterViewModel @ViewModelInject  constructor(
               ResultState.Error(e.message.toString())
           }
             registerResult.postValue(result)
-
         }
     }
 
