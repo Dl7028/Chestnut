@@ -3,41 +3,67 @@ package com.yks.chestnutyun.viewmodels
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.yks.chestnutyun.data.repositories.LoginRepository
+import com.yks.chestnutyun.utils.ListModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 /**
- * @Description:    登录功能的ViewModel
+ * @Description:    注册功能的ViewModel类
  * @Author:         Yu ki-r
- * @CreateDate:     2020/10/28 22:34
+ * @CreateDate:     2020/10/29 20:24
  */
-class LoginViewModel @ViewModelInject constructor(
-    private val loginRepository: LoginRepository
-) : ViewModel(){
-
-//     val loginResult = MutableLiveData<ResultState<String>>()
 
 
+class LoginViewModel @ViewModelInject  constructor(
+    private val loginRepository: LoginRepository,
+): ViewModel()  {
+    private companion object val TAG: String = "RegisterViewModel"
+
+
+//    val registerResult = MutableLiveData<ResultState<String>>()
+    val mRegisterStatus = MutableLiveData<ListModel<Int>>()
+    val mLoginStatus = MutableLiveData<ListModel<Int>>()
+
+
+    /**
+     * 获取验证码
+     */
+    fun getCode(userName:String):LiveData<Boolean> = liveData{
+        val code = loginRepository.getCode(userName)
+        emit(code)
+    }
+
+    /**
+     * 注册
+     */
+    fun register(username: String, password: String, verificationCode: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            loginRepository.register(
+                    username,
+                    password,
+                    verificationCode,
+                    mRegisterStatus      //网络请求的状态量
+                )
+            }
+        }
 
     /**
      * 登录
      */
-    fun toLogin(name: String,password:String){
-        viewModelScope.launch(Dispatchers.IO){
-            val result =  try {
-//                loginRepository.toLogin(name,password)
-            }catch (e: Exception){
-//                ResultState.Error(e.message.toString())
-            }
-//            loginResult.postValue(result)
+    fun login(username: String, password: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            loginRepository.login(
+                username,
+                password,
+                mLoginStatus
+            )
         }
     }
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+

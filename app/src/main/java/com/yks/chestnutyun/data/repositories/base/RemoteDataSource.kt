@@ -1,13 +1,11 @@
 package com.yks.chestnutyun.data.repositories.base
 
-import android.util.Log
-import com.yks.chestnutyun.api.LoginService
-import com.yks.chestnutyun.data.base.ResultData
+import com.yks.chestnutyun.data.api.LoginService
+import com.yks.chestnutyun.data.bean.base.ResultData
 import com.yks.chestnutyun.data.bean.User
-import com.yks.chestnutyun.data.network.ServiceCreator
+import com.yks.chestnutyun.data.api.ServiceCreator
 import com.yks.chestnutyun.utils.safeApiCall
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * @Description:
@@ -35,11 +33,10 @@ class RemoteDataSource@Inject constructor() {
         username: String,
         password: String,
         verificationCode:String
-    ): ResultData<User> {
+    ): ResultData<String> {
         val registerResult = loginImpl.register(username, password,verificationCode)
-        Log.d(TAG,registerResult.toString())
         if (registerResult.code == 1) {
-            return ResultData.Success(registerResult.data)
+            return ResultData.Success(registerResult.message)
         }
         return ResultData.ErrorMessage(registerResult.message)
     }
@@ -52,9 +49,7 @@ class RemoteDataSource@Inject constructor() {
         password: String
     ):ResultData<String>{
         val loginResult =loginImpl.login(userName,password)
-        Log.d(TAG,""+loginResult.toString())
         if (loginResult.code==1){
-            Log.d(TAG,"loginResult.code==1")
             return ResultData.Success(loginResult.message)
 
         }

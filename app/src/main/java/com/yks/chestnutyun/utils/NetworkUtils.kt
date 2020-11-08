@@ -1,12 +1,6 @@
 package com.yks.chestnutyun.utils
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
-
-import com.yks.chestnutyun.data.base.ResultData
-import kotlinx.coroutines.flow.Flow
+import com.yks.chestnutyun.data.bean.base.ResultData
 
 
 /**

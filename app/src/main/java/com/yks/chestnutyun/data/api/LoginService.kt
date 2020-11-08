@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.api
+package com.yks.chestnutyun.data.api
 
 import com.yks.chestnutyun.base.BaseBean
 import com.yks.chestnutyun.common.REGISTER_GET_CODE

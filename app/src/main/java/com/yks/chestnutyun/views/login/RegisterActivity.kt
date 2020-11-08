@@ -1,17 +1,12 @@
 package com.yks.chestnutyun.views.login
 
-import android.app.ProgressDialog.show
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.base.BaseActivity
 import com.yks.chestnutyun.utils.RegExpUtils
 import com.yks.chestnutyun.utils.ToastUtils
-import com.yks.chestnutyun.viewmodels.RegisterViewModel
+import com.yks.chestnutyun.viewmodels.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -27,7 +22,7 @@ class RegisterActivity : BaseActivity() {
     private companion object
 
     val TAG: String = "RegisterActivity"
-    private val viewModel: RegisterViewModel by viewModels()   //Activity 持有 ViewModel 的对象 ，Hilt 注入
+    private val viewModel: LoginViewModel by viewModels()   //Activity 持有 ViewModel 的对象 ，Hilt 注入
 
     override fun setLayoutId(): Int {
         return R.layout.activity_register

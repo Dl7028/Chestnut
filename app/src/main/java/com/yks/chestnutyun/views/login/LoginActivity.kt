@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.stx.xhb.androidx.XBanner
 import com.stx.xhb.androidx.entity.LocalImageInfo
 import com.yks.chestnutyun.MainActivity
@@ -15,7 +14,6 @@ import com.yks.chestnutyun.base.BaseActivity
 import com.yks.chestnutyun.utils.RegExpUtils
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.LoginViewModel
-import com.yks.chestnutyun.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -29,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : BaseActivity() {
 
     private companion object val TAG: String?="LoginActivity"
-    private val viewModel: RegisterViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModels()
 
 
     override fun setLayoutId(): Int {

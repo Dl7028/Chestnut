@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.data.base
+package com.yks.chestnutyun.data.bean.base
 
 
 /**

@@ -1,6 +1,5 @@
-package com.yks.chestnutyun.data.network
+package com.yks.chestnutyun.data.api
 
-import com.yks.chestnutyun.api.LoginService
 import com.yks.chestnutyun.base.BaseBean
 
 /**
