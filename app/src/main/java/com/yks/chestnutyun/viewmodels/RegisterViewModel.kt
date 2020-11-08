@@ -23,22 +23,9 @@ class RegisterViewModel @ViewModelInject  constructor(
 
 
 //    val registerResult = MutableLiveData<ResultState<String>>()
-val mRegisterStatus = MutableLiveData<ListModel<Int>>()
+    val mRegisterStatus = MutableLiveData<ListModel<Int>>()
+    val mLoginStatus = MutableLiveData<ListModel<Int>>()
 
-
-    /**
-     * 注册
-     */
-/*    fun toRegister(name: String,password:String,verificationCode:String){
-        viewModelScope.launch(Dispatchers.IO){
-          val result =  try {
-              registerRepository.toRegister(name,password,verificationCode)
-          }catch (e: Exception){
-              ResultState.Error(e.message.toString())
-          }
-            registerResult.postValue(result)
-        }
-    }*/
 
     /**
      * 获取验证码
@@ -49,7 +36,7 @@ val mRegisterStatus = MutableLiveData<ListModel<Int>>()
     }
 
     /**
-     * 获取验证码
+     * 注册
      */
     fun register(username: String, password: String, verificationCode: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -57,11 +44,24 @@ val mRegisterStatus = MutableLiveData<ListModel<Int>>()
                     username,
                     password,
                     verificationCode,
-                    mRegisterStatus
+                    mRegisterStatus      //网络请求的状态量
                 )
             }
         }
+
+    /**
+     * 登录
+     */
+    fun login(username: String, password: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            registerRepository.login(
+                username,
+                password,
+                mLoginStatus
+            )
+        }
     }
+}
 
 
 

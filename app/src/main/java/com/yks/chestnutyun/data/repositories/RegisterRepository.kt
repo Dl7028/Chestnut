@@ -6,8 +6,6 @@ import com.yks.chestnutyun.data.base.ResultData
 import com.yks.chestnutyun.data.network.NetWorkManager
 import com.yks.chestnutyun.data.repositories.base.RemoteDataSource
 import com.yks.chestnutyun.utils.ListModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,7 +16,9 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class RegisterRepository @Inject constructor() {
+class RegisterRepository @Inject constructor(
+    private val remoteDataSource: RemoteDataSource
+) {
 
     private val TAG: String? = "RegisterRepository"
 
@@ -29,22 +29,10 @@ class RegisterRepository @Inject constructor() {
         return baseBean.code == 1
     }
 
+
     /**
      * 注册
      */
-    /*  suspend fun toRegister(name: String,password:String,verificationCode:String) : ResultState<String> {
-
-        return withContext(Dispatchers.IO){ //移出主线程
-            val baseBean = NetWorkManager.register(name,password,verificationCode) //访问网络获取数据
-            if (baseBean.code==1){       //注册成功
-                return@withContext ResultState.Success(baseBean.message)
-            }else{
-                return@withContext ResultState.Error(baseBean.message) //注册失败
-            }
-
-        }
-    }*/
-
     suspend fun register(
         username: String,
         password: String,
@@ -52,21 +40,35 @@ class RegisterRepository @Inject constructor() {
         listModel: MutableLiveData<ListModel<Int>>?
     ) {
         listModel?.postValue(ListModel(showLoading = true))
-        val result = RemoteDataSource.register(username, password, verificationCode)
-        Log.d(TAG,result.toString())
-        if (result is ResultData.Success) {   //注册成功
-//            setLoggedInUser(result.data)
-            Log.d(TAG,"result is ResultData.Success")
+        val registerResult = remoteDataSource.register(username, password, verificationCode)
+        if (registerResult is ResultData.Success) {   //注册成功
             listModel?.postValue(ListModel(showLoading = false, showEnd = true))
-        } else if (result is ResultData.ErrorMessage) { //注册失败
-            listModel?.postValue(ListModel(showLoading = false, showError = result.message))
-            Log.d(TAG,"result is ResultData.ErrorMessage")
-        }else if (result is ResultData.Error){
-            listModel?.postValue(ListModel(showLoading = false, showError = "注册异常"))
+        } else if (registerResult is ResultData.ErrorMessage) { //注册失败
+            listModel?.postValue(ListModel(showLoading = false, showError = registerResult.message))
+        }else if (registerResult is ResultData.Error){
+            listModel?.postValue(ListModel(showLoading = false, showError = "异常"))
         }
-
-
     }
+    /**
+     * 登录
+     */
+    suspend fun login(
+        username: String,
+        password: String,
+        listModel: MutableLiveData<ListModel<Int>>?
+    ){
+        listModel?.postValue(ListModel(showLoading=true))
+        val loginResult = remoteDataSource.toLogin(username, password)
+        Log.d(TAG,loginResult.toString())
+        if (loginResult is ResultData.Success) {
+            listModel?.postValue(ListModel(showLoading = false, showEnd = true))
+        } else if (loginResult is ResultData.ErrorMessage) {
+            listModel?.postValue(ListModel(showLoading = false, showError = loginResult.message))
+        }else if (loginResult is ResultData.Error){
+            listModel?.postValue(ListModel(showLoading = false, showError = " "))
+        }
+    }
+
 }
 
 

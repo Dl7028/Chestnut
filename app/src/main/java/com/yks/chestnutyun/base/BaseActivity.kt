@@ -30,7 +30,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
 
-    abstract fun startObserve()
 
     protected open fun initActivity(savedInstanceState: Bundle?) {
         initView(savedInstanceState)
@@ -40,6 +39,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
     abstract fun setLayoutId(): Int
     abstract fun initView(savedInstanceState: Bundle?)
+    abstract fun startObserve()
+
 
 //    abstract fun initData()
 

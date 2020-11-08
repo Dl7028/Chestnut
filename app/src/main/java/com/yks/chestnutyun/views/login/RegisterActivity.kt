@@ -29,23 +29,6 @@ class RegisterActivity : BaseActivity() {
     val TAG: String = "RegisterActivity"
     private val viewModel: RegisterViewModel by viewModels()   //Activity 持有 ViewModel 的对象 ，Hilt 注入
 
-
-
-    override fun startObserve() {
-
-        viewModel.mRegisterStatus.observe(this){
-
-            if (it.showLoading) showProgressDialog(R.string.register) else dismissProgressDialog()
-            if (it.showEnd) {
-                ToastUtils.showToast(this,"注册成功"+it.showEnd)
-            }
-            it.showError?.let { errorMsg ->
-                ToastUtils.showToast(this,"注册失败"+it.showError)
-            }
-        }
-    }
-
-
     override fun setLayoutId(): Int {
         return R.layout.activity_register
     }
@@ -66,6 +49,17 @@ class RegisterActivity : BaseActivity() {
             registers()
         }
     }
+    override fun startObserve() {
+        viewModel.mRegisterStatus.observe(this){
+            if (it.showLoading) showProgressDialog(R.string.register_loading) else dismissProgressDialog()  //显示/隐藏 进度条
+            if (it.showEnd) {
+                ToastUtils.showToast(this,"注册成功"+it.showEnd)  //请求成功
+            }
+            it.showError?.let { errorMsg ->        //请求失败
+                ToastUtils.showToast(this,"注册失败"+it.showError)
+            }
+        }
+    }
 
 
     // 获取验证码
@@ -81,20 +75,6 @@ class RegisterActivity : BaseActivity() {
     }
 
     /**
-     * 观察验证码获取情况
-     */
-    private fun subscribeGetCode() {
-
-        viewModel.getCode(registerEmailPhoneInput.text.toString()).observe(this) {
-            if (it == true) {
-                ToastUtils.showToast(this, "验证码已发送，请注意查收")
-            }
-        }
-
-    }
-
-
-    /**
      * 开始注册
      */
     private fun registers() {
@@ -102,25 +82,10 @@ class RegisterActivity : BaseActivity() {
         val verificationCode = registerEmailCodeInput.text.toString()
         val password = registerPasswordInput.text.toString()
         val rePassword = registerConfirmPasswordInput.text.toString()
+        val ifPhoneNumber = RegExpUtils.checkPhone(name)
+        val ifEmailAddress = RegExpUtils.checkEmail(name)
         //检查信息格式是否合法
-        checkMessage(name, password, verificationCode, rePassword)
-    }
-
-
-
-
-    /**
-     * 检查信息输入是否合法
-     */
-    private fun checkMessage(
-        username: String,
-        password: String,
-        verificationCode: String,
-        rePassword: String
-    ) {
-        val ifPhoneNumber = RegExpUtils.checkPhone(username)
-        val ifEmailAddress = RegExpUtils.checkEmail(username)
-          when{
+        when{
             !ifPhoneNumber && !ifEmailAddress -> {
                 ToastUtils.showToast(this, "用户名格式不合法")
 
@@ -136,12 +101,24 @@ class RegisterActivity : BaseActivity() {
             password != rePassword   -> {
                 ToastUtils.showToast(this, "密码不一样")
             }
-              else -> {
-                  viewModel.register(username, password, verificationCode)
-              }
+            else -> {
+                viewModel.register(name, password, verificationCode)
+            }
         }
     }
 
+    /**
+     * 观察验证码获取情况
+     */
+    private fun subscribeGetCode() {
+
+        viewModel.getCode(registerEmailPhoneInput.text.toString()).observe(this) {
+            if (it == true) {
+                ToastUtils.showToast(this, "验证码已发送，请注意查收")
+            }
+        }
+
+    }
 }
 
 

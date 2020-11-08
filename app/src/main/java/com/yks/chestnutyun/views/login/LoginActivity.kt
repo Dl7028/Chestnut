@@ -15,6 +15,7 @@ import com.yks.chestnutyun.base.BaseActivity
 import com.yks.chestnutyun.utils.RegExpUtils
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.LoginViewModel
+import com.yks.chestnutyun.viewmodels.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -25,20 +26,17 @@ import kotlinx.android.synthetic.main.activity_login.*
  */
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     private companion object val TAG: String?="LoginActivity"
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: RegisterViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        initView()
-        initListener()
+
+    override fun setLayoutId(): Int {
+        return R.layout.activity_login
     }
 
-    private fun initView() {
-
+    override fun initView(savedInstanceState: Bundle?) {
         //轮播图图片
         val localImageInfoList:MutableList<LocalImageInfo> = ArrayList<LocalImageInfo>()
         localImageInfoList.add(LocalImageInfo(R.mipmap.banner_car))
@@ -46,11 +44,7 @@ class LoginActivity : AppCompatActivity() {
         localImageInfoList.add(LocalImageInfo(R.mipmap.banner_xingqiu))
         Log.d("", "" + localImageInfoList.size)
         banner.setBannerData(localImageInfoList)
-    }
 
-
-
-    private fun initListener() {
         //跳转到注册
         loginRegisterButton.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -67,48 +61,44 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginButton.setOnClickListener {
-            subscribeLogin()
+            login()
+        }
+    }
+
+    override fun startObserve() {
+        viewModel.mLoginStatus.observe(this) {
+            if (it.showLoading) showProgressDialog(R.string.register_loading) else dismissProgressDialog()  //显示/隐藏 进度条
+            if (it.showEnd) {
+                ToastUtils.showToast(this,"登录成功"+it.showEnd)  //请求成功
+            }
+            it.showError?.let { errorMsg ->        //请求失败
+                ToastUtils.showToast(this,"登录失败"+it.showError)
+            }
         }
 
     }
 
-    //观察登录结果
-    private fun subscribeLogin(){
+    private fun login() {
         val username = loginPhoneInput.text.toString()
         val password = loginPasswordInput.text.toString()
-        checkMessage(username, password)
-        /*viewModel.loginResult.observe(this){
-            when(it){
-                is ResultState.Success<String> ->{
-                    ToastUtils.showToast(this,"登录成功")
-                    Log.d(TAG, "登录成功$it")
-                }
-                else -> {
-                    ToastUtils.showToast(this,it.toString())
-                    Log.d(TAG, "登录失败$it")
-                }
-            }
-        }*/
-    }
-
-    /**
-     * 检查信息输入是否合法
-     */
-    private fun checkMessage(
-        username: String,
-        password: String,
-    ) {
         val ifPhoneNumber = RegExpUtils.checkPhone(username)
         val ifEmailAddress = RegExpUtils.checkEmail(username)
-        when{
+        when {
             !ifPhoneNumber && !ifEmailAddress -> {
                 ToastUtils.showToast(this, "用户名格式不合法")
             }
             else -> {
-                viewModel.toLogin(username, password)
+                viewModel.login(username, password)
             }
         }
     }
+
+
+
+
+
+
+
 
 
 
