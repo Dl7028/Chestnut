@@ -18,11 +18,11 @@ object NetWorkManager {
             = loginImpl.register(username, password,verificationCode)
 */
 
-    //获取验证码
+   /* //获取验证码
     suspend fun getCode(userName:String):BaseBean<String> = loginImpl.getCode(userName)
 
     //用户登录
-    suspend fun login(userName:String,password:String) = loginImpl.login(userName,password)
+    suspend fun login(userName:String,password:String) = loginImpl.login(userName,password)*/
 
 
 }

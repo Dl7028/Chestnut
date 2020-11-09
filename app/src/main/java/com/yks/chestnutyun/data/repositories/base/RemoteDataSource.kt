@@ -17,6 +17,12 @@ class RemoteDataSource@Inject constructor() {
     private   val TAG: String="RemoteDataSource"
     private val loginImpl = ServiceCreator.create(LoginService::class.java)
 
+    //获取验证码
+    suspend fun getCode(userName: String) = safeApiCall(
+        call = {toGetCode(userName)}
+    )
+
+
     //注册
     suspend fun register(username: String, password: String,verificationCode:String ) = safeApiCall(
         call = { toRegister(username, password,verificationCode) }
@@ -26,14 +32,23 @@ class RemoteDataSource@Inject constructor() {
     suspend fun login(username: String, password: String) = safeApiCall(
         call = { toLogin(username,password) }
     )
+
+
+    /**
+     * 网络请求获取验证码
+     */
+    private suspend fun toGetCode(userName: String):ResultData<String> {
+        val getCodeResult = loginImpl.getCode(userName)
+        if (getCodeResult.code==1){
+            return ResultData.Success(getCodeResult.message)
+        }
+        return ResultData.ErrorMessage(getCodeResult.message)
+    }
+
     /**
      * 网络请求注册
      */
-    private suspend fun toRegister(
-        username: String,
-        password: String,
-        verificationCode:String
-    ): ResultData<String> {
+    private suspend fun toRegister(username: String, password: String, verificationCode:String): ResultData<String> {
         val registerResult = loginImpl.register(username, password,verificationCode)
         if (registerResult.code == 1) {
             return ResultData.Success(registerResult.message)
@@ -44,10 +59,7 @@ class RemoteDataSource@Inject constructor() {
     /**
      * 网络请求登录
      */
-     suspend fun toLogin(
-        userName:String,
-        password: String
-    ):ResultData<String>{
+     suspend fun toLogin(userName:String, password: String):ResultData<String>{
         val loginResult =loginImpl.login(userName,password)
         if (loginResult.code==1){
             return ResultData.Success(loginResult.message)

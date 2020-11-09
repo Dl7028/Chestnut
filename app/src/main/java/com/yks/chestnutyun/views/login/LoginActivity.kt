@@ -40,7 +40,7 @@ class LoginActivity : BaseActivity() {
         localImageInfoList.add(LocalImageInfo(R.mipmap.banner_car))
         localImageInfoList.add(LocalImageInfo(R.mipmap.banner_chaojimali))
         localImageInfoList.add(LocalImageInfo(R.mipmap.banner_xingqiu))
-        Log.d("", "" + localImageInfoList.size)
+
         banner.setBannerData(localImageInfoList)
 
         //跳转到注册
@@ -73,6 +73,7 @@ class LoginActivity : BaseActivity() {
                 ToastUtils.showToast(this,"登录失败"+it.showError)
             }
         }
+
 
     }
 

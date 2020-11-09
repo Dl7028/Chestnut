@@ -54,16 +54,29 @@ class RegisterActivity : BaseActivity() {
                 ToastUtils.showToast(this,"注册失败"+it.showError)
             }
         }
+        viewModel.mGetCodeStatus.observe(this){
+            if (it.showLoading) showProgressDialog(R.string.getCode_loading) else dismissProgressDialog()  //显示/隐藏 进度条
+            if (it.showEnd) {
+                ToastUtils.showToast(this,"获取验证码成功"+it.showEnd)  //请求成功
+                loginEmailGetCodeButton.start() //获取成功，计时开始
+            }
+            it.showError?.let { errorMsg ->        //请求失败
+                ToastUtils.showToast(this,"获取验证码失败"+it.showError)
+            }
+        }
+
     }
 
 
-    // 获取验证码
+    /**
+     * 获取验证码
+     */
     private fun getCode() {
         val ifPhoneNumber = RegExpUtils.checkPhone(registerEmailPhoneInput.text.toString())
         val ifEmailAddress = RegExpUtils.checkEmail(registerEmailPhoneInput.text.toString())
         if (ifPhoneNumber || ifEmailAddress) {  //用户名合法，获取验证码并观察结果
-            loginEmailGetCodeButton.start() //获取成功，计时开始
-            subscribeGetCode()
+            viewModel.getCode(registerEmailPhoneInput.text.toString())
+
         } else {
             ToastUtils.showToast(this, "请输入正确的用户名") //用户名不合法
         }
@@ -100,19 +113,6 @@ class RegisterActivity : BaseActivity() {
                 viewModel.register(name, password, verificationCode)
             }
         }
-    }
-
-    /**
-     * 观察验证码获取情况
-     */
-    private fun subscribeGetCode() {
-
-        viewModel.getCode(registerEmailPhoneInput.text.toString()).observe(this) {
-            if (it == true) {
-                ToastUtils.showToast(this, "验证码已发送，请注意查收")
-            }
-        }
-
     }
 }
 
