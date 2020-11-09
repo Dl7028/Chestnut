@@ -1,12 +1,8 @@
-package com.yks.chestnutyun.base
+package com.yks.chestnutyun.views.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.TypedValue
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
-import com.yks.chestnutyun.R
 import com.yks.chestnutyun.customView.ProgressDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +12,6 @@ import dagger.hilt.android.AndroidEntryPoint
  * @Author:         Yu ki-r
  * @CreateDate:     2020/10/29 11:39
  */
-
 @AndroidEntryPoint
 abstract class BaseActivity : AppCompatActivity() {
     private lateinit var progressDialogFragment: ProgressDialogFragment

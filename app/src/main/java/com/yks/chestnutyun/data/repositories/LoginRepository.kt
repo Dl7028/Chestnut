@@ -1,9 +1,7 @@
 package com.yks.chestnutyun.data.repositories
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.yks.chestnutyun.data.bean.base.ResultData
-import com.yks.chestnutyun.data.api.NetWorkManager
 import com.yks.chestnutyun.data.repositories.base.RemoteDataSource
 import com.yks.chestnutyun.utils.ListModel
 import javax.inject.Inject

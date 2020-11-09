@@ -1,9 +1,6 @@
 package com.yks.chestnutyun.data.api
 
 import com.yks.chestnutyun.base.BaseBean
-import com.yks.chestnutyun.common.REGISTER_GET_CODE
-import com.yks.chestnutyun.common.USER_LOGIN
-import com.yks.chestnutyun.common.USER_REGISTER
 import com.yks.chestnutyun.data.bean.User
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,7 +10,7 @@ import retrofit2.http.Query
  * @Author:         Yu ki-r
  * @CreateDate:     2020/11/2 16:01
  */
-interface LoginService {
+interface ApiService {
     /**
      * 注册接口
      */

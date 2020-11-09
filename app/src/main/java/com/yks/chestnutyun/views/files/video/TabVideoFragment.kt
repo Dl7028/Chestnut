@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.yks.chestnutyun.R
-import com.yks.chestnutyun.base.BaseFragment
 
 /**
  * @Description:    视频标签的Fragment

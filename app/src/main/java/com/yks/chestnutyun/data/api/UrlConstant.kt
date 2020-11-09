@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.common
+package com.yks.chestnutyun.data.api
 
 /**
  * @Description:    网址常量

@@ -4,37 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.yks.chestnutyun.R
-import com.yks.chestnutyun.base.BaseFragment
+import com.yks.chestnutyun.views.base.BaseFragment
 
 /**
  * @Description:    文件fragment
  * @Author:         Yu ki-r
  * @CreateDate:     2020/10/29 23:03
  */
-class FileFragment : BaseFragment(){
-
-
-
-
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_file,container,false)
-    }
-
+class FileFragment : BaseFragment() {
+    override fun setLayoutResId(): Int = R.layout.fragment_file
 
     override fun initView() {
-        TODO("Not yet implemented")
+
     }
 
+    override fun initData() {
+    }
 
-
-    override fun initListener() {
-        TODO("Not yet implemented")
+    override fun startObserve() {
     }
 }
+
+
+
+
+
+
+

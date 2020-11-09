@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_nav_graph"
+    app:startDestination="@id/nav_login_fragment">
+    <fragment
+        android:id="@+id/nav_login_fragment"
+        android:name="com.yks.chestnutyun.views.login.LoginFragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_nav_login_fragment_to_nav_register_fragment"
+            app:destination="@id/nav_register_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_register_fragment"
+        android:name="com.yks.chestnutyun.views.login.RegisterFragment"
+        tools:layout="@layout/fragment_register">
+
+        <action
+            android:id="@+id/action_nav_register_fragment_to_nav_user_center_fragment"
+            app:destination="@id/nav_user_center_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_user_center_fragment"
+        android:name="com.yks.chestnutyun.views.mine.UserCenterFragment"
+        tools:layout="@layout/fragment_user_center"/>
+</navigation>

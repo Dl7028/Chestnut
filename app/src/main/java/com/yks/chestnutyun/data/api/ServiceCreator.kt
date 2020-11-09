@@ -1,7 +1,5 @@
 package com.yks.chestnutyun.data.api
 
-import com.yks.chestnutyun.common.BASE_URL
-import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
