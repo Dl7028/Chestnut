@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
 
 /**
- * @Description:
+ * @Description:    登录的Fragment
  * @Author:         Yu ki-r
  * @CreateDate:     2020/11/9 15:24
  */
@@ -42,7 +42,6 @@ class LoginFragment : BaseFragment() {
 
         //跳转到注册
         loginRegisterButton.setOnClickListener {
-//            startActivity(Intent(this, RegisterActivity::class.java))
             Navigation.findNavController(it).navigate(R.id.action_nav_login_fragment_to_nav_register_fragment)
         }
         //加载轮播图
@@ -61,12 +60,15 @@ class LoginFragment : BaseFragment() {
 
     override fun startObserve() {
         viewModel.mLoginStatus.observe(this) {
-            if (it.showLoading) showProgressDialog(R.string.register_loading) else dismissProgressDialog()  //显示/隐藏 进度条
+            if (it.showLoading) showProgressDialog(R.string.login_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
-                ToastUtils.showToast(activity,"登录成功"+it.showEnd)  //请求成功
+//                ToastUtils.showToast(activity,""+it.showEnd)  //请求成功
+                requireActivity().startActivity(Intent(activity,MainActivity::class.java))
+                requireActivity().finish()
+
             }
             it.showError?.let { errorMsg ->        //请求失败
-                ToastUtils.showToast(activity,"登录失败"+it.showError)
+                ToastUtils.showToast(activity,""+it.showError)
             }
         }
     }

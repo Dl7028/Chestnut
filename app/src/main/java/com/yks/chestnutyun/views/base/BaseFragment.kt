@@ -52,11 +52,11 @@ abstract class BaseFragment : Fragment(){
      * 显示加载(转圈)对话框
      */
     fun showProgressDialog(@StringRes message: Int) {
-        if (!this::progressDialogFragment.isInitialized) {
-            progressDialogFragment = ProgressDialogFragment.newInstance()
+        if (!this::progressDialogFragment.isInitialized) {  //对话框未被创建
+            progressDialogFragment = ProgressDialogFragment.newInstance() //创建实例
         }
-        if (!progressDialogFragment.isAdded) {
-            activity?.supportFragmentManager?.let { progressDialogFragment.show(it, message, false) }
+        if (!progressDialogFragment.isAdded) { //fragment 未被加入当前布局
+            activity?.supportFragmentManager?.let { progressDialogFragment.show(it, message, false) } //加入fragment 显示对话框
         }
     }
 
@@ -64,8 +64,8 @@ abstract class BaseFragment : Fragment(){
      * 隐藏加载(转圈)对话框
      */
     fun dismissProgressDialog() {
-        if (this::progressDialogFragment.isInitialized && progressDialogFragment.isVisible) {
-            progressDialogFragment.dismissAllowingStateLoss()
+        if (this::progressDialogFragment.isInitialized && progressDialogFragment.isVisible) { //有对话框的实例并且fragment 是可见的
+            progressDialogFragment.dismissAllowingStateLoss() //隐藏对话框
         }
     }
 

@@ -49,9 +49,11 @@
     <fragment
         android:id="@+id/nav_user_center_fragment"
         android:name="com.yks.chestnutyun.views.mine.UserCenterFragment"
-        tools:layout="@layout/fragment_video_tab"/>
-
-
-
+        tools:layout="@layout/fragment_user_center"/>
+    <navigation android:id="@+id/login_nav_graph">
+        <action
+            android:id="@+id/action_global_files_view_pager_fragment"
+            app:destination="@id/files_view_pager_fragment" />
+    </navigation>
 
 </navigation>

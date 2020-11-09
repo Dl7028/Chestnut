@@ -13,8 +13,6 @@ class UserCenterFragment: BaseFragment() {
     override fun setLayoutResId(): Int = R.layout.fragment_user_center
 
 
-
-
     override fun initView() {
 
     }

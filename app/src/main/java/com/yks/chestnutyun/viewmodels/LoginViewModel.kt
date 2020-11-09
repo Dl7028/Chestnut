@@ -26,13 +26,6 @@ class LoginViewModel @ViewModelInject  constructor(
     val mGetCodeStatus = MutableLiveData<ListModel<Int>>()
 
 
-    /**
-     * 获取验证码
-     */
-  /*  fun getCode(userName:String):LiveData<Boolean> = liveData{
-        val code = loginRepository.getCode(userName)
-        emit(code)
-    }*/
 
 
     /**

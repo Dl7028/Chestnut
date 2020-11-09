@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.base
+package com.yks.chestnutyun.data.bean.base
 
 /**
  * @Description:    默认返回的bean类
@@ -9,6 +9,4 @@ data class BaseBean<T>(
     val data: T,
     val code: Int = 0,
     val message: String = ""
-
-
 )

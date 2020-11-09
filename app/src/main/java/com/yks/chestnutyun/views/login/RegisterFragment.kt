@@ -1,12 +1,11 @@
 package com.yks.chestnutyun.views.login
 
-import androidx.activity.viewModels
+import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-
-import androidx.navigation.ui.NavigationUI.navigateUp
 import com.yks.chestnutyun.R
+import com.yks.chestnutyun.customView.CustomDialog
 import com.yks.chestnutyun.utils.RegExpUtils
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.LoginViewModel
@@ -14,8 +13,9 @@ import com.yks.chestnutyun.views.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_register.*
 
+
 /**
- * @Description:
+ * @Description:    注册的Fragment
  * @Author:         Yu ki-r
  * @CreateDate:     2020/11/9 15:25
  */
@@ -26,6 +26,7 @@ class RegisterFragment : BaseFragment(){
 
     val TAG: String = "RegisterFragment"
     private val viewModel: LoginViewModel by viewModels()   //Activity 持有 ViewModel 的对象 ，Hilt 注入
+    private   lateinit var mDialog:CustomDialog
 
     override fun setLayoutResId(): Int = R.layout.fragment_register
 
@@ -42,7 +43,8 @@ class RegisterFragment : BaseFragment(){
 
         //点击注册
         registerButton.setOnClickListener {
-            registers()
+//            registers()
+            showLayoutDialog()
         }
     }
 
@@ -53,20 +55,20 @@ class RegisterFragment : BaseFragment(){
         viewModel.mRegisterStatus.observe(this){
             if (it.showLoading) showProgressDialog(R.string.register_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
-                ToastUtils.showToast(activity,"注册成功"+it.showEnd)  //请求成功
+                ToastUtils.showToast(activity, "" + it.showEnd)  //请求成功
             }
             it.showError?.let { errorMsg ->        //请求失败
-                ToastUtils.showToast(activity,"注册失败"+it.showError)
+                ToastUtils.showToast(activity, "" + it.showError)
             }
         }
         viewModel.mGetCodeStatus.observe(this){
             if (it.showLoading) showProgressDialog(R.string.getCode_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
-                ToastUtils.showToast(activity,"获取验证码成功"+it.showEnd)  //请求成功
+                ToastUtils.showToast(activity, "" + it.showEnd)  //请求成功
                 loginEmailGetCodeButton.start() //获取成功，计时开始
             }
             it.showError?.let { errorMsg ->        //请求失败
-                ToastUtils.showToast(activity,"获取验证码失败"+it.showError)
+                ToastUtils.showToast(activity, "" + it.showError)
             }
         }
     }
@@ -117,4 +119,22 @@ class RegisterFragment : BaseFragment(){
             }
         }
     }
+
+    /**
+     * 自定义对话框
+     */
+    private  fun showLayoutDialog() {
+        mDialog = CustomDialog(activity,"注册成功！","是否登录？", {
+                //确认登录
+                ToastUtils.showToast(activity, "确认登录")
+                mDialog.dismiss()
+            }, {
+                //取消登录
+                mDialog.dismiss()
+         },"确认","取消")
+        mDialog.setCanotBackPress()
+        mDialog.setCanceledOnTouchOutside(false)
+        mDialog.show()
+    }
+
 }

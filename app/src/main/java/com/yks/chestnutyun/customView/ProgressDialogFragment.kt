@@ -10,6 +10,11 @@ import androidx.fragment.app.FragmentManager
 import com.yks.chestnutyun.R
 import kotlinx.android.synthetic.main.fragment_progress_dialog.*
 
+/**
+  * @Description:    网络加载情况对话框
+  * @Author:         Yu ki-r
+  * @CreateDate:     2020/11/9 17:38
+ */
 
 class ProgressDialogFragment : DialogFragment() {
 

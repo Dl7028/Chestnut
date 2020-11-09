@@ -41,7 +41,7 @@ class MineFragment: BaseFragment() {
     override fun initView() {
         mineDataBinding.mineCenterButton.setOnClickListener {
 //            findNavController().navigate(R.id.nav_user_center_fragment)
-            startActivity(Intent(activity, UserCenterActivity::class.java))
+//            startActivity(Intent(activity, UserCenterActivity::class.java))
             Log.d(TAG, "点击了按钮")
         }
 
