@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.views.mine
+package com.yks.chestnutyun.views.member
 
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.views.base.BaseFragment

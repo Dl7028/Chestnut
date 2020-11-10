@@ -16,10 +16,8 @@
         android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="n">
-        <activity android:name=".views.mine.usercenter.UserCenterActivity"/>
-        <activity android:name=".views.login.RegisterActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".views.login.LoginActivity">
+        <activity android:name="com.yks.chestnutyun.views.member.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

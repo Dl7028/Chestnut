@@ -2,7 +2,9 @@ package com.yks.chestnutyun.data.api
 
 import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.data.bean.User
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PUT
 import retrofit2.http.Query
 
 /**
@@ -31,4 +33,8 @@ interface ApiService {
      */
     @GET(USER_LOGIN)
     suspend fun login(@Query("username")userName:String,@Query("password")password:String): BaseBean<String>
+
+
+    @PUT(USER_INFO)
+    suspend fun modifyUserMessages(@Body user:User):BaseBean<User>
 }

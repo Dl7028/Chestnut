@@ -1,7 +1,5 @@
-package com.yks.chestnutyun.views.login
+package com.yks.chestnutyun.views.member.login
 
-import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yks.chestnutyun.R
@@ -124,17 +122,29 @@ class RegisterFragment : BaseFragment(){
      * 自定义对话框
      */
     private  fun showLayoutDialog() {
-        mDialog = CustomDialog(activity,"注册成功！","是否登录？", {
-                //确认登录
-                ToastUtils.showToast(activity, "确认登录")
-                mDialog.dismiss()
+        mDialog = CustomDialog(activity,"注册成功！","是否去登录？", {
+            //取消登录
+
+            mDialog.dismiss()
             }, {
-                //取消登录
+            //确认登录
+            ToastUtils.showToast(activity, "确认登录")
+//            Snackbar.make(it,"确认登录",Snackbar.LENGTH_LONG).show()
+            findNavController().navigateUp()
                 mDialog.dismiss()
-         },"确认","取消")
+         },"取消","确认")
         mDialog.setCanotBackPress()
         mDialog.setCanceledOnTouchOutside(false)
         mDialog.show()
+    }
+    /**
+     * 传数据给LoginFragment
+     */
+    fun giveDataToLogin(){
+//        val name = registerEmailPhoneInput.text.toString()
+//        val password = registerPasswordInput.text.toString()
+//        val bundle = RegisterFragmentArgs(name,password).toBundle()
+//        findNavController().navigate(R.id.action_nav_register_fragment_to_nav_login_fragment,bundle)
     }
 
 }

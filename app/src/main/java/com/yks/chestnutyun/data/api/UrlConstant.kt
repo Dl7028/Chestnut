@@ -13,3 +13,5 @@ const val USER_REGISTER = "/user/register"
 const val REGISTER_GET_CODE = "/user/register/getCode"
 //用户登录
 const val USER_LOGIN = "/user/login"
+//修改个人信息
+const val USER_INFO = "/userInfo"

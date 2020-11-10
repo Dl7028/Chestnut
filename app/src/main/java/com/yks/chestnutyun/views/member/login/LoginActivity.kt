@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.views.login
+package com.yks.chestnutyun.views.member.login
 
 import android.os.Bundle
 import androidx.activity.viewModels

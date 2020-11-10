@@ -21,12 +21,7 @@ class LoginRepository @Inject constructor(
     private val TAG: String? = "RegisterRepository"
 
 
- /*   //获取注册的验证码
-    suspend fun getCode(userName: String): Boolean {
-        val baseBean = NetWorkManager.getCode(userName)
-        return baseBean.code == 1
-    }
-*/
+
     /**
      * 获取验证码
      */

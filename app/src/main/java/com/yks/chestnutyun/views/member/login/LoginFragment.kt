@@ -1,9 +1,8 @@
-package com.yks.chestnutyun.views.login
+package com.yks.chestnutyun.views.member.login
 
 import android.content.Intent
 import android.view.View
 import android.widget.ImageView
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.stx.xhb.androidx.XBanner
@@ -27,6 +26,10 @@ class LoginFragment : BaseFragment() {
 
     private companion object val TAG: String?="LoginFragment"
     private val viewModel: LoginViewModel by viewModels()
+//    private val args :RegisterFragmentArgs by navArgs()
+
+
+
 
     override fun setLayoutResId(): Int = R.layout.fragment_login
 

@@ -3,6 +3,7 @@ package com.yks.chestnutyun.data.repositories.base
 import com.yks.chestnutyun.data.api.ApiService
 import com.yks.chestnutyun.data.bean.base.ResultData
 import com.yks.chestnutyun.data.api.ServiceCreator
+import com.yks.chestnutyun.data.bean.User
 import com.yks.chestnutyun.utils.safeApiCall
 import javax.inject.Inject
 
@@ -29,6 +30,10 @@ class RemoteDataSource@Inject constructor() {
     //登录
     suspend fun login(username: String, password: String) = safeApiCall(
         call = { toLogin(username,password) }
+    )
+    //修改用户信息
+    suspend fun modifyUserMessages(user: User) = safeApiCall(
+        call = {toModifyUserMessages(user)}
     )
 
 
@@ -65,5 +70,18 @@ class RemoteDataSource@Inject constructor() {
         }
         return ResultData.ErrorMessage(loginResult.message)
     }
+
+
+    /**
+     * 修改用户信息
+     */
+    private suspend fun toModifyUserMessages(user: User):ResultData<User> {
+        val changeResult =ApiImpl.modifyUserMessages(user)
+        if (changeResult.code==1){
+            return ResultData.Success(changeResult.data)
+        }
+        return ResultData.ErrorMessage(changeResult.message)
+    }
+
 
 }
