@@ -53,7 +53,9 @@ class LoginFragment : BaseFragment() {
         }
 
         loginButton.setOnClickListener {
-            login()
+//            login()
+            requireActivity().startActivity(Intent(activity,MainActivity::class.java))
+            requireActivity().finish()
         }
     }
 

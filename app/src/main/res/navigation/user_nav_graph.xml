@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_nav_graph"
+    app:startDestination="@id/nav_user_center_fragment">
+
+
+    <fragment
+        android:id="@+id/nav_user_center_fragment"
+        android:name="com.yks.chestnutyun.views.member.UserFragment"
+        tools:layout="@layout/fragment_user">
+        <action
+            android:id="@+id/action_nav_user_center_fragment_to_nav_user_change_nickname_fragment"
+            app:destination="@id/nav_user_change_nickname_fragment" />
+        <action
+            android:id="@+id/action_nav_user_center_fragment_to_nav_user_change_sign_nature_fragment"
+            app:destination="@id/nav_user_change_sign_nature_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_user_change_nickname_fragment"
+        android:name="com.yks.chestnutyun.views.member.ChangeNicknameFragment"
+        tools:layout="@layout/fragment_change_nickname"/>
+
+    <fragment
+        android:id="@+id/nav_user_change_sign_nature_fragment"
+        android:name="com.yks.chestnutyun.views.member.ChangeNatureSignFragment"
+        tools:layout="@layout/fragment_change_nature_sign"/>
+</navigation>

@@ -19,6 +19,16 @@ class UserViewModel@ViewModelInject constructor(
     private val userRepository: UserRepository
 ): ViewModel()  {
 
+    val user: User =User()
+
+    val id: Int? = null
+    var portrait: String? = null   //头像
+    var nickname  = user.nickname
+    val email = user.email
+    val phoneNumber = user.phoneNumber
+    val personalizedSignature = user.personalizedSignature
+    val password = user.password
+
     val mModifyResultStatus = MutableLiveData<ListModel<Int>>()
 
     fun modifyUserMessages(user: User){

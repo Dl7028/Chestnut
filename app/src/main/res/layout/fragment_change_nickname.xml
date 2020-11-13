@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/personal_back"
+            android:id="@+id/cancelBackBtn"
             android:layout_width="@dimen/ds50"
             android:layout_height="@dimen/ds50"
             android:gravity="center_vertical"
@@ -37,12 +37,12 @@
             android:textSize="@dimen/sp18"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/button"
-            app:layout_constraintStart_toStartOf="@+id/personal_back"
+            app:layout_constraintEnd_toEndOf="@+id/saveMessageTv"
+            app:layout_constraintStart_toStartOf="@+id/cancelBackBtn"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/button"
+            android:id="@+id/saveMessageTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -59,7 +59,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/modifyNicknameEdt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -82,8 +82,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="好名字可以让你的朋友更容易记住你"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintStart_toStartOf="@+id/modifyNicknameEdt"
+        app:layout_constraintTop_toBottomOf="@+id/modifyNicknameEdt" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

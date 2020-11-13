@@ -1,5 +1,6 @@
 package com.yks.chestnutyun.views.member
 
+import com.yks.chestnutyun.R
 import com.yks.chestnutyun.views.base.BaseFragment
 
 /**
@@ -8,20 +9,18 @@ import com.yks.chestnutyun.views.base.BaseFragment
  * @CreateDate:     2020/11/10 10:21
  */
 class ChangeNatureSignFragment : BaseFragment() {
-    override fun setLayoutResId(): Int {
-        TODO("Not yet implemented")
-    }
+
+    override fun setLayoutResId(): Int = R.layout.fragment_change_nature_sign
 
     override fun initView() {
-        TODO("Not yet implemented")
+
+
     }
 
     override fun initData() {
-        TODO("Not yet implemented")
     }
 
     override fun startObserve() {
-        TODO("Not yet implemented")
     }
 
 }

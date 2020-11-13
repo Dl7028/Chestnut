@@ -1,10 +1,12 @@
 package com.yks.chestnutyun.views.member
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
         import android.view.View
         import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.views.base.BaseFragment
 import com.yks.chestnutyun.databinding.FragmentMineBinding
@@ -40,8 +42,7 @@ class MineFragment: BaseFragment() {
     override fun initView() {
         mineDataBinding.mineCenterButton.setOnClickListener {
 //            findNavController().navigate(R.id.nav_user_center_fragment)
-//            startActivity(Intent(activity, UserCenterActivity::class.java))
-            Log.d(TAG, "点击了按钮")
+            requireActivity().startActivity(Intent(activity,UserActivity::class.java))
         }
 
     }
