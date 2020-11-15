@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginActivity(): BaseActivity() {
 
     private companion object val TAG: String?="LoginActivity"
-    private val viewModel: LoginViewModel by viewModels()
 
 
     override fun setLayoutId(): Int {

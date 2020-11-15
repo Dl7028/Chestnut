@@ -38,11 +38,7 @@ class ProgressDialogFragment : DialogFragment() {
         tvMessage.text = getString(messageResId ?: R.string.loading)
     }
 
-    fun show(
-        fragmentManager: FragmentManager,
-        @StringRes messageResId: Int,
-        isCancelable: Boolean = false
-    ) {
+    fun show(fragmentManager: FragmentManager, @StringRes messageResId: Int, isCancelable: Boolean = false) {
         this.messageResId = messageResId
         this.isCancelable = isCancelable
         try {

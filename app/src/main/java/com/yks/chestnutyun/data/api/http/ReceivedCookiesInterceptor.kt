@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.data.api
+package com.yks.chestnutyun.data.api.http
 
 import android.annotation.SuppressLint
 import android.content.Context

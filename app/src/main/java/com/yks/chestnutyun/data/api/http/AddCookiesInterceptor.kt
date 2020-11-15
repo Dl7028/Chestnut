@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.data.api
+package com.yks.chestnutyun.data.api.http
 
 import android.content.Context
 import com.yks.chestnutyun.app.MyApplication.Companion.CONTEXT

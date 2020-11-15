@@ -33,8 +33,7 @@ class LoginFragment : BaseFragment() {
 
     private companion object val TAG: String?="LoginFragment"
     private val viewModel: LoginViewModel by viewModels()
-
-
+//    private val args :RegisterFragmentArgs by navArgs()
 
 
     override fun setLayoutResId(): Int = R.layout.fragment_login
@@ -82,8 +81,8 @@ class LoginFragment : BaseFragment() {
                 saveUser(loginPhoneInput.text.toString(),loginPasswordInput.text.toString())
                 ToastUtils.showToast(activity,""+it.showEnd)  //请求成功
                 //2.跳转到主页面
-                requireActivity().startActivity(Intent(activity,MainActivity::class.java))
-                requireActivity().finish()
+                requireActivity().startActivity(Intent(requireActivity(),MainActivity::class.java))
+//                requireActivity().finish()
 
             }
             it.showError?.let { errorMsg ->        //请求失败

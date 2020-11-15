@@ -1,5 +1,6 @@
 package com.yks.chestnutyun.views.member
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yks.chestnutyun.R
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_change_nickname.*
 @AndroidEntryPoint
 class ChangeNicknameFragment : BaseFragment() {
 
+    private val TAG: String? = "ChangeNicknameFragment"
     private val viewModel: UserViewModel by viewModels()
 
     override fun setLayoutResId(): Int  = R.layout.fragment_change_nickname
@@ -29,7 +31,7 @@ class ChangeNicknameFragment : BaseFragment() {
             findNavController().navigateUp()
         }
         saveMessageTv.setOnClickListener{
-            //保存信息
+            //修改信息
             modifyUserMessages()
         }
     }
@@ -52,8 +54,9 @@ class ChangeNicknameFragment : BaseFragment() {
 
     private fun modifyUserMessages(){
         val nickname = modifyNicknameEdt.text.toString()
-        val user:User = User()
+        val user = User()
         user.nickname = nickname
+        Log.d(TAG, ""+user.toString())
         viewModel.modifyUserMessages(user)
     }
 

@@ -1,6 +1,8 @@
 package com.yks.chestnutyun.views.base
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,11 +34,9 @@ abstract class BaseFragment : Fragment(){
         }
     }
     protected open fun onFragmentFirstVisible() {
+        startObserve()
         initView()
         initData()
-        startObserve()
-
-
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -56,8 +56,12 @@ abstract class BaseFragment : Fragment(){
         if (!this::progressDialogFragment.isInitialized) {  //对话框未被创建
             progressDialogFragment = ProgressDialogFragment.newInstance() //创建实例
         }
+
+
         if (!progressDialogFragment.isAdded) { //fragment 未被加入当前布局
-            activity?.supportFragmentManager?.let { progressDialogFragment.show(it, message, false) } //加入fragment 显示对话框
+            activity?.supportFragmentManager?.let {
+                progressDialogFragment.show(it, message, false)   //加入fragment 显示对话框
+            }
         }
     }
 

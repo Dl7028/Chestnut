@@ -20,8 +20,7 @@ class UserViewModel@ViewModelInject constructor(
 ): ViewModel()  {
 
     val user: User =User()
-
-    val id: Int? = null
+    val id: Int = 0
     var portrait: String? = null   //头像
     var nickname  = user.nickname
     val email = user.email

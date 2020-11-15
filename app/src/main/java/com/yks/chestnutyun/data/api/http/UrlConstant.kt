@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.data.api
+package com.yks.chestnutyun.data.api.http
 
 /**
  * @Description:    网址常量
@@ -15,3 +15,7 @@ const val REGISTER_GET_CODE = "/user/register/getCode"
 const val USER_LOGIN = "/user/login"
 //修改个人信息
 const val USER_INFO = "/userInfo"
+//获取个人信息
+const val USER = "/user"
+//用户上传图片
+const val USER_INFO_PORTRAIT = "/userinfo/portrait"

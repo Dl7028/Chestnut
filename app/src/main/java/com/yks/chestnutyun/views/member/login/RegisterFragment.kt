@@ -41,8 +41,7 @@ class RegisterFragment : BaseFragment(){
 
         //点击注册
         registerButton.setOnClickListener {
-//            registers()
-            showLayoutDialog()
+            registers()
         }
     }
 
@@ -54,6 +53,7 @@ class RegisterFragment : BaseFragment(){
             if (it.showLoading) showProgressDialog(R.string.register_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
                 ToastUtils.showToast(activity, "" + it.showEnd)  //请求成功
+                showLayoutDialog()
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtils.showToast(activity, "" + it.showError)
@@ -131,7 +131,7 @@ class RegisterFragment : BaseFragment(){
             ToastUtils.showToast(activity, "确认登录")
 //            Snackbar.make(it,"确认登录",Snackbar.LENGTH_LONG).show()
             findNavController().navigateUp()
-                mDialog.dismiss()
+            mDialog.dismiss()
          },"取消","确认")
         mDialog.setCanotBackPress()
         mDialog.setCanceledOnTouchOutside(false)

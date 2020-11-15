@@ -11,7 +11,11 @@
 
         <action
             android:id="@+id/action_nav_login_fragment_to_nav_register_fragment"
-            app:destination="@id/nav_register_fragment" />
+            app:destination="@id/nav_register_fragment"
+            app:enterAnim="@anim/login_slide_in_right"
+            app:exitAnim="@anim/login_slide_out_left"
+            app:popEnterAnim="@anim/login_slide_in_left"
+            app:popExitAnim="@anim/login_slide_out_right" />
     </fragment>
 
     <fragment

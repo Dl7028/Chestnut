@@ -1,11 +1,9 @@
 package com.yks.chestnutyun.data.api
 
+import com.yks.chestnutyun.data.api.http.*
 import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.data.bean.User
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.PUT
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * @Description:    登录使用的接口调用方法
@@ -15,7 +13,7 @@ import retrofit2.http.Query
 interface ApiService {
 
 
-    //================【注册相关】===================
+    //================================【注册相关】=======================================
     /**
      * 注册接口
      */
@@ -38,13 +36,30 @@ interface ApiService {
     suspend fun login(@Query("username")userName:String,@Query("password")password:String): BaseBean<String>
 
 
-    //======================【用户相关】======================
+    //================================【用户相关】=======================================
     /**
-     * 修改用户信息
+     * TODO 修改用户信息
      *
-     * @param user
+     * @param user 用户实例
      * @return
      */
     @PUT(USER_INFO)
     suspend fun modifyUserMessages(@Body user:User):BaseBean<User>
+
+    /**
+     * TODO 获取用户信息
+     *
+     * @return
+     */
+    @GET(USER)
+    suspend fun getUserInfo(@Query("username")name: String):BaseBean<String>
+
+    /**
+     * TODO 用户上传 头像
+     *
+     * @param portrait
+     * @return
+     */
+    @POST(USER_INFO_PORTRAIT)
+    suspend fun postPortrait(@Query ("portrait") portrait:String):BaseBean<String>
 }
