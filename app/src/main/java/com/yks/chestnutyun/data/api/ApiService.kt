@@ -13,6 +13,9 @@ import retrofit2.http.Query
  * @CreateDate:     2020/11/2 16:01
  */
 interface ApiService {
+
+
+    //================【注册相关】===================
     /**
      * 注册接口
      */
@@ -35,6 +38,13 @@ interface ApiService {
     suspend fun login(@Query("username")userName:String,@Query("password")password:String): BaseBean<String>
 
 
+    //======================【用户相关】======================
+    /**
+     * 修改用户信息
+     *
+     * @param user
+     * @return
+     */
     @PUT(USER_INFO)
     suspend fun modifyUserMessages(@Body user:User):BaseBean<User>
 }

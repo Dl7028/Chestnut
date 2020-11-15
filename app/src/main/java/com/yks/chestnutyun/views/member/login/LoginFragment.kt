@@ -1,7 +1,11 @@
 package com.yks.chestnutyun.views.member.login
 
+import android.annotation.SuppressLint
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -24,9 +28,11 @@ import kotlinx.android.synthetic.main.fragment_login.*
 @AndroidEntryPoint
 class LoginFragment : BaseFragment() {
 
+    private lateinit var sp: SharedPreferences
+
+
     private companion object val TAG: String?="LoginFragment"
     private val viewModel: LoginViewModel by viewModels()
-//    private val args :RegisterFragmentArgs by navArgs()
 
 
 
@@ -35,6 +41,12 @@ class LoginFragment : BaseFragment() {
 
 
     override fun initView() {
+        sp = requireActivity().getSharedPreferences("userInfo",MODE_PRIVATE)
+        //开启应用的时候，显示保存的用户信息
+        val name = sp.getString("name","")
+        val password =sp.getString("password","")
+        loginPhoneInput.setText(name)
+        loginPasswordInput.setText(password)
         //轮播图图片
         val localImageInfoList:MutableList<LocalImageInfo> = ArrayList<LocalImageInfo>()
         localImageInfoList.add(LocalImageInfo(R.mipmap.banner_car))
@@ -53,9 +65,7 @@ class LoginFragment : BaseFragment() {
         }
 
         loginButton.setOnClickListener {
-//            login()
-            requireActivity().startActivity(Intent(activity,MainActivity::class.java))
-            requireActivity().finish()
+            login()
         }
     }
 
@@ -67,7 +77,11 @@ class LoginFragment : BaseFragment() {
         viewModel.mLoginStatus.observe(this) {
             if (it.showLoading) showProgressDialog(R.string.login_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
-//                ToastUtils.showToast(activity,""+it.showEnd)  //请求成功
+                //登录成功
+                //1.保存用户信息
+                saveUser(loginPhoneInput.text.toString(),loginPasswordInput.text.toString())
+                ToastUtils.showToast(activity,""+it.showEnd)  //请求成功
+                //2.跳转到主页面
                 requireActivity().startActivity(Intent(activity,MainActivity::class.java))
                 requireActivity().finish()
 
@@ -77,6 +91,10 @@ class LoginFragment : BaseFragment() {
             }
         }
     }
+
+    /**
+     * 开始登录
+     */
     private fun login() {
         val username = loginPhoneInput.text.toString()
         val password = loginPasswordInput.text.toString()
@@ -91,4 +109,23 @@ class LoginFragment : BaseFragment() {
             }
         }
     }
+
+
+    /**
+     * TODO 保存用户信息
+     *
+     * @param username 用户名
+     * @param password 密码
+     */
+    @SuppressLint("CommitPrefEdits")
+    private fun saveUser(username: String, password: String){
+        val editor = sp.edit()
+        //保存用户信息
+        editor.putString("name",username)
+        editor.putString("password",password)
+        editor.apply() //提交
+
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.yks.chestnutyun.data.api
 
+import com.yks.chestnutyun.data.api.cookie.PersistenceCookieJar
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,6 +20,7 @@ object ServiceCreator {
         .connectTimeout(8, TimeUnit.SECONDS)
         .addInterceptor(ReceivedCookiesInterceptor())
         .addInterceptor(AddCookiesInterceptor())
+        .cookieJar(PersistenceCookieJar())
         .build()
 
 

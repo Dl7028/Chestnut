@@ -12,7 +12,10 @@ object RegExpUtils {
 
 
     /**
-     * 验证邮箱
+     *
+     * 检查邮箱
+     * @param email
+     * @return
      */
     fun checkEmail(email: String?): Boolean {
         val regExp =

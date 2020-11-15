@@ -93,6 +93,11 @@ dependencies {
     //日志
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
+    //知乎图片选择库
+    implementation 'com.zhihu.android:matisse:0.5.3-beta3'
+
+
+
 
 
 }

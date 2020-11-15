@@ -17,6 +17,9 @@ class RemoteDataSource@Inject constructor() {
     private   val TAG: String="RemoteDataSource"
     private val ApiImpl = ServiceCreator.create(ApiService::class.java)
 
+
+    //============【登录相关】===========
+
     //获取验证码
     suspend fun getCode(userName: String) = safeApiCall(
         call = {toGetCode(userName)}
@@ -30,10 +33,6 @@ class RemoteDataSource@Inject constructor() {
     //登录
     suspend fun login(username: String, password: String) = safeApiCall(
         call = { toLogin(username,password) }
-    )
-    //修改用户信息
-    suspend fun modifyUserMessages(user: User) = safeApiCall(
-        call = {toModifyUserMessages(user)}
     )
 
 
@@ -72,8 +71,18 @@ class RemoteDataSource@Inject constructor() {
     }
 
 
+    //===============【用户相关】======================
+
+    //修改用户信息
+    suspend fun modifyUserMessages(user: User) = safeApiCall(
+        call = {toModifyUserMessages(user)}
+    )
+
     /**
-     * 修改用户信息
+     * TODO 修改用户信息
+     *
+     * @param user
+     * @return
      */
     private suspend fun toModifyUserMessages(user: User):ResultData<User> {
         val changeResult =ApiImpl.modifyUserMessages(user)
