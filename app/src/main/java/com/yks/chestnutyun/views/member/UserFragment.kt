@@ -52,11 +52,14 @@ class UserFragment: BaseFragment() {
     override fun setLayoutResId(): Int = R.layout.fragment_user
 
 
-    override fun initView() {
 
+
+    override fun initView() {
         val bundle = requireActivity().intent.extras!!
         val name = bundle.getString("username")!!
         viewModel.getUserInfo(name)
+
+
 
 
 
@@ -73,7 +76,7 @@ class UserFragment: BaseFragment() {
 
     override fun startObserve() {
         viewModel.mGetUserInfoResultStatus.observe(this){
-            if (it.showLoading) showProgressDialog(R.string.login_loading) else dismissProgressDialog()  //显示/隐藏 进度条
+//            if (it.showLoading) showProgressDialog(R.string.login_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
                 binding.apply {
                     userNickName.text = it.data?.nickname

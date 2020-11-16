@@ -1,12 +1,16 @@
 package com.yks.chestnutyun.customView
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.yks.chestnutyun.R
 import kotlinx.android.synthetic.main.fragment_progress_dialog.*
 
@@ -21,8 +25,7 @@ class ProgressDialogFragment : DialogFragment() {
     private var messageResId: Int? = null
 
     companion object {
-        fun newInstance() =
-            ProgressDialogFragment()
+        fun newInstance() = ProgressDialogFragment()
     }
 
     override fun onCreateView(
@@ -38,7 +41,11 @@ class ProgressDialogFragment : DialogFragment() {
         tvMessage.text = getString(messageResId ?: R.string.loading)
     }
 
-    fun show(fragmentManager: FragmentManager, @StringRes messageResId: Int, isCancelable: Boolean = false) {
+    fun show(
+        fragmentManager: FragmentManager,
+        @StringRes messageResId: Int,
+        isCancelable: Boolean = false
+    ) {
         this.messageResId = messageResId
         this.isCancelable = isCancelable
         try {

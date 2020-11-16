@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.yks.chestnutyun.data.repositories.LoginRepository
 import com.yks.chestnutyun.utils.ListModel
+import com.yks.chestnutyun.viewmodels.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel @ViewModelInject  constructor(
     private val loginRepository: LoginRepository,
-): ViewModel()  {
+): BaseViewModel()  {
     private companion object val TAG: String = "RegisterViewModel"
 
 

@@ -30,11 +30,17 @@ import kotlinx.android.synthetic.main.fragment_login.*
 class LoginFragment : BaseFragment() {
 
     private lateinit var sp: SharedPreferences
-
-
     private companion object val TAG: String?="LoginFragment"
-    private val viewModel: LoginViewModel by viewModels()
 //    private val args :RegisterFragmentArgs by navArgs()
+
+    private  val viewModel:LoginViewModel by viewModels<LoginViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+
+    }
 
 
     override fun setLayoutResId(): Int = R.layout.fragment_login

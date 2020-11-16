@@ -50,8 +50,11 @@ abstract class BaseFragment : Fragment(){
 
     abstract fun initData()
     abstract fun startObserve()
+
     /**
-     * 显示加载(转圈)对话框
+     * TODO 显示加载提示框
+     *
+     * @param message
      */
     fun showProgressDialog(@StringRes message: Int) {
         if (!this::progressDialogFragment.isInitialized) {  //对话框未被创建
