@@ -1,10 +1,12 @@
 package com.yks.chestnutyun.data.repositories.base
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.yks.chestnutyun.data.api.ApiService
 import com.yks.chestnutyun.data.bean.base.ResultData
 import com.yks.chestnutyun.data.api.http.ServiceCreator
 import com.yks.chestnutyun.data.bean.User
+import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.utils.safeApiCall
 import javax.inject.Inject
 
@@ -89,10 +91,10 @@ class RemoteDataSource@Inject constructor() {
      * @param name 用户名
      * @return
      */
-    private suspend fun toGetUserInfo(name: String):ResultData<String>{
+    private suspend fun toGetUserInfo(name: String): ResultData<BaseBean<User>> {
         val getResult =ApiImpl.getUserInfo(name)
         if (getResult.code==1){
-            return ResultData.Success(getResult.data)
+            return ResultData.Success(getResult)
         }
         return ResultData.ErrorMessage(getResult.message)
     }
@@ -105,6 +107,7 @@ class RemoteDataSource@Inject constructor() {
      */
     private suspend fun toModifyUserMessages(user: User):ResultData<String> {
         val changeResult =ApiImpl.modifyUserMessages(user)
+        Log.d(TAG, "" +changeResult)
         if (changeResult.code==1){
             return ResultData.Success(changeResult.message)
         }

@@ -34,9 +34,10 @@ abstract class BaseFragment : Fragment(){
         }
     }
     protected open fun onFragmentFirstVisible() {
-        startObserve()
         initView()
         initData()
+        startObserve()
+
     }
     override fun onDestroyView() {
         super.onDestroyView()

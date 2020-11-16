@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yks.chestnutyun.data.bean.User
+import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.data.repositories.UserRepository
 import com.yks.chestnutyun.utils.ListModel
 import kotlinx.coroutines.Dispatchers
@@ -19,17 +20,28 @@ class UserViewModel@ViewModelInject constructor(
     private val userRepository: UserRepository
 ): ViewModel()  {
 
-    val user: User =User()
-    val id: Int = 0
-    var portrait: String? = null   //头像
-    var nickname  = user.nickname
-    val email = user.email
-    val phoneNumber = user.phoneNumber
-    val personalizedSignature = user.personalizedSignature
-    val password = user.password
+
 
     val mModifyResultStatus = MutableLiveData<ListModel<Int>>()
+    val mGetUserInfoResultStatus = MutableLiveData<ListModel<User>>()
 
+
+
+    fun getUserInfo(name:String){
+        viewModelScope.launch(Dispatchers.IO) {
+             userRepository.getUserInfo(name, mGetUserInfoResultStatus
+             )
+        }
+    }
+
+
+
+
+    /**
+     * TODO 修改用户信息
+     *
+     * @param user 用户实例
+     */
     fun modifyUserMessages(user: User){
         viewModelScope.launch(Dispatchers.IO) {
             userRepository.modifyUserMessages(user,mModifyResultStatus)

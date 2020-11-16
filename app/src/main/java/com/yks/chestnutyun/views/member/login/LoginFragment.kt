@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
@@ -81,7 +82,7 @@ class LoginFragment : BaseFragment() {
                 saveUser(loginPhoneInput.text.toString(),loginPasswordInput.text.toString())
                 ToastUtils.showToast(activity,""+it.showEnd)  //请求成功
                 //2.跳转到主页面
-                requireActivity().startActivity(Intent(requireActivity(),MainActivity::class.java))
+                goToMainActivity()
 //                requireActivity().finish()
 
             }
@@ -89,6 +90,14 @@ class LoginFragment : BaseFragment() {
                 ToastUtils.showToast(activity,""+it.showError)
             }
         }
+    }
+
+    private fun goToMainActivity() {
+        val intent = Intent()
+        intent.putExtra("username", loginPhoneInput.text.toString())
+        intent.putExtra("password", loginPasswordInput.text.toString())
+        intent.setClass(requireActivity(), MainActivity::class.java)
+        requireActivity().startActivity(intent)
     }
 
     /**

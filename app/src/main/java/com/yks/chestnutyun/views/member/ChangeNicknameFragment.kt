@@ -56,7 +56,6 @@ class ChangeNicknameFragment : BaseFragment() {
         val nickname = modifyNicknameEdt.text.toString()
         val user = User()
         user.nickname = nickname
-        Log.d(TAG, ""+user.toString())
         viewModel.modifyUserMessages(user)
     }
 

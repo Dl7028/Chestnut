@@ -52,7 +52,7 @@ interface ApiService {
      * @return
      */
     @GET(USER)
-    suspend fun getUserInfo(@Query("username")name: String):BaseBean<String>
+    suspend fun getUserInfo(@Query("username")name: String):BaseBean<User>
 
     /**
      * TODO 用户上传 头像

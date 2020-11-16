@@ -5,6 +5,7 @@
 
     <data>
         <import type="com.yks.chestnutyun.viewmodels.UserViewModel" />
+        <import type="com.yks.chestnutyun.data.bean.User"/>
         <variable
             name="viewModel"
             type= "UserViewModel"/>
@@ -130,7 +131,6 @@
                     android:layout_gravity="center_vertical"
                     android:drawablePadding="@dimen/ds10"
                     android:gravity="center_vertical"
-                    android:text="@{viewModel.nickname}"
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp14"
                     app:drawableEndCompat="@mipmap/goto_icon" />
@@ -169,7 +169,6 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp14"
-                    android:text="@{viewModel.phoneNumber}"
                     app:drawableEndCompat="@mipmap/goto_icon" />
             </RelativeLayout>
 

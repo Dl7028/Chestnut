@@ -19,6 +19,8 @@ package com.yks.chestnutyun.utils
 import androidx.lifecycle.LiveData
 
 data class ListModel<T>(
+
+    val data:T ?= null,
     val showSuccess: List<T>? = null,
     val showLoading: Boolean = false,
     val showError: String? = null,
