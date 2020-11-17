@@ -31,7 +31,7 @@ class RemoteDataSource@Inject constructor() {
     suspend fun login(username: String, password: String) = safeApiCall(call = { toLogin(username,password) })
 
     /**
-     * TODO 网络请求获取验证码
+     *  网络请求获取验证码
      *
      * @param userName 用户名
      * @return
@@ -45,7 +45,7 @@ class RemoteDataSource@Inject constructor() {
     }
 
     /**
-     * TODO 网络请求注册
+     *  网络请求注册
      *
      * @param username 用户名
      * @param password 密码
@@ -61,7 +61,7 @@ class RemoteDataSource@Inject constructor() {
     }
 
     /**
-     * TODO 网络请求登录
+     *  网络请求登录
      *
      * @param userName 用户名
      * @param password 密码
@@ -86,7 +86,7 @@ class RemoteDataSource@Inject constructor() {
     suspend fun modifyUserMessages(user: User) = safeApiCall(call = {toModifyUserMessages(user)})
 
     /**
-     * TODO 获取用户信息
+     *  获取用户信息
      *
      * @param name 用户名
      * @return
@@ -100,7 +100,7 @@ class RemoteDataSource@Inject constructor() {
     }
 
     /**
-     * TODO 修改用户信息
+     *  修改用户信息
      *
      * @param user 用户实例
      * @return

@@ -38,7 +38,7 @@ class UserViewModel@ViewModelInject constructor(
 
 
     /**
-     * TODO 修改用户信息
+     *  修改用户信息
      *
      * @param user 用户实例
      */

@@ -25,7 +25,7 @@ class UserRepository @Inject constructor(
 
 
     /**
-     * TODO 获取用户信息
+     *  获取用户信息
      *
      * @param name
      */
@@ -40,7 +40,7 @@ class UserRepository @Inject constructor(
     }
 
     /**
-     * TODO 修改用户信息
+     *  修改用户信息
      *
      * @param user 用户实例
      * @param listModel 结果判断

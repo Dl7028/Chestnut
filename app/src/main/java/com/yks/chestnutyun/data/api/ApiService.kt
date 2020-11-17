@@ -38,7 +38,7 @@ interface ApiService {
 
     //================================【用户相关】=======================================
     /**
-     * TODO 修改用户信息
+     * 修改用户信息
      *
      * @param user 用户实例
      * @return
@@ -47,7 +47,7 @@ interface ApiService {
     suspend fun modifyUserMessages(@Body user:User):BaseBean<User>
 
     /**
-     * TODO 获取用户信息
+     * 获取用户信息
      *
      * @return
      */
@@ -55,7 +55,7 @@ interface ApiService {
     suspend fun getUserInfo(@Query("username")name: String):BaseBean<User>
 
     /**
-     * TODO 用户上传 头像
+     *  用户上传 头像
      *
      * @param portrait
      * @return
