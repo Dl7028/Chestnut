@@ -28,11 +28,7 @@ class LoginRepository @Inject constructor(
     suspend fun getCode(userName: String,listModel: MutableLiveData<ListModel<Int>>?){
         listModel?.postValue(ListModel(showLoading = true))
         val getCodeResult = remoteDataSource.getCode(userName)
-        if (getCodeResult is ResultData.Success) {   //获取验证码成功
-            listModel?.postValue(ListModel(showLoading = false, showEnd = true))
-        } else if (getCodeResult is ResultData.ErrorMessage) { //获取验证码失败
-            listModel?.postValue(ListModel(showLoading = false, showError = getCodeResult.message))
-        }
+        setListModel(getCodeResult, listModel)
     }
 
 
@@ -43,11 +39,7 @@ class LoginRepository @Inject constructor(
     suspend fun register(username: String, password: String, verificationCode: String, listModel: MutableLiveData<ListModel<Int>>?) {
         listModel?.postValue(ListModel(showLoading = true))
         val registerResult = remoteDataSource.register(username, password, verificationCode)
-        if (registerResult is ResultData.Success) {   //注册成功
-            listModel?.postValue(ListModel(showLoading = false, showEnd = true))
-        } else if (registerResult is ResultData.ErrorMessage) { //注册失败
-            listModel?.postValue(ListModel(showLoading = false, showError = registerResult.message))
-        }
+        setListModel(registerResult, listModel)
     }
     /**
      * 登录
@@ -56,10 +48,23 @@ class LoginRepository @Inject constructor(
 
         listModel?.postValue(ListModel(showLoading=true))
         val loginResult = remoteDataSource.toLogin(username, password)
-        if (loginResult is ResultData.Success) {
+        setListModel(loginResult, listModel)
+    }
+
+    /**
+     * 设置listModel 的值
+     *
+     * @param registerResult
+     * @param listModel
+     */
+    private fun setListModel(
+        registerResult: ResultData<String>,
+        listModel: MutableLiveData<ListModel<Int>>?
+    ) {
+        if (registerResult is ResultData.Success) {   //成功
             listModel?.postValue(ListModel(showLoading = false, showEnd = true))
-        } else if (loginResult is ResultData.ErrorMessage) {
-            listModel?.postValue(ListModel(showLoading = false, showError = loginResult.message))
+        } else if (registerResult is ResultData.ErrorMessage) { //失败
+            listModel?.postValue(ListModel(showLoading = false, showError = registerResult.message))
         }
     }
 

@@ -137,14 +137,8 @@ class RegisterFragment : BaseFragment(){
         mDialog.setCanceledOnTouchOutside(false)
         mDialog.show()
     }
-    /**
-     * 传数据给LoginFragment
-     */
-    fun giveDataToLogin(){
-//        val name = registerEmailPhoneInput.text.toString()
-//        val password = registerPasswordInput.text.toString()
-//        val bundle = RegisterFragmentArgs(name,password).toBundle()
-//        findNavController().navigate(R.id.action_nav_register_fragment_to_nav_login_fragment,bundle)
-    }
+
+
+
 
 }

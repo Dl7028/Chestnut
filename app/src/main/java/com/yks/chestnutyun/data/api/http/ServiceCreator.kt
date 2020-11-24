@@ -23,7 +23,6 @@ object ServiceCreator {
     private val client: OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(ReceivedCookiesInterceptor())
         .addInterceptor(AddCookiesInterceptor())
-        .cookieJar(CookiesManager(CONTEXT))
         .build()
 
 

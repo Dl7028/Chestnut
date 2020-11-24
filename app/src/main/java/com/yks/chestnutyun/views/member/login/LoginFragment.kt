@@ -5,11 +5,16 @@ import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import com.stx.xhb.androidx.XBanner
 import com.stx.xhb.androidx.entity.LocalImageInfo
 import com.yks.chestnutyun.MainActivity
@@ -35,12 +40,6 @@ class LoginFragment : BaseFragment() {
 
     private  val viewModel:LoginViewModel by viewModels<LoginViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-
-    }
 
 
     override fun setLayoutResId(): Int = R.layout.fragment_login
@@ -60,11 +59,12 @@ class LoginFragment : BaseFragment() {
         localImageInfoList.add(LocalImageInfo(R.mipmap.banner_xingqiu))
 
         banner.setBannerData(localImageInfoList)
-
         //跳转到注册
         loginRegisterButton.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_nav_login_fragment_to_nav_register_fragment)
+            dismissProgressDialog()
+            it.findNavController().navigate(R.id.action_nav_login_fragment_to_nav_register_fragment)
         }
+
         //加载轮播图
         banner.loadImage { banner: XBanner, model, view: View, position ->
             (view as ImageView).setImageResource((model as LocalImageInfo).xBannerUrl)
@@ -95,9 +95,14 @@ class LoginFragment : BaseFragment() {
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtils.showToast(activity,""+it.showError)
             }
+            dismissProgressDialog()
         }
     }
 
+    /**
+     *
+     * 跳转到主页面
+     */
     private fun goToMainActivity() {
         val intent = Intent()
         intent.putExtra("username", loginPhoneInput.text.toString())
@@ -126,7 +131,7 @@ class LoginFragment : BaseFragment() {
 
 
     /**
-     * TODO 保存用户信息
+     *  保存用户信息
      *
      * @param username 用户名
      * @param password 密码

@@ -55,7 +55,6 @@
         android:textSize="@dimen/sp14"
         android:singleLine="true"
         android:maxLength="20"
-
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView"

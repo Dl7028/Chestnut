@@ -23,9 +23,7 @@ object ToastUtil {
             createToast(msg)
         } else {
             ActivityUtil.getCurrentActivity()!!.runOnUiThread {
-                ToastUtil.createToast(
-                    msg
-                )
+                ToastUtil.createToast(msg)
             }
         }
     }

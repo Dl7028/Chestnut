@@ -34,9 +34,9 @@ abstract class BaseFragment : Fragment(){
         }
     }
     protected open fun onFragmentFirstVisible() {
+        startObserve()
         initView()
         initData()
-        startObserve()
 
     }
     override fun onDestroyView() {
@@ -60,7 +60,6 @@ abstract class BaseFragment : Fragment(){
         if (!this::progressDialogFragment.isInitialized) {  //对话框未被创建
             progressDialogFragment = ProgressDialogFragment.newInstance() //创建实例
         }
-
 
         if (!progressDialogFragment.isAdded) { //fragment 未被加入当前布局
             activity?.supportFragmentManager?.let {

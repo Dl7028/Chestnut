@@ -60,13 +60,11 @@ class UserFragment: BaseFragment() {
         viewModel.getUserInfo(name)
 
 
-
-
-
         user_nick_name.setOnClickListener{
             findNavController().navigate(R.id.action_nav_user_center_fragment_to_nav_user_change_nickname_fragment)
         }
        userPersonalizedSignature.setOnClickListener{
+           
             findNavController().navigate(R.id.action_nav_user_center_fragment_to_nav_user_change_sign_nature_fragment)
         }
     }
