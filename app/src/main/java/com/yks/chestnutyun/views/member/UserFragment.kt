@@ -64,9 +64,12 @@ class UserFragment: BaseFragment() {
             findNavController().navigate(R.id.action_nav_user_center_fragment_to_nav_user_change_nickname_fragment)
         }
        userPersonalizedSignature.setOnClickListener{
-           
             findNavController().navigate(R.id.action_nav_user_center_fragment_to_nav_user_change_sign_nature_fragment)
         }
+        cancelBackBtn.setOnClickListener{
+            requireActivity().finish()
+        }
+
     }
 
     override fun initData() {

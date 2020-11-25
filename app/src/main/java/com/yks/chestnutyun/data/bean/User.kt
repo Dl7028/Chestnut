@@ -9,7 +9,7 @@ import java.io.Serializable
  */
 
 data class User(
-    val email: Any?=null,
+    val email: String?=null,
     var nickname: String?=null,
     var password: String?=null,
     var personalizedSignature: String?=null,

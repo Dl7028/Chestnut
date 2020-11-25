@@ -52,7 +52,7 @@ abstract class BaseFragment : Fragment(){
     abstract fun startObserve()
 
     /**
-     * TODO 显示加载提示框
+     *  显示加载提示框
      *
      * @param message
      */

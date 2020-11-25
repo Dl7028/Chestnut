@@ -47,7 +47,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/vip_level"
+                    android:id="@+id/titleName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="板栗云盘"
@@ -56,7 +56,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/mine_email"
+                    android:id="@+id/titleUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ds3"
@@ -66,7 +66,7 @@
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/mine_go_uses_center_button"
+                android:id="@+id/mineGoUserButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

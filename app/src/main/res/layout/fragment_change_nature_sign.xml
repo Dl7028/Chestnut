@@ -59,7 +59,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
-        android:id="@+id/modifyNicknameEdt"
+        android:id="@+id/modifySignatureEdt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -81,9 +81,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="好名字可以让你的朋友更容易记住你"
-        app:layout_constraintStart_toStartOf="@+id/modifyNicknameEdt"
-        app:layout_constraintTop_toBottomOf="@+id/modifyNicknameEdt" />
+        android:text="点击设置你的个性签名"
+        app:layout_constraintStart_toStartOf="@+id/modifySignatureEdt"
+        app:layout_constraintTop_toBottomOf="@+id/modifySignatureEdt" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

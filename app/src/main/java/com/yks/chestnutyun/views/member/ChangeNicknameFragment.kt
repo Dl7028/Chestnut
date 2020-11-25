@@ -1,10 +1,5 @@
 package com.yks.chestnutyun.views.member
 
-import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yks.chestnutyun.R
@@ -12,7 +7,6 @@ import com.yks.chestnutyun.data.bean.User
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.UserViewModel
 import com.yks.chestnutyun.views.base.BaseFragment
-import com.yks.chestnutyun.views.base.NavigationBaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_change_nickname.*
 
@@ -39,7 +33,7 @@ class ChangeNicknameFragment : BaseFragment() {
         }
         saveMessageTv.setOnClickListener{
             //修改信息
-            modifyUserMessages()
+            modifyNickNameMessages()
         }
     }
 
@@ -59,7 +53,7 @@ class ChangeNicknameFragment : BaseFragment() {
         }
     }
 
-    private fun modifyUserMessages(){
+    private fun modifyNickNameMessages(){
         val nickname = modifyNicknameEdt.text.toString()
         val user = User()
         user.nickname = nickname
