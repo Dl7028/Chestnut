@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.views.member.login
+package com.yks.chestnutyun.views.member.fragment
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController

@@ -16,7 +16,6 @@ object ToastUtil {
 
     private var toast: Toast? = null
 
-    fun ToastUtil() {}
 
     fun showToast(msg: String) {
         if ("main" == Thread.currentThread().name) {

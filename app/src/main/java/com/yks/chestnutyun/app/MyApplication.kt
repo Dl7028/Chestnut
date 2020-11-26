@@ -2,10 +2,14 @@ package com.yks.chestnutyun.app
 
 import android.app.Application
 import android.content.Context
+
+
+
 import com.yks.chestnutyun.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import kotlin.properties.Delegates
+
 
 /**
  * @Description:    基类注入hilt 依赖
@@ -28,5 +32,7 @@ class MyApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+
+
     }
 }

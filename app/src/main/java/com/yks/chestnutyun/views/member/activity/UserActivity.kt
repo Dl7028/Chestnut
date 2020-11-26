@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.views.member
+package com.yks.chestnutyun.views.member.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,5 +19,13 @@ class UserActivity : BaseActivity() {
     }
 
     override fun startObserve() {
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yks.chestnutyun.data.bean.User
-import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.data.repositories.UserRepository
 import com.yks.chestnutyun.utils.ListModel
 import kotlinx.coroutines.Dispatchers
@@ -24,17 +23,35 @@ class UserViewModel@ViewModelInject constructor(
 
     val mModifyResultStatus = MutableLiveData<ListModel<Int>>()
     val mGetUserInfoResultStatus = MutableLiveData<ListModel<User>>()
+    val mPostPortraitResultStatus = MutableLiveData<ListModel<String>>()
 
 
+    /**
+     * 上传用户头像
+     *
+     * @param portrait
+     */
+    fun postPortrait(portrait: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.postPortrait(
+                portrait,
+                mPostPortraitResultStatus
+            )
+        }
+    }
 
+
+    /**
+     * 获取用户信息
+     *
+     * @param name
+     */
     fun getUserInfo(name:String){
         viewModelScope.launch(Dispatchers.IO) {
              userRepository.getUserInfo(name, mGetUserInfoResultStatus
              )
         }
     }
-
-
 
 
     /**

@@ -1,4 +1,4 @@
-package com.yks.chestnutyun.views.member
+package com.yks.chestnutyun.views.member.fragment
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
@@ -6,6 +6,7 @@ import com.yks.chestnutyun.R
 import com.yks.chestnutyun.views.base.BaseFragment
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.UserViewModel
+import com.yks.chestnutyun.views.member.activity.UserActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_mine.*
 

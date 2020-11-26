@@ -84,6 +84,8 @@ class RemoteDataSource@Inject constructor() {
     suspend fun getUserInfo(name: String) = safeApiCall(call = {toGetUserInfo(name)})
     //修改用户信息
     suspend fun modifyUserMessages(user: User) = safeApiCall(call = {toModifyUserMessages(user)})
+    //上传用户头像
+    suspend fun postPortrait(portrait: String) = safeApiCall(call = {toPostPortrait(portrait)})
 
     /**
      *  获取用户信息
@@ -107,11 +109,25 @@ class RemoteDataSource@Inject constructor() {
      */
     private suspend fun toModifyUserMessages(user: User):ResultData<String> {
         val changeResult =ApiImpl.modifyUserMessages(user)
-        Log.d(TAG, "" +changeResult)
         if (changeResult.code==1){
             return ResultData.Success(changeResult.message)
         }
         return ResultData.ErrorMessage(changeResult.message)
+    }
+
+    /**
+     * 上次用户图片
+     *
+     * @param portrait
+     * @return
+     */
+    private suspend fun toPostPortrait(portrait: String):ResultData<String>{
+        val postResult =ApiImpl.postPortrait(portrait)
+        Log.d(TAG, ""+postResult)
+        if (postResult.code==1){
+            return ResultData.Success(postResult.message)
+        }
+        return ResultData.ErrorMessage(postResult.message)
     }
 
 

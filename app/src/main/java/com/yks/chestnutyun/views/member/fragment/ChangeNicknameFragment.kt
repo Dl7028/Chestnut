@@ -1,49 +1,45 @@
-package com.yks.chestnutyun.views.member
+package com.yks.chestnutyun.views.member.fragment
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.data.bean.User
+import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.UserViewModel
 import com.yks.chestnutyun.views.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_change_nature_sign.*
+import kotlinx.android.synthetic.main.fragment_change_nickname.*
 
 /**
- * @Description:    修改 个性签名的Fragment
+ * @Description:    修改 昵称的Fragment
  * @Author:         Yu ki-r
  * @CreateDate:     2020/11/10 10:21
  */
-@AndroidEntryPoint
-class ChangeNatureSignFragment : BaseFragment() {
 
+@AndroidEntryPoint
+class ChangeNicknameFragment : BaseFragment() {
+
+    private val TAG: String? = "ChangeNicknameFragment"
     private val viewModel: UserViewModel by viewModels()
-    override fun setLayoutResId(): Int = R.layout.fragment_change_nature_sign
+
+    override fun setLayoutResId(): Int  = R.layout.fragment_change_nickname
+
+
 
     override fun initView() {
         cancelBackBtn.setOnClickListener{
-            //取消
+            //回退
             findNavController().navigateUp()
         }
         saveMessageTv.setOnClickListener{
-            modifySignatureMessages()
+            //修改信息
+            modifyNickNameMessages()
         }
-
-    }
-
-    /**
-     * 修改个性签名
-     *
-     */
-    private fun modifySignatureMessages() {
-        val signature = modifySignatureEdt.text.toString()
-        val user = User()
-        user.personalizedSignature = signature
-        viewModel.modifyUserMessages(user)
     }
 
     override fun initData() {
+
     }
 
     override fun startObserve() {
@@ -56,6 +52,18 @@ class ChangeNatureSignFragment : BaseFragment() {
                 ToastUtils.showToast(activity, "" + it.showError)
             }
         }
+    }
+
+    private fun modifyNickNameMessages(){
+        var nickname = modifyNicknameEdt.text.toString()
+        val user = User()
+        if (nickname.isEmpty()){
+            nickname = "立即添加"
+        }else if (nickname.length>20){
+            ToastUtil.showToast("昵称字数不能超过20")
+        }
+        user.nickname = nickname
+        viewModel.modifyUserMessages(user)
     }
 
 }

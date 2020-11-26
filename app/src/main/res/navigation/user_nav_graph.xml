@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/nav_user_center_fragment"
-        android:name="com.yks.chestnutyun.views.member.UserFragment"
+        android:name="com.yks.chestnutyun.views.member.fragment.UserFragment"
         tools:layout="@layout/fragment_user">
         <action
             android:id="@+id/action_nav_user_center_fragment_to_nav_user_change_nickname_fragment"
@@ -24,11 +24,11 @@
 
     <fragment
         android:id="@+id/nav_user_change_nickname_fragment"
-        android:name="com.yks.chestnutyun.views.member.ChangeNicknameFragment"
+        android:name="com.yks.chestnutyun.views.member.fragment.ChangeNicknameFragment"
         tools:layout="@layout/fragment_change_nickname"/>
 
     <fragment
         android:id="@+id/nav_user_change_sign_nature_fragment"
-        android:name="com.yks.chestnutyun.views.member.ChangeNatureSignFragment"
+        android:name="com.yks.chestnutyun.views.member.fragment.ChangeNatureSignFragment"
         tools:layout="@layout/fragment_change_nature_sign"/>
 </navigation>
