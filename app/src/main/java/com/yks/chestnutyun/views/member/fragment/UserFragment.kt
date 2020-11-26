@@ -106,12 +106,15 @@ class UserFragment: BaseFragment() {
         viewModel.mGetUserInfoResultStatus.observe(this){
 //            if (it.showLoading) showProgressDialog(R.string.login_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
+                //显示数据
                 binding.apply {
                     userNickName.text = it.data?.nickname
                     userPhoneNumber.text = it.data?.phoneNumber
                     userEmilAddress.text = it.data?.email.toString()
                     userPersonalizedSignature.text = it.data?.personalizedSignature
                 }
+                //显示图片
+                if (it.data?.portrait!=null) Glide.with(this).load(it.data.portrait).into(personalImage)
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtils.showToast(activity, "" + it.showError)

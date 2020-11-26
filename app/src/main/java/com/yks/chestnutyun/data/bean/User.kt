@@ -14,7 +14,7 @@ data class User(
     var password: String?=null,
     var personalizedSignature: String?=null,
     val phoneNumber: String?=null,
-    var portrait: Any?=null,
+    var portrait: String?=null,
     val userId: Int = 0
 
 

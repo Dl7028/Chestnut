@@ -2,6 +2,7 @@ package com.yks.chestnutyun.views.member.fragment
 
 import android.content.Intent
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.views.base.BaseFragment
 import com.yks.chestnutyun.utils.ToastUtils
@@ -54,6 +55,7 @@ class MineFragment: BaseFragment() {
             if (it.showEnd) {
                 titleName.text = it.data?.nickname
                 if (it.data?.phoneNumber!=null) titleUserName.text = it.data.phoneNumber else  titleUserName.text = it.data?.email
+                if (it.data?.portrait!=null) Glide.with(this).load(it.data.portrait).into(minePicture)
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtils.showToast(activity, "" + it.showError)
