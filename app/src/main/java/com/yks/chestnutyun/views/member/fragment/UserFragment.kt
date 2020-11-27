@@ -6,12 +6,14 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,6 +23,7 @@ import com.yks.chestnutyun.customView.CustomDialog
 import com.yks.chestnutyun.databinding.FragmentUserBinding
 import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.utils.ToastUtils
+import com.yks.chestnutyun.utils.UriToFilePathUtil
 import com.yks.chestnutyun.viewmodels.UserViewModel
 import com.yks.chestnutyun.views.base.BaseFragment
 import com.zhihu.matisse.Matisse
@@ -28,11 +31,15 @@ import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_user.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
 import permissions.dispatcher.RuntimePermissions
 import timber.log.Timber
+import java.io.File
 
 /**
  * @Description:    用户中心的fragment
@@ -91,8 +98,8 @@ class UserFragment: BaseFragment() {
             requireActivity().finish()
         }
         personalImage.setOnClickListener{
-            getPictureWithPermissionCheck()
-//            jumpSetting()
+            getPictureWithPermissionCheck() //权限访问
+
         }
 
 
@@ -104,7 +111,6 @@ class UserFragment: BaseFragment() {
     override fun startObserve() {
         //获取用户信息
         viewModel.mGetUserInfoResultStatus.observe(this){
-//            if (it.showLoading) showProgressDialog(R.string.login_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
                 //显示数据
                 binding.apply {
@@ -122,12 +128,11 @@ class UserFragment: BaseFragment() {
         }
         //上传用户头像
         viewModel.mPostPortraitResultStatus.observe(this){
-            if (it.showLoading) showProgressDialog(R.string.post_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
                 ToastUtil.showToast("更改图片成功")
                 }
             it.showError?.let { errorMsg ->        //请求失败
-                ToastUtil.showToast( it.showError)
+                ToastUtil.showToast(it.showError)
             }
         }
     }
@@ -201,14 +206,18 @@ class UserFragment: BaseFragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK){
             val mSelect:List<Uri> = Matisse.obtainResult(data)
             Glide.with(this).load(mSelect[0]).into(personalImage) //加载图片
-            val portraitUrl = mSelect[0].toString()
-            Log.d(TAG, portraitUrl)
-            viewModel.postPortrait(portraitUrl)
+
+            val path = UriToFilePathUtil.uriToFileQ(requireActivity(),mSelect[0]).toString()
+            val file = File(path)
+            val requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file) //构建图片Body
+            val body: MultipartBody.Part = MultipartBody.Part.createFormData("portrait", file.name, requestBody)
+            viewModel.postPortrait(body)
 
         }
     }
@@ -228,5 +237,6 @@ class UserFragment: BaseFragment() {
             e.printStackTrace()
         }
     }
+
 
 }

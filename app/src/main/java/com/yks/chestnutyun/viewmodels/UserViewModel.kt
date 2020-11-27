@@ -9,6 +9,7 @@ import com.yks.chestnutyun.data.repositories.UserRepository
 import com.yks.chestnutyun.utils.ListModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 
 /**
  * @Description:    修改用户信息的ViewModel
@@ -31,10 +32,10 @@ class UserViewModel@ViewModelInject constructor(
      *
      * @param portrait
      */
-    fun postPortrait(portrait: String){
+    fun postPortrait(part: MultipartBody.Part){
         viewModelScope.launch(Dispatchers.IO) {
             userRepository.postPortrait(
-                portrait,
+                part,
                 mPostPortraitResultStatus
             )
         }

@@ -6,8 +6,10 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation.findNavController
+import com.gyf.immersionbar.ImmersionBar
 import com.yks.chestnutyun.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        ImmersionBar.with(this).titleBar(toolbar).init()
 
     }
 
@@ -38,17 +41,17 @@ class MainActivity : AppCompatActivity() {
                         R.id.nav_host_main
                     ).navigate(R.id.files_view_pager_fragment)
                     mainBinding.toolbarTitle.text = "文件"
-                    mainBinding.toolbarLayout.setBackgroundColor(Color.parseColor("#9c27b0"))
+//                    mainBinding.toolbarLayout.setBackgroundColor(Color.parseColor("#9c27b0"))
                 }
                 1 -> {
                     findNavController(this, R.id.nav_host_main).navigate(R.id.nav_home_fragment)
                     mainBinding.toolbarTitle.text= "主页"
-                    mainBinding.toolbarLayout.setBackgroundColor(Color.parseColor("#03a9f4"))
+//                    mainBinding.toolbarLayout.setBackgroundColor(Color.parseColor("#03a9f4"))
                 }
                 2 -> {
                     findNavController(this, R.id.nav_host_main).navigate(R.id.nav_mine_fragment)
                     mainBinding.toolbarTitle.text = "用户"
-                    mainBinding.toolbarLayout.setBackgroundColor(Color.parseColor("#4caf50"))
+//                    mainBinding.toolbarLayout.setBackgroundColor(Color.parseColor("#4caf50"))
                 }
             }
         }

@@ -41,10 +41,13 @@ class LoginFragment : BaseFragment() {
     override fun initView() {
         sp = requireActivity().getSharedPreferences("userInfo",MODE_PRIVATE)
         //开启应用的时候，显示保存的用户信息
-        val name = sp.getString("name","")
-        val password =sp.getString("password","")
+        val name = sp.getString("name","").toString()
+        val password =sp.getString("password","").toString()
         loginPhoneInput.setText(name)
         loginPasswordInput.setText(password)
+        if(name.isNotEmpty()&&password.isNotEmpty()){
+            login()
+        }
         //轮播图图片
         val localImageInfoList:MutableList<LocalImageInfo> = ArrayList<LocalImageInfo>()
         localImageInfoList.add(LocalImageInfo(R.mipmap.banner_car))

@@ -3,6 +3,7 @@ package com.yks.chestnutyun.data.api
 import com.yks.chestnutyun.data.api.http.*
 import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.data.bean.User
+import okhttp3.MultipartBody
 import retrofit2.http.*
 
 /**
@@ -60,6 +61,7 @@ interface ApiService {
      * @param portrait
      * @return
      */
+    @Multipart
     @POST(USER_INFO_PORTRAIT)
-    suspend fun postPortrait(@Query ("portrait") portrait:String):BaseBean<String>
+    suspend fun postPortrait(@Part part: MultipartBody.Part ):BaseBean<String>
 }

@@ -18,4 +18,4 @@ const val USER_INFO = "userInfo"
 //获取个人信息
 const val USER = "user"
 //用户上传图片
-const val USER_INFO_PORTRAIT = "userinfo/portrait"
+const val USER_INFO_PORTRAIT = "userInfo/portrait"

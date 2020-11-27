@@ -8,6 +8,7 @@ import com.yks.chestnutyun.data.api.http.ServiceCreator
 import com.yks.chestnutyun.data.bean.User
 import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.utils.safeApiCall
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 /**
@@ -85,7 +86,7 @@ class RemoteDataSource@Inject constructor() {
     //修改用户信息
     suspend fun modifyUserMessages(user: User) = safeApiCall(call = {toModifyUserMessages(user)})
     //上传用户头像
-    suspend fun postPortrait(portrait: String) = safeApiCall(call = {toPostPortrait(portrait)})
+    suspend fun postPortrait(part: MultipartBody.Part) = safeApiCall(call = {toPostPortrait(part)})
 
     /**
      *  获取用户信息
@@ -121,8 +122,8 @@ class RemoteDataSource@Inject constructor() {
      * @param portrait
      * @return
      */
-    private suspend fun toPostPortrait(portrait: String):ResultData<String>{
-        val postResult =ApiImpl.postPortrait(portrait)
+    private suspend fun toPostPortrait(part: MultipartBody.Part):ResultData<String>{
+        val postResult =ApiImpl.postPortrait(part)
         Log.d(TAG, ""+postResult)
         if (postResult.code==1){
             return ResultData.Success(postResult.message)

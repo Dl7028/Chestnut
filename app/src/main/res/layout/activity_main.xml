@@ -31,7 +31,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/purple_active"
+            android:background="@color/blue_active"
             app:layout_scrollFlags="scroll|snap"
             app:toolbarId="@id/toolbar">
 
@@ -43,6 +43,7 @@
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="parallax">
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mainTitleBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -105,10 +106,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:bt_active="true"
-                app:bt_colorActive="@color/purple_active"
-                app:bt_colorInactive="@color/default_inactive"
                 app:bt_icon="@drawable/ic_photos"
-                app:bt_shape="@drawable/file_background_stroke"
+                app:bt_colorActive="@color/blue_active"
+                app:bt_colorInactive="@color/default_inactive"
+                app:bt_shape="@drawable/shop_background_stroke"
                 app:bt_title="文件" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
@@ -130,10 +131,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:bt_active="true"
-                app:bt_colorActive="@color/green_active"
-                app:bt_colorInactive="@color/default_inactive"
                 app:bt_icon="@drawable/ic_person"
-                app:bt_shape="@drawable/mine_background_stroke"
+                app:bt_colorActive="@color/blue_active"
+                app:bt_colorInactive="@color/default_inactive"
+                app:bt_shape="@drawable/shop_background_stroke"
                 app:bt_title="我的" />
 
 

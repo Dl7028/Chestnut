@@ -17,9 +17,6 @@ import java.util.concurrent.TimeUnit
 object ServiceCreator {
 
 
-
-
-
     private val client: OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(ReceivedCookiesInterceptor())
         .addInterceptor(AddCookiesInterceptor())
