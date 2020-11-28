@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.data.bean.User
+import com.yks.chestnutyun.utils.ListModel
 import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.UserViewModel
@@ -40,13 +41,18 @@ class ChangeNatureSignFragment : BaseFragment() {
     private fun modifySignatureMessages() {
         var signature= modifySignatureEdt.text.toString()
         val user = User()
-        if(signature.isEmpty()){
-            signature = "立即添加"
-        } else if(signature.length >100){
-            ToastUtil.showToast("签名字数不能超过100")
+        when {
+            signature.isEmpty() -> {
+                signature = "立即添加"
+            }
+            signature.length >100 -> {
+                ToastUtil.showToast("签名字数不能超过100")
+            }
+            else -> {
+                user.personalizedSignature = signature
+                viewModel.modifyUserMessages(user)
+            }
         }
-        user.personalizedSignature = signature
-        viewModel.modifyUserMessages(user)
     }
 
     override fun initData() {
@@ -57,11 +63,14 @@ class ChangeNatureSignFragment : BaseFragment() {
             if (it.showLoading) showProgressDialog(R.string.save_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
                 ToastUtils.showToast(activity, "" + it.showEnd)  //请求成功
+                findNavController().navigateUp()
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtils.showToast(activity, "" + it.showError)
             }
         }
+        viewModel.mModifyResultStatus.value = ListModel(showLoading = false, showEnd = false)
+
     }
 
 }

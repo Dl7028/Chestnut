@@ -51,6 +51,8 @@ class UserRepository @Inject constructor(
             listModel?.postValue(ListModel(showLoading = false, showEnd = true))
         } else if (modifyResult is ResultData.ErrorMessage) { //获取验证码失败
             listModel?.postValue(ListModel(showLoading = false, showError = modifyResult.message))
+        }else if (modifyResult is ResultData.Error){
+
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.data.bean.User
+import com.yks.chestnutyun.utils.ListModel
 import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.UserViewModel
@@ -47,23 +48,31 @@ class ChangeNicknameFragment : BaseFragment() {
             if (it.showLoading) showProgressDialog(R.string.save_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
                 ToastUtils.showToast(activity, "" + it.showEnd)  //请求成功
+                findNavController().navigateUp()
+
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtils.showToast(activity, "" + it.showError)
             }
         }
+        viewModel.mModifyResultStatus.value = ListModel(showLoading=false,showEnd = false)
     }
 
     private fun modifyNickNameMessages(){
         var nickname = modifyNicknameEdt.text.toString()
         val user = User()
-        if (nickname.isEmpty()){
-            nickname = "立即添加"
-        }else if (nickname.length>20){
-            ToastUtil.showToast("昵称字数不能超过20")
+        when {
+            nickname.isEmpty() -> {
+                nickname = "立即添加"
+            }
+            nickname.length>20 -> {
+                ToastUtil.showToast("昵称字数不能超过20")
+            }
+            else -> {
+                user.nickname = nickname
+                viewModel.modifyUserMessages(user)
+            }
         }
-        user.nickname = nickname
-        viewModel.modifyUserMessages(user)
     }
 
 }
