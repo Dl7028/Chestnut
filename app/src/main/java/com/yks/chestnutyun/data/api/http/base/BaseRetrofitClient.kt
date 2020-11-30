@@ -1,8 +1,8 @@
-package com.yks.chestnutyun.data.api.http
+package com.yks.chestnutyun.data.api.http.base
 
 import android.annotation.SuppressLint
-import android.net.Proxy.getHost
 import com.yks.chestnutyun.BuildConfig
+import com.yks.chestnutyun.data.api.http.BASE_URL
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody.Companion.toResponseBody

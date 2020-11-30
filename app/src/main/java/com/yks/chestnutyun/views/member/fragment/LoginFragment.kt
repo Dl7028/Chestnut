@@ -12,8 +12,9 @@ import com.stx.xhb.androidx.XBanner
 import com.stx.xhb.androidx.entity.LocalImageInfo
 import com.yks.chestnutyun.MainActivity
 import com.yks.chestnutyun.R
+import com.yks.chestnutyun.ext.setOnClickWithFilter
 import com.yks.chestnutyun.utils.RegExpUtils
-import com.yks.chestnutyun.utils.ToastUtils
+import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.viewmodels.LoginViewModel
 import com.yks.chestnutyun.views.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,7 +57,7 @@ class LoginFragment : BaseFragment() {
 
         banner.setBannerData(localImageInfoList)
         //跳转到注册
-        loginRegisterButton.setOnClickListener {
+        loginRegisterButton.setOnClickWithFilter {
             dismissProgressDialog()
             it.findNavController().navigate(R.id.action_nav_login_fragment_to_nav_register_fragment)
         }
@@ -66,7 +67,7 @@ class LoginFragment : BaseFragment() {
             (view as ImageView).setImageResource((model as LocalImageInfo).xBannerUrl)
         }
 
-        loginButton.setOnClickListener {
+        loginButton.setOnClickWithFilter {
             login()
         }
     }
@@ -82,14 +83,14 @@ class LoginFragment : BaseFragment() {
                 //登录成功
                 //1.保存用户信息
                 saveUser(loginPhoneInput.text.toString(),loginPasswordInput.text.toString())
-                ToastUtils.showToast(activity,""+it.showEnd)  //请求成功
+                ToastUtil.showToast(it.showEnd.toString())  //请求成功
                 //2.跳转到主页面
                 goToMainActivity()
 //                requireActivity().finish()
 
             }
             it.showError?.let { errorMsg ->        //请求失败
-                ToastUtils.showToast(activity,""+it.showError)
+                ToastUtil.showToast(it.showError)
             }
             dismissProgressDialog()
         }
@@ -117,7 +118,7 @@ class LoginFragment : BaseFragment() {
         val ifEmailAddress = RegExpUtils.checkEmail(username)
         when {
             !ifPhoneNumber && !ifEmailAddress -> {
-                ToastUtils.showToast(activity, "用户名格式不合法")
+                ToastUtil.showToast("用户名格式不合法")
             }
             else -> {
                 viewModel.login(username, password)

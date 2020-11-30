@@ -1,11 +1,10 @@
 package com.yks.chestnutyun.app
 
+
 import android.app.Application
 import android.content.Context
-
-
-
 import com.yks.chestnutyun.BuildConfig
+import com.yks.chestnutyun.utils.ActivityHelper
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import kotlin.properties.Delegates
@@ -29,9 +28,15 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         CONTEXT = applicationContext
+
+        //注册Activity生命周期
+        registerActivityLifecycleCallbacks(ActivityHelper.getActivityLifecycleCallbacks())
+
+        //DEBUG开关
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+
 
 
     }

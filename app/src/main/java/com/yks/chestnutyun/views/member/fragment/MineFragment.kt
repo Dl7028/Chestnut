@@ -4,8 +4,9 @@ import android.content.Intent
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.yks.chestnutyun.R
+import com.yks.chestnutyun.ext.setOnClickWithFilter
 import com.yks.chestnutyun.views.base.BaseFragment
-import com.yks.chestnutyun.utils.ToastUtils
+import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.viewmodels.UserViewModel
 import com.yks.chestnutyun.views.member.activity.UserActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +31,7 @@ class MineFragment: BaseFragment() {
 
     override fun initView() {
         val bundle = requireActivity().intent.extras!!
-        mineGoUserButton.setOnClickListener {
+        mineGoUserButton.setOnClickWithFilter {
             //获取用户信息
             val intent = Intent()
             intent.putExtra("username", bundle.getString("username")!!)
@@ -58,7 +59,7 @@ class MineFragment: BaseFragment() {
                 if (it.data?.portrait!=null) Glide.with(this).load(it.data.portrait).into(minePicture)
             }
             it.showError?.let { errorMsg ->        //请求失败
-                ToastUtils.showToast(activity, "" + it.showError)
+                ToastUtil.showToast(it.showError)
             }
         }
     }

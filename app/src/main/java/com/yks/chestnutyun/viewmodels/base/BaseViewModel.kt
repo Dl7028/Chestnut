@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 open class BaseViewModel : ViewModel(), LifecycleObserver {
 
     /**
-     * TODO     运行在UI线程的协程 viewModelScope 已经实现了在onCleared取消协程
+     *  运行在UI线程的协程 viewModelScope 已经实现了在onCleared取消协程
      *
      * @param block
      */

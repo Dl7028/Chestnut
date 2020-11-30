@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +20,8 @@ import com.bumptech.glide.Glide
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.customView.CustomDialog
 import com.yks.chestnutyun.databinding.FragmentUserBinding
+import com.yks.chestnutyun.ext.setOnClickWithFilter
 import com.yks.chestnutyun.utils.ToastUtil
-import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.utils.UriToFilePathUtil
 import com.yks.chestnutyun.viewmodels.UserViewModel
 import com.yks.chestnutyun.views.base.BaseFragment
@@ -31,10 +30,8 @@ import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_user.*
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
@@ -85,21 +82,22 @@ class UserFragment: BaseFragment() {
 
 
     override fun initView() {
+
         val bundle = requireActivity().intent.extras!!
         val name = bundle.getString("username")!!
         viewModel.getUserInfo(name)
 
 
-        user_nick_name.setOnClickListener{
+        user_nick_name.setOnClickWithFilter{
             findNavController().navigate(R.id.action_nav_user_center_fragment_to_nav_user_change_nickname_fragment)
         }
-       userPersonalizedSignature.setOnClickListener{
+       userPersonalizedSignature.setOnClickWithFilter{
             findNavController().navigate(R.id.action_nav_user_center_fragment_to_nav_user_change_sign_nature_fragment)
         }
-        cancelBackBtn.setOnClickListener{
+        cancelBackBtn.setOnClickWithFilter{
             requireActivity().finish()
         }
-        personalImage.setOnClickListener{
+        personalImage.setOnClickWithFilter{
             getPictureWithPermissionCheck() //权限访问
 
         }
@@ -125,7 +123,7 @@ class UserFragment: BaseFragment() {
                 if (it.data?.portrait!=null) Glide.with(this).load(it.data.portrait).into(personalImage)
             }
             it.showError?.let { errorMsg ->        //请求失败
-                ToastUtils.showToast(activity, "" + it.showError)
+                ToastUtil.showToast(it.showError)
             }
         }
         //上传用户头像

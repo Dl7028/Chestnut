@@ -4,9 +4,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.data.bean.User
+import com.yks.chestnutyun.ext.setOnClickWithFilter
 import com.yks.chestnutyun.utils.ListModel
 import com.yks.chestnutyun.utils.ToastUtil
-import com.yks.chestnutyun.utils.ToastUtils
 import com.yks.chestnutyun.viewmodels.UserViewModel
 import com.yks.chestnutyun.views.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,11 +29,11 @@ class ChangeNicknameFragment : BaseFragment() {
 
 
     override fun initView() {
-        cancelBackBtn.setOnClickListener{
+        cancelBackBtn.setOnClickWithFilter{
             //回退
             findNavController().navigateUp()
         }
-        saveMessageTv.setOnClickListener{
+        saveMessageTv.setOnClickWithFilter{
             //修改信息
             modifyNickNameMessages()
         }
@@ -47,12 +47,12 @@ class ChangeNicknameFragment : BaseFragment() {
         viewModel.mModifyResultStatus.observe(this){
             if (it.showLoading) showProgressDialog(R.string.save_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
-                ToastUtils.showToast(activity, "" + it.showEnd)  //请求成功
+                ToastUtil.showToast( it.showEnd.toString())  //请求成功
                 findNavController().navigateUp()
 
             }
             it.showError?.let { errorMsg ->        //请求失败
-                ToastUtils.showToast(activity, "" + it.showError)
+                ToastUtil.showToast( it.showError)
             }
         }
         viewModel.mModifyResultStatus.value = ListModel(showLoading=false,showEnd = false)

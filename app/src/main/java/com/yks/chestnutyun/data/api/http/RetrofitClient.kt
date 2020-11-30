@@ -1,6 +1,7 @@
 package com.yks.chestnutyun.data.api.http
 
 import com.yks.chestnutyun.data.api.ApiService
+import com.yks.chestnutyun.data.api.http.base.BaseRetrofitClient
 import com.yks.chestnutyun.ext.CookieClass.cookieJar
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

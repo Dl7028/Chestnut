@@ -21,7 +21,7 @@ object ToastUtil {
         if ("main" == Thread.currentThread().name) {
             createToast(msg)
         } else {
-            ActivityUtil.getCurrentActivity()!!.runOnUiThread {
+            ActivityHelper.getCurrentActivity()!!.runOnUiThread {
                 ToastUtil.createToast(msg)
             }
         }
@@ -34,9 +34,9 @@ object ToastUtil {
         } else {
             toast!!.setText(msg)
         }
-        val linearLayout = toast!!.view as LinearLayout?
+        /*val linearLayout = toast!!.view as LinearLayout?
         val messageTextView = linearLayout!!.getChildAt(0) as TextView
-        messageTextView.textSize = 15.0f
+        messageTextView.textSize = 15.0f*/
         toast!!.show()
     }
 
@@ -44,7 +44,7 @@ object ToastUtil {
         if ("main" == Thread.currentThread().name) {
             createCenterToast(msg)
         } else {
-            ActivityUtil.getCurrentActivity()!!.runOnUiThread {
+            ActivityHelper.getCurrentActivity()!!.runOnUiThread {
               ToastUtil.createCenterToast(
                     msg
                 )
@@ -59,10 +59,10 @@ object ToastUtil {
         } else {
             toast!!.setText(msg)
         }
-        val linearLayout = toast!!.view as LinearLayout?
-        val messageTextView = linearLayout!!.getChildAt(0) as TextView
+     /*   val linearLayout = toast!!.view as LinearLayout?
+        val messageTextView = linearLayout!!.getChildAt(0) as TextView*/
         toast!!.setGravity(17, 0, 0)
-        messageTextView.textSize = 15.0f
+//        messageTextView.textSize = 15.0f
         toast!!.show()
     }
 
