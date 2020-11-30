@@ -32,8 +32,10 @@ import com.zhihu.matisse.engine.impl.GlideEngine
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_user.*
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
@@ -215,7 +217,9 @@ class UserFragment: BaseFragment() {
 
             val path = UriToFilePathUtil.uriToFileQ(requireActivity(),mSelect[0]).toString()
             val file = File(path)
-            val requestBody: RequestBody = RequestBody.create(MediaType.parse("image/*"), file) //构建图片Body
+//            val requestBody: RequestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file) //构建图片Body
+
+            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull()) //构建图片Body
             val body: MultipartBody.Part = MultipartBody.Part.createFormData("portrait", file.name, requestBody)
             viewModel.postPortrait(body)
 

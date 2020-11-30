@@ -3,6 +3,7 @@ package com.yks.chestnutyun.data.repositories.base
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.yks.chestnutyun.data.api.ApiService
+import com.yks.chestnutyun.data.api.http.RetrofitClient
 import com.yks.chestnutyun.data.bean.base.ResultData
 import com.yks.chestnutyun.data.api.http.ServiceCreator
 import com.yks.chestnutyun.data.bean.User
@@ -19,7 +20,7 @@ import javax.inject.Inject
 class RemoteDataSource@Inject constructor() {
 
     private   val TAG: String="RemoteDataSource"
-    private val ApiImpl = ServiceCreator.create(ApiService::class.java)
+    private val ApiImpl = RetrofitClient.getInStance().service
 
 
     //================================【登录相关】=======================================
