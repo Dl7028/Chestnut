@@ -2,7 +2,9 @@ package com.yks.chestnutyun.views.member.fragment
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
@@ -12,6 +14,7 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -47,16 +50,20 @@ import java.io.File
  */
 @AndroidEntryPoint
 @RuntimePermissions
+@RequiresApi(Build.VERSION_CODES.Q)
 class UserFragment: BaseFragment() {
 
     private val REQUEST_CODE_CHOOSE: Int = 1001
     private val TAG: String? = "UserFragment"
     private val viewModel: UserViewModel by viewModels()
-    private   lateinit var mDialog: CustomDialog
-
+    private lateinit var mDialog: CustomDialog
+    val ACCEPTED_MIMETYPES = arrayOf("image/jpeg", "image/png")
 
 
     private lateinit var binding: FragmentUserBinding
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -70,15 +77,13 @@ class UserFragment: BaseFragment() {
             false
         )
         binding.apply {
-            viewModel =viewModel
+            viewModel = viewModel
             lifecycleOwner = viewLifecycleOwner
         }
         return binding.root
     }
 
     override fun setLayoutResId(): Int = R.layout.fragment_user
-
-
 
 
     override fun initView() {
@@ -88,16 +93,16 @@ class UserFragment: BaseFragment() {
         viewModel.getUserInfo(name)
 
 
-        user_nick_name.setOnClickWithFilter{
+        user_nick_name.setOnClickWithFilter {
             findNavController().navigate(R.id.action_nav_user_center_fragment_to_nav_user_change_nickname_fragment)
         }
-       userPersonalizedSignature.setOnClickWithFilter{
+        userPersonalizedSignature.setOnClickWithFilter {
             findNavController().navigate(R.id.action_nav_user_center_fragment_to_nav_user_change_sign_nature_fragment)
         }
-        cancelBackBtn.setOnClickWithFilter{
+        cancelBackBtn.setOnClickWithFilter {
             requireActivity().finish()
         }
-        personalImage.setOnClickWithFilter{
+        personalImage.setOnClickWithFilter {
             getPictureWithPermissionCheck() //权限访问
 
         }
@@ -110,7 +115,7 @@ class UserFragment: BaseFragment() {
 
     override fun startObserve() {
         //获取用户信息
-        viewModel.mGetUserInfoResultStatus.observe(this){
+        viewModel.mGetUserInfoResultStatus.observe(this) {
             if (it.showEnd) {
                 //显示数据
                 binding.apply {
@@ -120,17 +125,18 @@ class UserFragment: BaseFragment() {
                     userPersonalizedSignature.text = it.data?.personalizedSignature
                 }
                 //显示图片
-                if (it.data?.portrait!=null) Glide.with(this).load(it.data.portrait).into(personalImage)
+                if (it.data?.portrait != null) Glide.with(this).load(it.data.portrait)
+                    .into(personalImage)
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtil.showToast(it.showError)
             }
         }
         //上传用户头像
-        viewModel.mPostPortraitResultStatus.observe(this){
+        viewModel.mPostPortraitResultStatus.observe(this) {
             if (it.showEnd) {
                 ToastUtil.showToast("更改图片成功")
-                }
+            }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtil.showToast(it.showError)
             }
@@ -145,15 +151,9 @@ class UserFragment: BaseFragment() {
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
-     fun getPicture(){
-        Matisse.from(this)
-            .choose(MimeType.ofImage())
-            .countable(false)
-            .maxSelectable(1)
-            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-            .thumbnailScale(0.85f)
-            .imageEngine(GlideEngine())
-            .forResult(REQUEST_CODE_CHOOSE)
+    fun getPicture() {
+        //构造数据，页面跳转
+       selectPicture.launch(ACCEPTED_MIMETYPES)
     }
 
     /**
@@ -164,7 +164,7 @@ class UserFragment: BaseFragment() {
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
-    fun onGalleryDenied(){
+    fun onGalleryDenied() {
         ToastUtil.showToast("未授权权限，部分功能不能使用")
         Timber.d("拒绝")
     }
@@ -206,23 +206,8 @@ class UserFragment: BaseFragment() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.Q)
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK){
-            val mSelect:List<Uri> = Matisse.obtainResult(data)
-            Glide.with(this).load(mSelect[0]).into(personalImage) //加载图片
 
-            val path = UriToFilePathUtil.uriToFileQ(requireActivity(),mSelect[0]).toString()
-            val file = File(path)
-//            val requestBody: RequestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file) //构建图片Body
 
-            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull()) //构建图片Body
-            val body: MultipartBody.Part = MultipartBody.Part.createFormData("portrait", file.name, requestBody)
-            viewModel.postPortrait(body)
-
-        }
-    }
 
 
     /**
@@ -239,6 +224,48 @@ class UserFragment: BaseFragment() {
             e.printStackTrace()
         }
     }
+    /**
+     * 1.注册协议，获取ActivityResultLauncher
+     */
+    private val selectPicture = registerForActivityResult(GetContentWithMimeTypes()) { uri ->
+        uri?.let {
+            Glide.with(this).load(uri).into(personalImage) //加载图片
+            val path = UriToFilePathUtil.uriToFileQ(requireActivity(), uri).toString()
+            val file = File(path)
+//            val requestBody: RequestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file) //构建图片Body
 
+            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull()) //构建图片Body
+            val body: MultipartBody.Part =
+                MultipartBody.Part.createFormData("portrait", file.name, requestBody)
+            viewModel.postPortrait(body)
+        }
+    }
 
+    /**
+     * 定义协议
+     *
+     */
+    class GetContentWithMimeTypes : ActivityResultContract<Array<String>, Uri?>() {
+        override fun createIntent(
+            context: Context,
+            input: Array<String>
+        ): Intent {
+            return Intent(Intent.ACTION_GET_CONTENT)
+                .addCategory(Intent.CATEGORY_OPENABLE)
+                .setType("*/*")
+                .putExtra(Intent.EXTRA_MIME_TYPES, input);
+
+        }
+
+        override fun getSynchronousResult(
+            context: Context,
+            input: Array<String>
+        ): SynchronousResult<Uri?>? {
+            return null
+        }
+
+        override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+            return if (intent == null || resultCode != Activity.RESULT_OK) null else intent.data
+        }
+    }
 }
