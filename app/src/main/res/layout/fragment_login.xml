@@ -42,13 +42,13 @@
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/banner">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/ds15"
             android:layout_height="@dimen/ds15"
             android:layout_marginStart="@dimen/sp16"
             android:src="@mipmap/login_login_icon" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/loginPhoneInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -62,7 +62,7 @@
             tools:ignore="TextFields">
 
             <requestFocus />
-        </EditText>
+        </androidx.appcompat.widget.AppCompatEditText>
 
 
     </LinearLayout>
@@ -80,7 +80,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/login_password_image"
             android:layout_width="@dimen/ds15"
             android:layout_height="@dimen/ds15"
@@ -88,7 +88,7 @@
             android:gravity="center"
             android:src="@mipmap/login_password_icon" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/loginPasswordInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -110,7 +110,7 @@
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/loginRegisterButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
             android:textColor="@color/color_text1"
             android:textSize="@dimen/sp12" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/loginForgetButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
             tools:ignore="RtlHardcoded" />
     </LinearLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/loginButton"
         android:layout_width="0dp"
         android:layout_height="@dimen/ds55"

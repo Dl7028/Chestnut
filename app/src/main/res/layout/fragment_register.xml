@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/registerCancel"
             android:layout_width="@dimen/ds50"
             android:layout_height="@dimen/ds50"
@@ -28,7 +28,7 @@
             android:textStyle="bold"
             tools:ignore="RtlSymmetry" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/register_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
     </RelativeLayout>
 
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/registerPasswordInput"
         android:layout_width="0dp"
         android:layout_height="@dimen/ds45"
@@ -62,7 +62,7 @@
 
 
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/registerButton"
         android:layout_width="0dp"
         android:layout_height="@dimen/ds42"
@@ -79,7 +79,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerConfirmPasswordInput" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="用户名"
@@ -133,7 +133,7 @@
                 android:textSize="@dimen/sp12" />
 
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/registerEmailPhoneInput"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/ds45"
@@ -149,7 +149,7 @@
                 tools:ignore="RtlSymmetry" />
 
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/sp20"
@@ -165,7 +165,7 @@
                 android:background="@drawable/gray_radiu_8_bg">
 
 
-                <EditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/registerEmailCodeInput"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/ds45"
@@ -210,7 +210,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/relativeLayout" />
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/registerConfirmPasswordInput"
         android:layout_width="0dp"
         android:layout_height="@dimen/ds45"

@@ -24,6 +24,7 @@ import com.yks.chestnutyun.R
 import com.yks.chestnutyun.customView.CustomDialog
 import com.yks.chestnutyun.databinding.FragmentUserBinding
 import com.yks.chestnutyun.ext.setOnClickWithFilter
+import com.yks.chestnutyun.utils.PathUtils
 import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.utils.UriToFilePathUtil
 import com.yks.chestnutyun.viewmodels.UserViewModel
@@ -90,7 +91,7 @@ class UserFragment: BaseFragment() {
 
         val bundle = requireActivity().intent.extras!!
         val name = bundle.getString("username")!!
-        viewModel.getUserInfo(name)
+        viewModel.getUserInfo(name) //获取信息
 
 
         user_nick_name.setOnClickWithFilter {
@@ -134,6 +135,7 @@ class UserFragment: BaseFragment() {
         }
         //上传用户头像
         viewModel.mPostPortraitResultStatus.observe(this) {
+            if (it.showLoading) showProgressDialog(R.string.post_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
                 ToastUtil.showToast("更改图片成功")
             }
@@ -230,9 +232,9 @@ class UserFragment: BaseFragment() {
     private val selectPicture = registerForActivityResult(GetContentWithMimeTypes()) { uri ->
         uri?.let {
             Glide.with(this).load(uri).into(personalImage) //加载图片
-            val path = UriToFilePathUtil.uriToFileQ(requireActivity(), uri).toString()
+//            val path = UriToFilePathUtil.uriToFileQ(requireActivity(), uri).toString()
+            val path = PathUtils.getPath(requireActivity(),uri).toString()
             val file = File(path)
-//            val requestBody: RequestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file) //构建图片Body
 
             val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull()) //构建图片Body
             val body: MultipartBody.Part =

@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/find_push"
                         android:layout_width="@dimen/ds50"
                         android:layout_height="@dimen/ds50"
@@ -57,7 +57,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/toolbar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="?attr/actionBarSize"
@@ -72,7 +72,7 @@
                         app:layout_constraintStart_toStartOf="@+id/find_push"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/find_search"
                         android:layout_width="@dimen/ds50"
                         android:layout_height="@dimen/ds50"

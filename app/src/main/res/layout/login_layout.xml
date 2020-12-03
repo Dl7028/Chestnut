@@ -12,13 +12,13 @@
         android:background="@drawable/gray_radiu_20_bg"
         android:orientation="horizontal">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/ds15"
             android:layout_height="@dimen/ds15"
             android:layout_marginLeft="@dimen/sp16"
             android:src="@mipmap/login_login_icon" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/login_phone_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,7 +31,7 @@
             android:textColorHighlight="@color/color_c9c9c9"
             android:textSize="@dimen/sp14">
             <requestFocus />
-        </EditText>
+        </androidx.appcompat.widget.AppCompatEditText>
     </LinearLayout>
 
     <RelativeLayout
@@ -39,7 +39,7 @@
         android:layout_height="@dimen/ds40"
         android:layout_marginTop="@dimen/sp18">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/login_password_image"
                 android:layout_width="@dimen/ds15"
                 android:layout_height="@dimen/ds15"
@@ -48,7 +48,7 @@
                 android:src="@mipmap/login_password_icon" />
 
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/login_pass_word_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

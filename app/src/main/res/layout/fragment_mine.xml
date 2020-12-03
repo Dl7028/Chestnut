@@ -37,7 +37,7 @@
                 android:layout_toEndOf="@id/minePicture"
                 android:orientation="vertical">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/titleName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                     android:textSize="@dimen/sp16"
                     android:textStyle="bold" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/titleUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 android:layout_centerVertical="true"
                 android:background="@mipmap/mine_center_bg">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -87,7 +87,7 @@
             app:layout_constraintStart_toStartOf="@+id/mine_center_button"
             app:layout_constraintTop_toBottomOf="@+id/mine_center_button">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/mine_profit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/ds50"
@@ -106,7 +106,7 @@
                 android:layout_marginRight="@dimen/ds15"
                 android:background="@color/color_line" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/mine_refresh"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/ds50"
@@ -137,7 +137,7 @@
             app:layout_constraintStart_toStartOf="@+id/linearLayout4"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/mine_recycle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/ds50"
@@ -159,7 +159,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/mine_change_account"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/ds50"

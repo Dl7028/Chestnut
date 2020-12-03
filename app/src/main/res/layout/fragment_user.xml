@@ -28,7 +28,7 @@
                 android:layout_height="@dimen/ds50"
                 android:layout_alignParentTop="true">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/cancelBackBtn"
                     android:layout_width="@dimen/ds50"
                     android:layout_height="@dimen/ds50"
@@ -36,7 +36,7 @@
                     android:padding="@dimen/ds15"
                     android:src="@mipmap/back_icon" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -78,7 +78,7 @@
                     android:layout_toStartOf="@+id/textView5"
                     android:src="@mipmap/picture_error_icon" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/ds2"
@@ -90,7 +90,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp14" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/ds15">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -122,7 +122,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp14" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/user_nick_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/ds15">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -158,7 +158,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp14" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/user_phone_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/ds15">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -191,7 +191,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp14" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/user_emil_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -217,7 +217,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/ds15">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -225,7 +225,7 @@
                     android:textColor="@color/color_333333"
                     android:textSize="@dimen/sp14" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/userPersonalizedSignature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -258,7 +258,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
