@@ -33,11 +33,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabIconTint="@drawable/tab_icon_color_selector"
-            app:tabTextColor="@color/purple_active"
-            app:tabIndicatorColor="@color/purple_active"
+            app:tabTextColor="@color/blue_active"
+            app:tabIndicatorColor="@color/blue_active"
             app:tabIndicator="@drawable/tab_indicator_share"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/selectDocumentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:clickable="true"
+            android:contentDescription="上传文件"
+            android:focusable="true"
+            android:src="@drawable/ic_add_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

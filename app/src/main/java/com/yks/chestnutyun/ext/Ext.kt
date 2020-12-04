@@ -117,12 +117,18 @@ private fun <T : View> T.clickEnable(): Boolean {
     return flag
 }
 
+/**
+ *  获取点击的最后时间
+ */
 private var <T : View> T.triggerLastTime: Long
     get() = if (getTag(1234567898) != null) getTag(1234567898) as Long else -601
     set(value) {
         setTag(1234567898, value)
     }
 
+/**
+ * 设置规定的重复点击间隔时间
+ */
 private var <T : View> T.triggerDelay: Long
     get() = if (getTag(987654318) != null) getTag(987654318) as Long else 600
     set(value) {

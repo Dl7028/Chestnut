@@ -99,79 +99,77 @@ class FileUtils(private val context: Context) {
     }
 
     /**
-     * API版本19的路径的获取
+     * 4.4及以后
      *
      * @param uri
      * @return
      */
     private fun getFilePathByUriAPI19(uri: Uri): String? {
         // 4.4及之后的 是以 content:// 开头的，比如 content://com.android.providers.media.documents/document/image%3A235700
-        if (ContentResolver.SCHEME_CONTENT == uri.scheme && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (DocumentsContract.isDocumentUri(context, uri)) {
-                if (isExternalStorageDocument(uri)) {
-                    // ExternalStorageProvider
-                    val docId = DocumentsContract.getDocumentId(uri)
-                    val split = docId.split(":".toRegex()).toTypedArray()
-                    val type = split[0]
-                    if ("primary".equals(type, ignoreCase = true)) {
-                        return if (split.size > 1) {
-                            Environment.getExternalStorageDirectory().toString() + "/" + split[1]
-                        } else {
-                            Environment.getExternalStorageDirectory().toString() + "/"
-                        }
-                        // This is for checking SD Card
+        if (DocumentsContract.isDocumentUri(context, uri)) {
+            if (isExternalStorageDocument(uri)) {
+                // ExternalStorageProvider
+                val docId = DocumentsContract.getDocumentId(uri)
+                val split = docId.split(":".toRegex()).toTypedArray()
+                val type = split[0]
+                if ("primary".equals(type, ignoreCase = true)) {
+                    return if (split.size > 1) {
+                        context.getExternalFilesDir(null)?.path.toString() + "/" + split[1]
+                    } else {
+                        context.getExternalFilesDir(null)?.path.toString() + "/"
                     }
-                } else if (isDownloadsDocument(uri)) {
-                    //下载内容提供者时应当判断下载管理器是否被禁用
-                    val stateCode: Int = context.packageManager
-                        .getApplicationEnabledSetting("com.android.providers.downloads")
-                    if (stateCode != 0 && stateCode != 1) {
-                        return null
-                    }
-                    var id = DocumentsContract.getDocumentId(uri)
-                    // 如果出现这个RAW地址，我们则可以直接返回!
-                    if (id.startsWith("raw:")) {
-                        return id.replaceFirst("raw:".toRegex(), "")
-                    }
-                    if (id.contains(":")) {
-                        val tmp = id.split(":".toRegex()).toTypedArray()
-                        if (tmp.size > 1) {
-                            id = tmp[1]
-                        }
-                    }
-                    var contentUri: Uri = Uri.parse("content://downloads/public_downloads")
-                    Timber.d("测试打印Uri: $uri")
-                    try {
-                        contentUri = ContentUris.withAppendedId(contentUri, id.toLong())
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                    var path = getDataColumn(contentUri, null, null)
-                    if (path != null) return path
-                    // 兼容某些特殊情况下的文件管理器!
-                    val fileName = getFileNameByUri(uri)
-                    if (fileName != null) {
-                        path = Environment.getExternalStorageDirectory().toString()
-                            .toString() + "/Download/" + fileName
-                        return path
-                    }
-                } else if (isMediaDocument(uri)) {
-                    // MediaProvider
-                    val docId = DocumentsContract.getDocumentId(uri)
-                    val split = docId.split(":".toRegex()).toTypedArray()
-                    val type = split[0]
-                    var contentUri: Uri? = null
-                    if ("image" == type) {
-                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    } else if ("video" == type) {
-                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-                    } else if ("audio" == type) {
-                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-                    }
-                    val selection = "_id=?"
-                    val selectionArgs = arrayOf(split[1])
-                    return getDataColumn(contentUri, selection, selectionArgs)
+                    // This is for checking SD Card
                 }
+            } else if (isDownloadsDocument(uri)) {
+                //下载内容提供者时应当判断下载管理器是否被禁用
+                val stateCode: Int = context.packageManager
+                    .getApplicationEnabledSetting("com.android.providers.downloads")
+                if (stateCode != 0 && stateCode != 1) {
+                    return null
+                }
+
+                var id = DocumentsContract.getDocumentId(uri)
+                // 如果出现这个RAW地址，我们则可以直接返回!
+                if (id.startsWith("raw:")) {
+                    return id.replaceFirst("raw:".toRegex(), "")
+                }
+                if (id.contains(":")) {
+                    val tmp = id.split(":".toRegex()).toTypedArray()
+                    if (tmp.size > 1) {
+                        id = tmp[1]
+                    }
+                }
+                var contentUri: Uri = Uri.parse("content://downloads/public_downloads")
+                Timber.d("测试打印Uri: $uri")
+                try {
+                    contentUri = ContentUris.withAppendedId(contentUri, id.toLong())
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+                var path = getDataColumn(contentUri, null, null)
+                if (path != null) return path
+                // 兼容某些特殊情况下的文件管理器!
+                val fileName = getFileNameByUri(uri)
+                if (fileName != null) {
+                    path = context.getExternalFilesDir(null)?.path.toString()+ "/Download/" + fileName
+                    return path
+                }
+            } else if (isMediaDocument(uri)) {
+                // MediaProvider
+                val docId = DocumentsContract.getDocumentId(uri)
+                val split = docId.split(":".toRegex()).toTypedArray()
+                val type = split[0]
+                var contentUri: Uri? = null
+                if ("image" == type) {
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                } else if ("video" == type) {
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                } else if ("audio" == type) {
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                }
+                val selection = "_id=?"
+                val selectionArgs = arrayOf(split[1])
+                return getDataColumn(contentUri, selection, selectionArgs)
             }
         }
         return null
@@ -230,10 +228,6 @@ class FileUtils(private val context: Context) {
         return null
     }
 
-    private fun isExternalStorageDocument(uri: Uri): Boolean {
-        return "com.android.externalstorage.documents" == uri.authority
-    }
-
     private fun isOtherDocument(uri: Uri?): Boolean {
         // 以/storage开头的也直接返回
         if (uri?.path != null) {
@@ -249,11 +243,15 @@ class FileUtils(private val context: Context) {
     }
 
     private fun isDownloadsDocument(uri: Uri): Boolean {
-        return "com.android.providers.downloads.documents" == uri.getAuthority()
+        return "com.android.providers.downloads.documents" == uri.authority
+    }
+
+    private fun isExternalStorageDocument(uri: Uri): Boolean {
+        return "com.android.externalstorage.documents" == uri.authority
     }
 
     private fun isMediaDocument(uri: Uri): Boolean {
-        return "com.android.providers.media.documents" == uri.getAuthority()
+        return "com.android.providers.media.documents" == uri.authority
     }
 
 }

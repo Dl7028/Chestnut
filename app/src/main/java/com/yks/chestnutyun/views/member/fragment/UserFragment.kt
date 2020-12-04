@@ -24,9 +24,7 @@ import com.yks.chestnutyun.R
 import com.yks.chestnutyun.customView.CustomDialog
 import com.yks.chestnutyun.databinding.FragmentUserBinding
 import com.yks.chestnutyun.ext.setOnClickWithFilter
-import com.yks.chestnutyun.utils.PathUtils
-import com.yks.chestnutyun.utils.ToastUtil
-import com.yks.chestnutyun.utils.UriToFilePathUtil
+import com.yks.chestnutyun.utils.*
 import com.yks.chestnutyun.viewmodels.UserViewModel
 import com.yks.chestnutyun.views.base.BaseFragment
 import com.zhihu.matisse.Matisse
@@ -50,15 +48,11 @@ import java.io.File
  * @CreateDate:     2020/11/9 15:25
  */
 @AndroidEntryPoint
-@RuntimePermissions
-@RequiresApi(Build.VERSION_CODES.Q)
 class UserFragment: BaseFragment() {
 
-    private val REQUEST_CODE_CHOOSE: Int = 1001
-    private val TAG: String? = "UserFragment"
+    private val TAG: String = "UserFragment"
     private val viewModel: UserViewModel by viewModels()
     private lateinit var mDialog: CustomDialog
-    val ACCEPTED_MIMETYPES = arrayOf("image/jpeg", "image/png")
 
 
     private lateinit var binding: FragmentUserBinding
@@ -91,7 +85,7 @@ class UserFragment: BaseFragment() {
 
         val bundle = requireActivity().intent.extras!!
         val name = bundle.getString("username")!!
-        viewModel.getUserInfo(name) //获取信息
+        viewModel.getUserInfo(name) //
 
 
         user_nick_name.setOnClickWithFilter {
@@ -104,7 +98,9 @@ class UserFragment: BaseFragment() {
             requireActivity().finish()
         }
         personalImage.setOnClickWithFilter {
-            getPictureWithPermissionCheck() //权限访问
+//            getPictureWithPermissionCheck() //权限访问
+            selectPicture.launch(ACCEPTED_MIMETYPES)
+
 
         }
 
@@ -145,70 +141,6 @@ class UserFragment: BaseFragment() {
         }
     }
 
-    /**
-     * 获取图片
-     *
-     */
-    @NeedsPermission(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
-    )
-    fun getPicture() {
-        //构造数据，页面跳转
-       selectPicture.launch(ACCEPTED_MIMETYPES)
-    }
-
-    /**
-     * 拒绝
-     *
-     */
-    @OnPermissionDenied(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
-    )
-    fun onGalleryDenied() {
-        ToastUtil.showToast("未授权权限，部分功能不能使用")
-        Timber.d("拒绝")
-    }
-
-    /**
-     * 不再询问
-     *
-     */
-    @OnNeverAskAgain(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
-    )
-    fun onGalleryAskAgain() {
-        Timber.d("不再询问")
-
-        mDialog = CustomDialog(activity, "未获取权限", "是否设置权限？", {
-            //取消
-
-            mDialog.dismiss()
-        }, {
-            //确认
-            jumpSetting()
-            mDialog.dismiss()
-        }, "取消", "确认")
-        mDialog.setCanotBackPress()
-        mDialog.setCanceledOnTouchOutside(false)
-        mDialog.show()
-    }
-
-
-    @SuppressLint("NeedOnRequestPermissionsResult")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        onRequestPermissionsResult(requestCode, grantResults)
-    }
-
-
-
 
 
 
@@ -243,31 +175,5 @@ class UserFragment: BaseFragment() {
         }
     }
 
-    /**
-     * 定义协议
-     *
-     */
-    class GetContentWithMimeTypes : ActivityResultContract<Array<String>, Uri?>() {
-        override fun createIntent(
-            context: Context,
-            input: Array<String>
-        ): Intent {
-            return Intent(Intent.ACTION_GET_CONTENT)
-                .addCategory(Intent.CATEGORY_OPENABLE)
-                .setType("*/*")
-                .putExtra(Intent.EXTRA_MIME_TYPES, input);
 
-        }
-
-        override fun getSynchronousResult(
-            context: Context,
-            input: Array<String>
-        ): SynchronousResult<Uri?>? {
-            return null
-        }
-
-        override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
-            return if (intent == null || resultCode != Activity.RESULT_OK) null else intent.data
-        }
-    }
 }
