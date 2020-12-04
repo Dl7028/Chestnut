@@ -5,26 +5,35 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.adaper.*
 import com.yks.chestnutyun.adaper.VIDEO_PAGE_INDEX
 import com.yks.chestnutyun.views.base.BaseFragment
 import com.yks.chestnutyun.databinding.FragmentTabViewPagerBinding
+import com.yks.chestnutyun.utils.*
 import com.yks.chestnutyun.utils.ACCEPTED_ALL
-import com.yks.chestnutyun.utils.GetContentWithMimeTypes
+import com.yks.chestnutyun.viewmodels.FilesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_tab_view_pager.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
+import java.io.File
 
 /**
  * @Description:    管理 ViewPager 的fragment
  * @Author:         Yu ki-r
  * @CreateDate:     2020/10/30 11:14
  */
+@AndroidEntryPoint
 class TabFilesViewPagerFragment : BaseFragment() {
     private lateinit var viewPagerBinding: FragmentTabViewPagerBinding
 
-
+    private val viewModel: FilesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +60,7 @@ class TabFilesViewPagerFragment : BaseFragment() {
             tab.text = getTabTitle(position)
         }.attach()
         viewPagerBinding.selectDocumentButton.setOnClickListener{
-            selectDocument.launch(ACCEPTED_ALL)
+            selectDocument.launch(ACCEPTED_DOCUMENT)
         }
     }
 
@@ -59,10 +68,25 @@ class TabFilesViewPagerFragment : BaseFragment() {
     }
 
     override fun startObserve() {
+        viewModel.mPostFileResultStatus.observe(this){
+            if (it.showLoading) showProgressDialog(R.string.post_loading) else dismissProgressDialog()  //显示/隐藏 进度条
+            if (it.showEnd) {
+                ToastUtil.showToast(it.showEnd.toString())  //请求成功
+            }
+            it.showError?.let { errorMsg ->        //请求失败
+                ToastUtil.showToast( it.showError)
+            }
+        }
     }
 
-    private val selectDocument = registerForActivityResult(GetContentWithMimeTypes()){
-        Timber.d("getContent获取到的uri为：${it.toString()}")
+    private val selectDocument = registerForActivityResult(GetContentWithMimeTypes()){uri->
+        Timber.d("getContent获取到的uri为：${uri.toString()}")
+        val file = File(PathUtils.getPath(requireActivity(), uri!!).toString())
+        val requestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull()) //构建图片Body
+        val body: MultipartBody.Part =
+                MultipartBody.Part.createFormData("file", file.name, requestBody)
+        viewModel.postFile(body)
+        Timber.d(file.path)
     }
 
 

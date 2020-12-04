@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContract
  */
 val ACCEPTED_MIMETYPES = arrayOf("image/*")
 val ACCEPTED_ALL = arrayOf("*/*")
+val ACCEPTED_DOCUMENT = arrayOf("application/pdf","application/vnd.oasis.opendocument.text","text/plain")
 
 /**
  * 定义协议

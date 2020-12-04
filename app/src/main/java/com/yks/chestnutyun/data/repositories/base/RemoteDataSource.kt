@@ -7,6 +7,7 @@ import com.yks.chestnutyun.data.bean.User
 import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.utils.safeApiCall
 import okhttp3.MultipartBody
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -122,11 +123,30 @@ class RemoteDataSource@Inject constructor() {
      */
     private suspend fun toPostPortrait(part: MultipartBody.Part):ResultData<String>{
         val postResult =ApiImpl.postPortrait(part)
-        Log.d(TAG, ""+postResult)
+        Timber.d(TAG, ""+postResult)
         if (postResult.code==1){
             return ResultData.Success(postResult.message)
         }
         return ResultData.ErrorMessage(postResult.message)
+    }
+
+    //================================【文件相关】=======================================
+
+    suspend fun postFile(part: MultipartBody.Part) = safeApiCall(call = {toPostFile(part)})
+
+    /**
+     * 上传文件
+     *
+     * @param part
+     * @return
+     */
+    private suspend fun toPostFile(part: MultipartBody.Part):ResultData<String>{
+        val postFileResult =ApiImpl.postFile(part)
+        Timber.d(TAG, ""+postFileResult.message)
+        if (postFileResult.code==1){
+            return ResultData.Success(postFileResult.message)
+        }
+        return ResultData.ErrorMessage(postFileResult.message)
     }
 
 

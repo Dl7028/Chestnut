@@ -64,4 +64,17 @@ interface ApiService {
     @Multipart
     @POST(USER_INFO_PORTRAIT)
     suspend fun postPortrait(@Part part: MultipartBody.Part ):BaseBean<String>
+
+    //================================【文件相关】=======================================
+
+    /**
+     * 上传文件
+     *
+     * @param part
+     * @return
+     */
+    @Multipart
+    @POST(FILE_MANAGER_FILE)
+    suspend fun postFile(@Part part: MultipartBody.Part):BaseBean<String>
+
 }
