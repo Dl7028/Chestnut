@@ -95,7 +95,6 @@ class TabFilesViewPagerFragment : BaseFragment() {
     private fun getTabTitle(position: Int): String? {
         return when (position) {
             ALL_FILES_PAGE_INDEX -> getString(R.string.all_files)
-            VIDEO_PAGE_INDEX ->getString(R.string.video)
             MUSIC_PAGE_INDEX ->getString(R.string.music)
             PICTURE_PAGE_INDEX ->getString(R.string.picture)
             else -> null

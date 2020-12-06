@@ -1,6 +1,5 @@
 package com.yks.chestnutyun.data.repositories.base
 
-import android.util.Log
 import com.yks.chestnutyun.data.api.http.RetrofitClient
 import com.yks.chestnutyun.data.bean.base.ResultData
 import com.yks.chestnutyun.data.bean.User
@@ -11,14 +10,14 @@ import timber.log.Timber
 import javax.inject.Inject
 
 /**
- * @Description:
+ * @Description:    数据源
  * @Author:         Yu ki-r
  * @CreateDate:     2020/11/8 16:33
  */
 class RemoteDataSource@Inject constructor() {
 
     private   val TAG: String="RemoteDataSource"
-    private val ApiImpl = RetrofitClient.getInStance().service
+    private val apiImpl = RetrofitClient.getInStance().service
 
 
     //================================【登录相关】=======================================
@@ -37,7 +36,7 @@ class RemoteDataSource@Inject constructor() {
      * @return
      */
     private suspend fun toGetCode(userName: String):ResultData<String> {
-        val getCodeResult = ApiImpl.getCode(userName)
+        val getCodeResult = apiImpl.getCode(userName)
         if (getCodeResult.code==1){
             return ResultData.Success(getCodeResult.message)
         }
@@ -53,7 +52,7 @@ class RemoteDataSource@Inject constructor() {
      * @return
      */
     private suspend fun toRegister(username: String, password: String, verificationCode:String): ResultData<String> {
-        val registerResult = ApiImpl.register(username, password,verificationCode)
+        val registerResult = apiImpl.register(username, password,verificationCode)
         if (registerResult.code == 1) {
             return ResultData.Success(registerResult.message)
         }
@@ -68,7 +67,7 @@ class RemoteDataSource@Inject constructor() {
      * @return
      */
      suspend fun toLogin(userName:String, password: String):ResultData<String>{
-        val loginResult =ApiImpl.login(userName,password)
+        val loginResult =apiImpl.login(userName,password)
         if (loginResult.code==1){
             return ResultData.Success(loginResult.message)
 
@@ -94,7 +93,7 @@ class RemoteDataSource@Inject constructor() {
      * @return
      */
     private suspend fun toGetUserInfo(name: String): ResultData<BaseBean<User>> {
-        val getResult =ApiImpl.getUserInfo(name)
+        val getResult =apiImpl.getUserInfo(name)
         if (getResult.code==1){
             return ResultData.Success(getResult)
         }
@@ -108,7 +107,7 @@ class RemoteDataSource@Inject constructor() {
      * @return
      */
     private suspend fun toModifyUserMessages(user: User):ResultData<String> {
-        val changeResult =ApiImpl.modifyUserMessages(user)
+        val changeResult =apiImpl.modifyUserMessages(user)
         if (changeResult.code==1){
             return ResultData.Success(changeResult.message)
         }
@@ -122,7 +121,7 @@ class RemoteDataSource@Inject constructor() {
      * @return
      */
     private suspend fun toPostPortrait(part: MultipartBody.Part):ResultData<String>{
-        val postResult =ApiImpl.postPortrait(part)
+        val postResult =apiImpl.postPortrait(part)
         Timber.d(TAG, ""+postResult)
         if (postResult.code==1){
             return ResultData.Success(postResult.message)
@@ -141,7 +140,7 @@ class RemoteDataSource@Inject constructor() {
      * @return
      */
     private suspend fun toPostFile(part: MultipartBody.Part):ResultData<String>{
-        val postFileResult =ApiImpl.postFile(part)
+        val postFileResult =apiImpl.postFile(part)
         Timber.d(TAG, ""+postFileResult.message)
         if (postFileResult.code==1){
             return ResultData.Success(postFileResult.message)

@@ -32,9 +32,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorHeight = "1dp"
+            android:textSize = "18sp"
+            app:tabSelectedTextColor = "@color/colorAccent"
             app:tabIconTint="@drawable/tab_icon_color_selector"
-            app:tabTextColor="@color/blue_active"
-            app:tabIndicatorColor="@color/blue_active"
+            app:tabIndicatorColor="@color/colorAccent"
             app:tabIndicator="@drawable/tab_indicator_share"
             android:textStyle="bold" />
 

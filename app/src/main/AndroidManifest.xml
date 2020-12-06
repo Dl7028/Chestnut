@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".views.member.activity.UserActivity"></activity>
+        <activity android:name=".views.member.activity.UserActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".views.member.activity.LoginActivity">
             <intent-filter>

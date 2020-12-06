@@ -28,7 +28,7 @@ import com.yks.chestnutyun.views.files.video.TabVideoFragment
 const val ALL_FILES_PAGE_INDEX = 0
 const val VIDEO_PAGE_INDEX = 1
 const val MUSIC_PAGE_INDEX = 2
-const val PICTURE_PAGE_INDEX = 3
+const val PICTURE_PAGE_INDEX = 1
 
 
 class ChestnutPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) { //FragmentStatePagerAdapter - 适用于对未知数量的页面进行分页。
@@ -39,7 +39,6 @@ class ChestnutPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
      */
     private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(  //将fragments放进map中
             ALL_FILES_PAGE_INDEX to { TabAllFilesFragment() },
-            VIDEO_PAGE_INDEX to { TabVideoFragment() },
             MUSIC_PAGE_INDEX to { TabMusicFragment() },
             PICTURE_PAGE_INDEX to { TabMusicFragment() },
 

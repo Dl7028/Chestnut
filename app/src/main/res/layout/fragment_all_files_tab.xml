@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textView2"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_all_files_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="全部文件"
+        android:layout_height="match_parent"
+        android:padding = "8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
