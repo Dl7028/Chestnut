@@ -21,6 +21,11 @@ const val USER = "user"
 //用户上传图片
 const val USER_INFO_PORTRAIT = "userInfo/portrait"
 //==============================【文件相关】============================
+
+//上传文件
 const val FILE_MANAGER_FILE = "file/manager/file"
+//获取文件列表
+const val FILE_MANAGER_LS = "file/manager/ls"
+
 
 

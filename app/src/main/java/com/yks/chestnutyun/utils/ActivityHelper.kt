@@ -95,12 +95,12 @@ object ActivityHelper {
          *
          * @return 当前 Activity
          */
-        fun getCurrentActivity(): Activity? {
+        fun getCurrentActivity(): Activity {
             var activity: Activity? = null
             if (!activityStack.isEmpty()) {
                 activity = activityStack.peek()
             }
-            return activity
+            return activity!!
         }
 
         private class MyActivityLifecycleCallbacks() :

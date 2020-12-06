@@ -1,6 +1,7 @@
 package com.yks.chestnutyun.data.repositories.base
 
 import com.yks.chestnutyun.data.api.http.RetrofitClient
+import com.yks.chestnutyun.data.bean.FileItem
 import com.yks.chestnutyun.data.bean.base.ResultData
 import com.yks.chestnutyun.data.bean.User
 import com.yks.chestnutyun.data.bean.base.BaseBean
@@ -146,6 +147,21 @@ class RemoteDataSource@Inject constructor() {
             return ResultData.Success(postFileResult.message)
         }
         return ResultData.ErrorMessage(postFileResult.message)
+    }
+
+    suspend fun getFileList() = safeApiCall(call = {toGetFileList()})
+
+    /**
+     * 获取文件列表
+     *
+     * @return
+     */
+    private suspend fun toGetFileList():ResultData<MutableList<FileItem>>{
+        val getResult =apiImpl.getFileList()
+        if (getResult.code==1){
+            return ResultData.Success(getResult.data)
+        }
+        return ResultData.ErrorMessage(getResult.message)
     }
 
 

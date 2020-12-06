@@ -1,6 +1,7 @@
 package com.yks.chestnutyun.data.api
 
 import com.yks.chestnutyun.data.api.http.*
+import com.yks.chestnutyun.data.bean.FileItem
 import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.data.bean.User
 import okhttp3.MultipartBody
@@ -76,5 +77,8 @@ interface ApiService {
     @Multipart
     @POST(FILE_MANAGER_FILE)
     suspend fun postFile(@Part part: MultipartBody.Part):BaseBean<String>
+
+    @GET(FILE_MANAGER_LS)
+    suspend fun getFileList():BaseBean<MutableList<FileItem>>
 
 }

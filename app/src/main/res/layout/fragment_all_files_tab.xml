@@ -6,10 +6,11 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragment_all_files_rv"
+        android:id="@+id/fragmentAllFilesRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding = "8dp"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
