@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background = "#88FFFFFF"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_marginBottom="@dimen/sp8"
+    android:layout_marginLeft="@dimen/sp8"
+    android:layout_marginRight="@dimen/sp8">
 
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/item_file_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/doc" />
 
     <TextView
         android:id="@+id/item_file_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="8dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/item_file_image"
         app:layout_constraintTop_toTopOf="@+id/item_file_image"
         tools:text="3118005387徐潮松.docx" />
@@ -31,15 +40,17 @@
         android:id="@+id/item_file_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="404.51KB"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/item_file_image"
-        app:layout_constraintStart_toStartOf="@+id/item_file_name" />
+        app:layout_constraintStart_toStartOf="@+id/item_file_name"
+        tools:text="404.51KB" />
 
     <TextView
         android:id="@+id/item_file_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:textSize = "12sp"
         app:layout_constraintBottom_toBottomOf="@+id/item_file_size"
         app:layout_constraintStart_toEndOf="@+id/item_file_size"
         tools:text="2020-12-06 08:04" />

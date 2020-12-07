@@ -80,14 +80,18 @@ class TabFilesViewPagerFragment : BaseFragment() {
     }
 
     private val selectDocument = registerForActivityResult(GetContentWithMimeTypes()){uri->
-        Timber.d("getContent获取到的uri为：${uri.toString()}")
-        val file = File(PathUtils.getPath(requireActivity(), uri!!).toString())
-        val requestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull()) //构建图片Body
-        val body: MultipartBody.Part =
+        if (uri!=null){
+            Timber.d("getContent获取到的uri为：${uri.toString()}")
+            val file = File(PathUtils.getPath(requireActivity(), uri!!).toString())
+            val requestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull()) //构建图片Body
+            val body: MultipartBody.Part =
                 MultipartBody.Part.createFormData("file", file.name, requestBody)
-        viewModel.postFile(body)
-        Timber.d(file.path)
+            viewModel.postFile(body)
+            Timber.d(file.path)
+
+        }
     }
+
 
 
 
