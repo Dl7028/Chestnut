@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="false"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_main"
+            app:layout_constraintBottom_toTopOf="@+id/main_bottom_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"
@@ -44,6 +44,7 @@
                 app:layout_collapseMode="parallax">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/mainTitleBar"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -83,63 +84,305 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mainSelectBar"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/ds50"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/home_cannel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/ds50"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/ds15"
+                        android:text="取消"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp14"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/home_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="已选中1个文件"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/sp18"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/home_right_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/ds50"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="@dimen/ds15"
+                        android:text="全选"
+                        android:textColor="@color/color_1689FF"
+                        android:textSize="@dimen/sp14"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 
-        <com.gauravk.bubblenavigation.BubbleNavigationLinearView
-            android:id="@+id/bottom_navigation_main"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_bottom_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:elevation="8dp"
-            android:orientation="horizontal"
-            android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <com.gauravk.bubblenavigation.BubbleToggleView
-                android:id="@+id/l_item_mine"
-                android:layout_width="0dp"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mainBottomButton"
+
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:bt_active="true"
-                app:bt_icon="@drawable/ic_photos"
-                app:bt_colorActive="@color/blue_active"
-                app:bt_colorInactive="@color/default_inactive"
-                app:bt_shape="@drawable/shop_background_stroke"
-                app:bt_title="文件" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-            <com.gauravk.bubblenavigation.BubbleToggleView
-                android:id="@+id/l_item_home"
-                android:layout_width="0dp"
+                <com.gauravk.bubblenavigation.BubbleNavigationLinearView
+                    android:id="@+id/bottom_navigation_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:elevation="8dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.gauravk.bubblenavigation.BubbleToggleView
+                        android:id="@+id/l_item_mine"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:bt_active="true"
+                        app:bt_colorActive="@color/blue_active"
+                        app:bt_colorInactive="@color/default_inactive"
+                        app:bt_icon="@drawable/ic_photos"
+                        app:bt_shape="@drawable/shop_background_stroke"
+                        app:bt_title="文件" />
+
+                    <com.gauravk.bubblenavigation.BubbleToggleView
+                        android:id="@+id/l_item_home"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:bt_active="true"
+                        app:bt_colorActive="@color/blue_active"
+                        app:bt_colorInactive="@color/default_inactive"
+                        app:bt_shape="@drawable/shop_background_stroke"
+                        app:bt_title="主页" />
+
+
+                    <com.gauravk.bubblenavigation.BubbleToggleView
+                        android:id="@+id/l_item_file"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:bt_active="true"
+                        app:bt_colorActive="@color/blue_active"
+                        app:bt_colorInactive="@color/default_inactive"
+                        app:bt_icon="@drawable/ic_person"
+                        app:bt_shape="@drawable/shop_background_stroke"
+                        app:bt_title="我的" />
+
+
+                </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+
+                android:id="@+id/mainBottomSelect"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:bt_active="true"
-                app:bt_colorActive="@color/blue_active"
-                app:bt_colorInactive="@color/default_inactive"
-                app:bt_shape="@drawable/shop_background_stroke"
-                app:bt_title="主页" />
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorAccent"
+                android:orientation="horizontal"
+                android:visibility="gone"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <com.gauravk.bubblenavigation.BubbleToggleView
-                android:id="@+id/l_item_file"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:bt_active="true"
-                app:bt_icon="@drawable/ic_person"
-                app:bt_colorActive="@color/blue_active"
-                app:bt_colorInactive="@color/default_inactive"
-                app:bt_shape="@drawable/shop_background_stroke"
-                app:bt_title="我的" />
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/sp6"
+                        android:src="@mipmap/select_file_download_icon" />
 
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/ds6"
+                        android:layout_marginBottom="@dimen/ds6"
+                        android:text="下载"
+                        android:textColor="@color/color_c9c9c9"
+                        android:textSize="@dimen/sp14" />
+                </LinearLayout>
 
-        </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/sp6"
+                        android:src="@mipmap/select_file_share_icon" />
 
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/ds6"
+                        android:layout_marginBottom="@dimen/ds6"
+                        android:text="分享"
+                        android:textColor="@color/color_c9c9c9"
+                        android:textSize="@dimen/sp14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/ds6"
+                        android:src="@mipmap/select_file_rename_icon" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/ds6"
+                        android:layout_marginBottom="@dimen/ds6"
+                        android:text="重命名"
+                        android:textColor="@color/color_c9c9c9"
+                        android:textSize="@dimen/sp14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:layout_marginTop="@dimen/ds6"
+                        android:src="@mipmap/select_file_delete_icon" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/ds6"
+                        android:layout_marginBottom="@dimen/ds6"
+                        android:text="删除"
+                        android:textColor="@color/color_c9c9c9"
+                        android:textSize="@dimen/sp14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/ds6"
+                        android:src="@mipmap/select_file_more_icon" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/ds6"
+                        android:layout_marginBottom="@dimen/ds6"
+                        android:text="更多"
+                        android:textColor="@color/color_c9c9c9"
+                        android:textSize="@dimen/sp14" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

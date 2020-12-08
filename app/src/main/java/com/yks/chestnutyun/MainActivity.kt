@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
     private fun initListener() {
 
         mainBinding.bottomNavigationMain.setNavigationChangeListener { _, position ->
-            Log.d(TAG, "" + position)
             when(position){
                 0 -> {
                     findNavController(this,

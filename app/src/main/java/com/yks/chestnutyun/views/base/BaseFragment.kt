@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.ListFragment
 import com.yks.chestnutyun.customView.ProgressDialogFragment
 
 /**
@@ -15,7 +16,7 @@ import com.yks.chestnutyun.customView.ProgressDialogFragment
  * @Author:         Yu ki-r
  * @CreateDate:     2020/10/30 9:09
  */
-abstract class BaseFragment : Fragment(){
+abstract class BaseFragment : Fragment() {
 
     private lateinit var progressDialogFragment: ProgressDialogFragment
     private var isLoaded = false
