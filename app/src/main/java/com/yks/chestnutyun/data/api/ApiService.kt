@@ -5,6 +5,7 @@ import com.yks.chestnutyun.data.bean.FileItem
 import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.data.bean.User
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 /**
@@ -78,7 +79,21 @@ interface ApiService {
     @POST(FILE_MANAGER_FILE)
     suspend fun postFile(@Part part: MultipartBody.Part):BaseBean<String>
 
+    /**
+     * 获取文件列表
+     *
+     * @return
+     */
     @GET(FILE_MANAGER_LS)
     suspend fun getFileList():BaseBean<MutableList<FileItem>>
+
+    /**
+     * 图片的预览
+     *
+     * @param filename
+     * @return
+     */
+    @GET(FILE_MANAGER_SHOW_PICTURE)
+    suspend fun getPreviewPictures(@Query("filename") filename: String):ResponseBody
 
 }

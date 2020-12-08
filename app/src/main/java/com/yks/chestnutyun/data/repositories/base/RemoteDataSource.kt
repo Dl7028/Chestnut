@@ -5,9 +5,13 @@ import com.yks.chestnutyun.data.bean.FileItem
 import com.yks.chestnutyun.data.bean.base.ResultData
 import com.yks.chestnutyun.data.bean.User
 import com.yks.chestnutyun.data.bean.base.BaseBean
+import com.yks.chestnutyun.utils.ActivityHelper
+import com.yks.chestnutyun.utils.FileUtils
 import com.yks.chestnutyun.utils.safeApiCall
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import timber.log.Timber
+import java.io.File
 import javax.inject.Inject
 
 /**
@@ -162,6 +166,24 @@ class RemoteDataSource@Inject constructor() {
             return ResultData.Success(getResult.data)
         }
         return ResultData.ErrorMessage(getResult.message)
+    }
+    suspend fun getPreviewPicture(filename:String) = safeApiCall(call = {toGetPreviewPicture(filename)})
+
+    /**
+     * 根据图片名字获取图片io流
+     *
+     * @param filename
+     * @return
+     */
+    private suspend fun toGetPreviewPicture(filename:String):ResultData<File>{
+        val getResult =apiImpl.getPreviewPictures(filename)
+        Timber.d(getResult.contentLength().toString())
+        val file:File? = FileUtils.getFileFromResponse(getResult, ActivityHelper.getCurrentActivity()) //io流转换为文件
+        Timber.d("文件路径---------->"+file?.path)
+        if (file!=null){
+            return ResultData.Success(file)
+        }
+        return ResultData.ErrorMessage("预览失败")
     }
 
 

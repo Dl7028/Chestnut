@@ -6,6 +6,7 @@ import com.yks.chestnutyun.data.bean.base.ResultData
 import com.yks.chestnutyun.data.repositories.base.RemoteDataSource
 import com.yks.chestnutyun.utils.ListModel
 import okhttp3.MultipartBody
+import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -47,6 +48,25 @@ class FilesRepository @Inject constructor(
             listModel.postValue(ListModel(showLoading = false, showEnd = true,data= postResult.data))
         } else if (postResult is ResultData.ErrorMessage) {
             listModel.postValue(ListModel(showLoading = false, showError = postResult.message))
+        }
+    }
+
+    /**
+     * 获取预览的图片
+     *
+     * @param filename
+     * @param listModel
+     */
+    suspend fun getPreviewPicture(filename:String, listModel: MutableLiveData<ListModel<File?>>){
+        listModel.postValue(ListModel(showLoading = true))
+        val getResult = remoteDataSource.getPreviewPicture(filename)
+
+        if (getResult is ResultData.Success) {
+            listModel.postValue(ListModel(showLoading = false, showEnd = true,data = getResult.data))
+        } else if (getResult is ResultData.ErrorMessage) {
+            listModel.postValue(ListModel(showLoading = false, showError = getResult.message))
+        }else if (getResult is ResultData.Error){
+            listModel.postValue(ListModel(showLoading = false, showError = getResult.exception.toString()))
         }
     }
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.adaper.*
@@ -39,7 +40,7 @@ class TabFilesViewPagerFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewPagerBinding = FragmentTabViewPagerBinding.inflate(inflater,container,false)
         initView()
         return viewPagerBinding.root
@@ -82,7 +83,7 @@ class TabFilesViewPagerFragment : BaseFragment() {
     private val selectDocument = registerForActivityResult(GetContentWithMimeTypes()){uri->
         if (uri!=null){
             Timber.d("getContent获取到的uri为：${uri.toString()}")
-            val file = File(PathUtils.getPath(requireActivity(), uri!!).toString())
+            val file = File(PathUtils.getPath(requireActivity(), uri).toString())
             val requestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull()) //构建图片Body
             val body: MultipartBody.Part =
                 MultipartBody.Part.createFormData("file", file.name, requestBody)

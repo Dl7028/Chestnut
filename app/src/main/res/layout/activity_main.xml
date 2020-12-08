@@ -26,6 +26,8 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
+            android:animateLayoutChanges="true"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,13 +40,14 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:animateLayoutChanges="true"
+
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="parallax">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/mainTitleBar"
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -95,7 +98,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/home_cannel"
+                        android:id="@+id/home_cancel"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/ds50"
                         android:gravity="center_vertical"
@@ -148,6 +151,8 @@
             android:id="@+id/main_bottom_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -232,6 +237,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/main_download_ll"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -262,6 +268,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/main_share_ll"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -292,6 +299,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/main_rename_ll"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -322,6 +330,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/main_delete_ll"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -353,6 +362,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/main_more_ll"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -384,5 +394,7 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

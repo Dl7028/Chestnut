@@ -10,6 +10,7 @@ import com.yks.chestnutyun.utils.ListModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
+import java.io.File
 
 /**
  * @Description:
@@ -21,6 +22,8 @@ class FilesViewModel @ViewModelInject constructor(
 ): ViewModel() {
     val mPostFileResultStatus = MutableLiveData<ListModel<String>>()
     val mGetFileListResultStatus = MutableLiveData<ListModel<MutableList<FileItem>>>()
+    val mGetPreviewPictureResultStatus = MutableLiveData<ListModel<File?>>()
+
 
     /**
      * 上传图片
@@ -44,6 +47,20 @@ class FilesViewModel @ViewModelInject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             filesRepository.getFileList(
                 mGetFileListResultStatus
+            )
+        }
+    }
+
+    /**
+     * 获取预览的图片
+     *
+     * @param filename
+     */
+    fun getPreviewPicture(filename:String){
+        viewModelScope.launch(Dispatchers.IO) {
+            filesRepository.getPreviewPicture(
+                filename,
+                mGetPreviewPictureResultStatus
             )
         }
     }

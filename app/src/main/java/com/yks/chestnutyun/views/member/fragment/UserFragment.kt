@@ -120,13 +120,14 @@ class UserFragment: BaseFragment() {
                     userPhoneNumber.text = it.data?.phoneNumber
                     userEmilAddress.text = it.data?.email.toString()
                     userPersonalizedSignature.text = it.data?.personalizedSignature
+                    Timber.d(it.data?.portrait)
                 }
                 //显示图片
                 if (it.data?.portrait != null) Glide.with(this).load(it.data.portrait)
                     .into(personalImage)
             }
             it.showError?.let { errorMsg ->        //请求失败
-                ToastUtil.showToast(it.showError)
+                ToastUtil.showToast(errorMsg)
             }
         }
         //上传用户头像

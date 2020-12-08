@@ -16,7 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/ds10" />
+            android:layout_marginTop="@dimen/ds10"
+            android:src="@mipmap/select_file_download_icon" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,7 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/ds10" />
+            android:layout_marginTop="@dimen/ds10"
+            android:src="@mipmap/select_file_share_icon" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,7 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/ds10" />
+            android:layout_marginTop="@dimen/ds10"
+            android:src="@mipmap/select_file_rename_icon" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/ds10"
-            />
+            android:src="@mipmap/select_file_delete_icon" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -114,7 +117,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/ds10" />
+            android:layout_marginTop="@dimen/ds10"
+            android:src="@mipmap/select_file_more_icon" />
 
         <TextView
             android:layout_width="wrap_content"

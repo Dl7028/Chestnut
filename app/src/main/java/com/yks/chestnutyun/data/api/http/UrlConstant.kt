@@ -26,6 +26,7 @@ const val USER_INFO_PORTRAIT = "userInfo/portrait"
 const val FILE_MANAGER_FILE = "file/manager/file"
 //获取文件列表
 const val FILE_MANAGER_LS = "file/manager/ls"
-
+//预览图片
+const val FILE_MANAGER_SHOW_PICTURE = "file/manager/show/picture"
 
 
