@@ -182,8 +182,8 @@ class RemoteDataSource@Inject constructor() {
         val response =apiImpl.getPreviewPictures(filename)
 
         val preViewPicture:File? = FileUtils.getFileFromResponse(response.body()!!) //io流转换为文件
-        if (preViewPicture!=null){
-            return ResultData.Success(preViewPicture)
+        if (response.code()==200){
+            return ResultData.Success(preViewPicture!!)
         }
         return ResultData.ErrorMessage("预览失败")
     }

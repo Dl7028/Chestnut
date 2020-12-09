@@ -17,7 +17,6 @@ abstract class BaseActivity : AppCompatActivity() {
     private lateinit var progressDialogFragment: ProgressDialogFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        setTheme(getAppTheme())
         super.onCreate(savedInstanceState)
         setContentView(setLayoutId())
 

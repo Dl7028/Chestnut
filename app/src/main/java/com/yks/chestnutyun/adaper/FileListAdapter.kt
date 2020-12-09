@@ -38,7 +38,6 @@ class FileListAdapter(layoutResId: Int) : BaseQuickAdapter<FileItem, BaseViewHol
         val name = item.filename
         val imageView: ImageView = holder.getView(R.id.item_file_image)
 
-
         if(name.endsWith("jpeg")||name.endsWith("phg")||name.endsWith("jpg")){
             Glide.with(ActivityHelper.getCurrentActivity()).load(R.mipmap.picture).into(imageView)
         }

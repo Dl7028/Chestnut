@@ -21,6 +21,9 @@ import com.yks.chestnutyun.views.files.PreviewPictureActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_all_files_tab.*
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import timber.log.Timber
 
 
@@ -40,6 +43,8 @@ class TabAllFilesFragment: BaseFragment() {
     override fun setLayoutResId(): Int  = R.layout.fragment_all_files_tab
 
     override fun initView() {
+        //注册
+        EventBus.getDefault().register(this);
         //获取MainActivity中的控件
         val titleBar = requireActivity().findViewById<ConstraintLayout>(R.id.mainTitleBar)
         val titleSelectBar = requireActivity().findViewById<ConstraintLayout>(R.id.mainSelectBar)
@@ -68,13 +73,13 @@ class TabAllFilesFragment: BaseFragment() {
         })
         mAdapter.setOnItemClickListener{ adapter, view, position ->
             val filename = mList[position].filename
-            val intent = Intent()
-            intent.putExtra("filename", filename)
-            intent.setClass(requireActivity(), PreviewPictureActivity::class.java)
-            requireActivity().startActivity(intent)
+            if (filename.endsWith("jpg")||filename.endsWith("png")||filename.endsWith("jpeg")){
+                val intent = Intent()
+                intent.putExtra("filename", filename)
+                intent.setClass(requireActivity(), PreviewPictureActivity::class.java)
+                requireActivity().startActivity(intent)
+            }
         }
-
-
 
     }
 
@@ -135,7 +140,23 @@ class TabAllFilesFragment: BaseFragment() {
             }
             dismissProgressDialog()
         }
+    }
 
+    /**
+     * 事件总线，观察事件，删除图片后在这里刷新ui
+     *
+     * @param event
+     */
+    @Subscribe
+    fun updateUi(event: String) {
+        Timber.d(event)
+        ToastUtil.showToast(event)
+        viewModel.getFileList()
+    }
 
+    override fun onDestroyView() {
+        //取消注册
+        EventBus.getDefault().unregister(this);
+        super.onDestroyView()
     }
 }

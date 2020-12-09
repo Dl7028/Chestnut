@@ -22,6 +22,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 import java.io.File
 
@@ -70,9 +71,11 @@ class TabFilesViewPagerFragment : BaseFragment() {
 
     override fun startObserve() {
         viewModel.mPostFileResultStatus.observe(this){
-            if (it.showLoading) showProgressDialog(R.string.post_loading) else dismissProgressDialog()  //显示/隐藏 进度条
+//            if (it.showLoading) showProgressDialog(R.string.post_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
                 ToastUtil.showToast(it.showEnd.toString())  //请求成功
+                EventBus.getDefault().post("增加了文件");
+
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtil.showToast( it.showError)

@@ -8,6 +8,7 @@
     android:background="@color/black">
 
     <RelativeLayout
+        android:id="@+id/previewPictureTitle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/ds80">
 
@@ -17,18 +18,21 @@
             android:layout_marginTop="@dimen/ds30">
 
             <ImageView
-                android:id="@+id/big_image_back"
+                android:id="@+id/bigImageBack"
                 android:layout_width="@dimen/ds50"
                 android:layout_height="@dimen/ds50"
                 android:padding="@dimen/ds15"
                 android:src="@mipmap/white_back_icon" />
 
             <TextView
-                android:id="@+id/bigimage_title"
+                android:id="@+id/bigImageName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="预览图片"
+
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp18"
                 android:textStyle="bold" />

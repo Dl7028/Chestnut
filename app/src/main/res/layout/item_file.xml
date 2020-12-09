@@ -35,6 +35,8 @@
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/item_file_image"
         app:layout_constraintTop_toTopOf="@+id/item_file_image"
+        android:singleLine="true"
+        android:ellipsize="end"
         tools:text="3118005387徐潮松.docx" />
 
     <TextView

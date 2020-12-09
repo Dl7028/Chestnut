@@ -57,15 +57,18 @@ class FilesRepository @Inject constructor(
      * @param filename
      * @param listModel
      */
-    suspend fun getPreviewPicture(filename:String, listModel: MutableLiveData<ListModel<File?>>){
-        listModel.postValue(ListModel(showLoading = true))
-        val getResult = remoteDataSource.getPreviewPicture(filename)
-        if (getResult is ResultData.Success) {
-            listModel.postValue(ListModel(showLoading = false, showEnd = true,data = getResult.data))
-        } else if (getResult is ResultData.ErrorMessage) {
-            listModel.postValue(ListModel(showLoading = false, showError = getResult.message))
-        }else if (getResult is ResultData.Error){
-            listModel.postValue(ListModel(showLoading = false, showError = getResult.exception.toString()))
+    suspend fun getPreviewPicture(filename:String, listModel: MutableLiveData<ListModel<File?>>?){
+        listModel?.postValue(ListModel(showLoading = true))
+        when (val getResult = remoteDataSource.getPreviewPicture(filename)) {
+            is ResultData.Success -> {
+                listModel?.postValue(ListModel(showLoading = false, showEnd = true,data = getResult.data))
+            }
+            is ResultData.ErrorMessage -> {
+                listModel?.postValue(ListModel(showLoading = false, showError = getResult.message))
+            }
+            is ResultData.Error -> {
+                listModel?.postValue(ListModel(showLoading = false, showError = getResult.exception.toString()))
+            }
         }
     }
 
