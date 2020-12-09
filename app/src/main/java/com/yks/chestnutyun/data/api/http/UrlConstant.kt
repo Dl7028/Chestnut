@@ -28,5 +28,6 @@ const val FILE_MANAGER_FILE = "file/manager/file"
 const val FILE_MANAGER_LS = "file/manager/ls"
 //预览图片
 const val FILE_MANAGER_SHOW_PICTURE = "file/manager/show/picture"
-
+//删除文件
+const val FILE_MANAGER_DELETE_FILE = "file/manager/file"
 

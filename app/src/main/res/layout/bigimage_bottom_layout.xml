@@ -82,7 +82,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/big_image_delete_button"
+        android:id="@+id/bigImageDeleteButton"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

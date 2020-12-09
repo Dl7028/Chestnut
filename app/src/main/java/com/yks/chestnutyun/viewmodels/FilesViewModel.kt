@@ -23,6 +23,7 @@ class FilesViewModel @ViewModelInject constructor(
     val mPostFileResultStatus = MutableLiveData<ListModel<String>>()
     val mGetFileListResultStatus = MutableLiveData<ListModel<MutableList<FileItem>>>()
     val mGetPreviewPictureResultStatus = MutableLiveData<ListModel<File?>>()
+    val mDeleteFileResultStatus = MutableLiveData<ListModel<String>>()
 
 
     /**
@@ -61,6 +62,20 @@ class FilesViewModel @ViewModelInject constructor(
             filesRepository.getPreviewPicture(
                 filename,
                 mGetPreviewPictureResultStatus
+            )
+        }
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param filename
+     */
+    fun deleteFile(filename:String){
+        viewModelScope.launch(Dispatchers.IO) {
+            filesRepository.deleteFile(
+                filename,
+                mDeleteFileResultStatus
             )
         }
     }

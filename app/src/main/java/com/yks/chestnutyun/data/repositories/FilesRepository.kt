@@ -69,5 +69,21 @@ class FilesRepository @Inject constructor(
         }
     }
 
+    /**
+     * 删除文件
+     *
+     * @param filename
+     * @param listModel
+     */
+    suspend fun deleteFile(filename:String,listModel: MutableLiveData<ListModel<String>>){
+        listModel.postValue(ListModel(showLoading = true))
+        val deleteResult = remoteDataSource.deleteFile(filename)
+        if (deleteResult is ResultData.Success) {
+            listModel.postValue(ListModel(showLoading = false, showEnd = true,data = deleteResult.data))
+        } else if (deleteResult is ResultData.ErrorMessage) {
+            listModel.postValue(ListModel(showLoading = false, showError = deleteResult.message))
+        }
+    }
+
 
 }

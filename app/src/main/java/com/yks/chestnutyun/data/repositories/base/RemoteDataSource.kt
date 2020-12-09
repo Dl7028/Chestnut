@@ -168,6 +168,8 @@ class RemoteDataSource@Inject constructor() {
         }
         return ResultData.ErrorMessage(getResult.message)
     }
+
+
     suspend fun getPreviewPicture(filename:String) = safeApiCall(call = {toGetPreviewPicture(filename)})
 
     /**
@@ -186,5 +188,19 @@ class RemoteDataSource@Inject constructor() {
         return ResultData.ErrorMessage("预览失败")
     }
 
+    suspend fun deleteFile(filename:String) = safeApiCall(call = {toDeleteFile(filename)})
+    /**
+     * 删除文件
+     *
+     * @param filename
+     * @return
+     */
+    private suspend fun toDeleteFile(filename: String):ResultData<String>{
+        val deleteResult =apiImpl.deleteFile(filename)
+        if (deleteResult.code==0){
+            return ResultData.Success(deleteResult.message)
+        }
+        return ResultData.ErrorMessage(deleteResult.message)
+    }
 
 }

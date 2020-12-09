@@ -36,6 +36,8 @@
     <string name="login_loading">登录中…</string>
     <string name="save_loading">保存中…</string>
     <string name="post_loading">上传中…</string>
+    <string name="delete_loading">正在删除…</string>
+
 
 
 

@@ -98,4 +98,13 @@ interface ApiService {
     @GET(FILE_MANAGER_SHOW_PICTURE)
     suspend fun getPreviewPictures(@Query("filename") filename: String): Response<ResponseBody>
 
+    /**
+     * 删除文件
+     *
+     * @param filename
+     * @return
+     */
+    @DELETE(FILE_MANAGER_DELETE_FILE)
+    suspend fun deleteFile(@Query("filename") filename:String):BaseBean<String>
+
 }
