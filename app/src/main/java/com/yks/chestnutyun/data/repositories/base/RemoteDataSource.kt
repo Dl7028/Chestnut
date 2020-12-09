@@ -1,5 +1,6 @@
 package com.yks.chestnutyun.data.repositories.base
 
+import com.yks.chestnutyun.app.MyApplication
 import com.yks.chestnutyun.data.api.http.RetrofitClient
 import com.yks.chestnutyun.data.bean.FileItem
 import com.yks.chestnutyun.data.bean.base.ResultData
@@ -71,7 +72,7 @@ class RemoteDataSource@Inject constructor() {
      * @param password 密码
      * @return
      */
-     suspend fun toLogin(userName:String, password: String):ResultData<String>{
+     private suspend fun toLogin(userName:String, password: String):ResultData<String>{
         val loginResult =apiImpl.login(userName,password)
         if (loginResult.code==1){
             return ResultData.Success(loginResult.message)
@@ -176,12 +177,11 @@ class RemoteDataSource@Inject constructor() {
      * @return
      */
     private suspend fun toGetPreviewPicture(filename:String):ResultData<File>{
-        val getResult =apiImpl.getPreviewPictures(filename)
-        Timber.d(getResult.contentLength().toString())
-        val file:File? = FileUtils.getFileFromResponse(getResult, ActivityHelper.getCurrentActivity()) //io流转换为文件
-        Timber.d("文件路径---------->"+file?.path)
-        if (file!=null){
-            return ResultData.Success(file)
+        val response =apiImpl.getPreviewPictures(filename)
+
+        val preViewPicture:File? = FileUtils.getFileFromResponse(response.body()!!) //io流转换为文件
+        if (preViewPicture!=null){
+            return ResultData.Success(preViewPicture)
         }
         return ResultData.ErrorMessage("预览失败")
     }

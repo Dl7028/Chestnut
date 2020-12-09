@@ -28,11 +28,11 @@
 
     <TextView
         android:id="@+id/item_file_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:textSize="14sp"
         android:textColor="@color/black"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/item_file_image"
         app:layout_constraintTop_toTopOf="@+id/item_file_image"
         tools:text="3118005387徐潮松.docx" />

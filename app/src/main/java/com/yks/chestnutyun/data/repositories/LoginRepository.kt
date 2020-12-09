@@ -47,7 +47,7 @@ class LoginRepository @Inject constructor(
     suspend fun login(username: String, password: String, listModel: MutableLiveData<ListModel<Int>>?){
 
         listModel?.postValue(ListModel(showLoading=true))
-        val loginResult = remoteDataSource.toLogin(username, password)
+        val loginResult = remoteDataSource.login(username, password)
         setListModel(loginResult, listModel)
     }
 

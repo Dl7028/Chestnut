@@ -6,6 +6,7 @@ import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.data.bean.User
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.http.*
 
 /**
@@ -93,7 +94,8 @@ interface ApiService {
      * @param filename
      * @return
      */
+
     @GET(FILE_MANAGER_SHOW_PICTURE)
-    suspend fun getPreviewPictures(@Query("filename") filename: String):ResponseBody
+    suspend fun getPreviewPictures(@Query("filename") filename: String): Response<ResponseBody>
 
 }

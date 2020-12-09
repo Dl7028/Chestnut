@@ -60,7 +60,6 @@ class FilesRepository @Inject constructor(
     suspend fun getPreviewPicture(filename:String, listModel: MutableLiveData<ListModel<File?>>){
         listModel.postValue(ListModel(showLoading = true))
         val getResult = remoteDataSource.getPreviewPicture(filename)
-
         if (getResult is ResultData.Success) {
             listModel.postValue(ListModel(showLoading = false, showEnd = true,data = getResult.data))
         } else if (getResult is ResultData.ErrorMessage) {

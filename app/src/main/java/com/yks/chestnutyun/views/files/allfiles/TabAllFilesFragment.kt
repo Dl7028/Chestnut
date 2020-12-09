@@ -21,6 +21,7 @@ import com.yks.chestnutyun.views.files.PreviewPictureActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_all_files_tab.*
 import kotlinx.android.synthetic.main.fragment_login.*
+import timber.log.Timber
 
 
 /**
@@ -127,6 +128,7 @@ class TabAllFilesFragment: BaseFragment() {
             if (it.showEnd) {
                 mList = it.data!!
                 mAdapter.setNewInstance(mList)
+                Timber.d(mList[0].filename)
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtil.showToast(it.showError)

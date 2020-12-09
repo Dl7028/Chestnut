@@ -34,14 +34,13 @@ abstract class BaseRetrofitClient {
                 logging.level = HttpLoggingInterceptor.Level.BASIC
             }
             builder.addInterceptor(logging)
-                .addInterceptor(mLoggingInterceptor)
+//                .addInterceptor(mLoggingInterceptor)
                 .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
             handleBuilder(builder)
             return builder.build()
         }
 
-    @SuppressLint("BinaryOperationInTimber")
     private val mLoggingInterceptor = Interceptor { chain ->
         val request = chain.request()
         val t1 = System.nanoTime()
@@ -49,6 +48,7 @@ abstract class BaseRetrofitClient {
         val t2 = System.nanoTime()
         val contentType = response.body?.contentType()
         val content = response.body?.string()
+
         Timber.tag("ykr")
             .d("request url:" + request.url + "\ntime:" + (t2 - t1) / 1e6 + "\nbody:" + content + "\n")
         response.newBuilder()

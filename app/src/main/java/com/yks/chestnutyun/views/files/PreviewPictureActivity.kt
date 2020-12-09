@@ -3,7 +3,9 @@ package com.yks.chestnutyun.views.files
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.yks.chestnutyun.R
+import com.yks.chestnutyun.utils.ListModel
 import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.viewmodels.FilesViewModel
 import com.yks.chestnutyun.views.base.BaseActivity
@@ -31,19 +33,18 @@ class PreviewPictureActivity: BaseActivity() {
 
     override fun startObserve() {
         viewModel.mGetPreviewPictureResultStatus.observe(this) {
-            if (it.showLoading) showProgressDialog(R.string.loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
-                Glide.with(this).load(it.data?.path).into(bigImage)
+                Glide.with(this)
+                    .load(it.data)
+                    .skipMemoryCache(true) // 不使用内存缓存
+                    .diskCacheStrategy(DiskCacheStrategy.NONE) // 不使用磁盘缓存
+                    .into(bigImage)
                 Timber.d(it.data?.path)
-
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtil.showToast(errorMsg)
                 Timber.d(errorMsg)
             }
-
-
         }
-
     }
 }
