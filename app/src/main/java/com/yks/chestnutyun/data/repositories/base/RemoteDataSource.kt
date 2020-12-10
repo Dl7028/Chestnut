@@ -188,16 +188,16 @@ class RemoteDataSource@Inject constructor() {
         return ResultData.ErrorMessage("预览失败")
     }
 
-    suspend fun deleteFile(filename:String) = safeApiCall(call = {toDeleteFile(filename)})
+    suspend fun deleteFile(filename:Array<String>) = safeApiCall(call = {toDeleteFile(filename)})
     /**
      * 删除文件
      *
      * @param filename
      * @return
      */
-    private suspend fun toDeleteFile(filename: String):ResultData<String>{
+    private suspend fun toDeleteFile(filename: Array<String>):ResultData<String>{
         val deleteResult =apiImpl.deleteFile(filename)
-        if (deleteResult.code==0){
+        if (deleteResult.code==1){
             return ResultData.Success(deleteResult.message)
         }
         return ResultData.ErrorMessage(deleteResult.message)

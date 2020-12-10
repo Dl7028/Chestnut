@@ -104,7 +104,8 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/ds15"
                         android:text="取消"
-                        android:textColor="@color/color_333333"
+
+                        android:textColor="#ffffff"
                         android:textSize="@dimen/sp14"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -112,13 +113,14 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/home_title"
+                        android:id="@+id/homeTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:text="已选中1个文件"
-                        android:textColor="@color/color_333333"
+
+                        android:textColor="#ffffff"
                         android:textSize="@dimen/sp18"
                         android:textStyle="bold"
                         android:visibility="visible"
@@ -135,7 +137,7 @@
                         android:gravity="center_vertical"
                         android:paddingEnd="@dimen/ds15"
                         android:text="全选"
-                        android:textColor="@color/color_1689FF"
+                        android:textColor="@color/colorAccent"
                         android:textSize="@dimen/sp14"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -227,7 +229,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@color/colorAccent"
+                android:background="@color/blue_active"
                 android:orientation="horizontal"
                 android:visibility="gone"
 
@@ -263,7 +265,7 @@
                         android:layout_marginTop="@dimen/ds6"
                         android:layout_marginBottom="@dimen/ds6"
                         android:text="下载"
-                        android:textColor="@color/color_c9c9c9"
+                        android:textColor="#ffffff"
                         android:textSize="@dimen/sp14" />
                 </LinearLayout>
 
@@ -294,7 +296,7 @@
                         android:layout_marginTop="@dimen/ds6"
                         android:layout_marginBottom="@dimen/ds6"
                         android:text="分享"
-                        android:textColor="@color/color_c9c9c9"
+                        android:textColor="#ffffff"
                         android:textSize="@dimen/sp14" />
                 </LinearLayout>
 
@@ -325,7 +327,7 @@
                         android:layout_marginTop="@dimen/ds6"
                         android:layout_marginBottom="@dimen/ds6"
                         android:text="重命名"
-                        android:textColor="@color/color_c9c9c9"
+                        android:textColor="#ffffff"
                         android:textSize="@dimen/sp14" />
                 </LinearLayout>
 
@@ -357,7 +359,7 @@
                         android:layout_marginTop="@dimen/ds6"
                         android:layout_marginBottom="@dimen/ds6"
                         android:text="删除"
-                        android:textColor="@color/color_c9c9c9"
+                        android:textColor="#ffffff"
                         android:textSize="@dimen/sp14" />
                 </LinearLayout>
 
@@ -388,7 +390,7 @@
                         android:layout_marginTop="@dimen/ds6"
                         android:layout_marginBottom="@dimen/ds6"
                         android:text="更多"
-                        android:textColor="@color/color_c9c9c9"
+                        android:textColor="#ffffff"
                         android:textSize="@dimen/sp14" />
                 </LinearLayout>
             </LinearLayout>

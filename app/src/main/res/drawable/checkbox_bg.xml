@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/checkbox_pressed" android:state_checked="true"/> <!--状态为选中-->
+    <item android:drawable="@drawable/checkbox_normal" android:state_checked="false"/><!--状态为没选中-->
+    <item android:drawable="@drawable/checkbox_normal" /> <!--默认的必须的有一个-->
+</selector>

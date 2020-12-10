@@ -132,5 +132,8 @@ dependencies {
     //EventBus
     implementation 'org.greenrobot:eventbus:3.2.0'
 
+    //LiveDataBus
+    implementation 'com.jeremyliao:live-event-bus:1.4.2'
+
 
 }

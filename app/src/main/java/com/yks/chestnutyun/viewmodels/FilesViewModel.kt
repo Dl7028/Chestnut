@@ -71,7 +71,7 @@ class FilesViewModel @ViewModelInject constructor(
      *
      * @param filename
      */
-    fun deleteFile(filename:String){
+    fun deleteFile(filename:Array<String>){
         viewModelScope.launch(Dispatchers.IO) {
             filesRepository.deleteFile(
                 filename,

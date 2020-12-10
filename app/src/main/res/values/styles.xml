@@ -33,4 +33,8 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
+    <style  name="customCheckbox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_bg</item>
+    </style>
+
 </resources>

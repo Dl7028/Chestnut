@@ -8,6 +8,7 @@ import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
+import java.sql.Array
 
 /**
  * @Description:    登录使用的接口调用方法
@@ -105,6 +106,6 @@ interface ApiService {
      * @return
      */
     @DELETE(FILE_MANAGER_DELETE_FILE)
-    suspend fun deleteFile(@Query("filename") filename:String):BaseBean<String>
+    suspend fun deleteFile(@Query("filenames") filename:kotlin.Array<String>):BaseBean<String>
 
 }

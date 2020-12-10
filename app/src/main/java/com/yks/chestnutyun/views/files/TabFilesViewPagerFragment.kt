@@ -73,12 +73,10 @@ class TabFilesViewPagerFragment : BaseFragment() {
         viewModel.mPostFileResultStatus.observe(this){
 //            if (it.showLoading) showProgressDialog(R.string.post_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
-                ToastUtil.showToast(it.showEnd.toString())  //请求成功
                 EventBus.getDefault().post("增加了文件");
-
             }
             it.showError?.let { errorMsg ->        //请求失败
-                ToastUtil.showToast( it.showError)
+                ToastUtil.showToast( errorMsg)
             }
         }
     }

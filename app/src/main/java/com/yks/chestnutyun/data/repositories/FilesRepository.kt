@@ -78,7 +78,7 @@ class FilesRepository @Inject constructor(
      * @param filename
      * @param listModel
      */
-    suspend fun deleteFile(filename:String,listModel: MutableLiveData<ListModel<String>>){
+    suspend fun deleteFile(filename:Array<String>,listModel: MutableLiveData<ListModel<String>>){
         listModel.postValue(ListModel(showLoading = true))
         val deleteResult = remoteDataSource.deleteFile(filename)
         if (deleteResult is ResultData.Success) {

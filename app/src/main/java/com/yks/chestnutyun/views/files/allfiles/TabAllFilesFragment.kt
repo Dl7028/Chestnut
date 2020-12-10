@@ -1,5 +1,6 @@
 package com.yks.chestnutyun.views.files.allfiles
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.View
 import android.widget.LinearLayout
@@ -38,10 +39,13 @@ class TabAllFilesFragment: BaseFragment() {
     private val  viewModel: FilesViewModel by viewModels()
     private val mAdapter: FileListAdapter = FileListAdapter(R.layout.item_file)
     private lateinit var mList:MutableList<FileItem>
+    private  var fileNameList: ArrayList<String> = ArrayList<String>()
 
+    private var ifLongClick = false
 
     override fun setLayoutResId(): Int  = R.layout.fragment_all_files_tab
 
+    @SuppressLint("SetTextI18n")
     override fun initView() {
         //注册
         EventBus.getDefault().register(this);
@@ -51,13 +55,31 @@ class TabAllFilesFragment: BaseFragment() {
         val bottomButtons = requireActivity().findViewById<ConstraintLayout>(R.id.mainBottomButton)
         val bottomSelectButtons = requireActivity().findViewById<LinearLayout>(R.id.mainBottomSelect)
         val cancelTv = requireActivity().findViewById<TextView>(R.id.home_cancel)
+        val homeTitle = requireActivity().findViewById<TextView>(R.id.homeTitle)
+        val selectAll = requireActivity().findViewById<TextView>(R.id.home_right_button)
         val deleteButton = requireActivity().findViewById<LinearLayout>(R.id.main_delete_ll)
+
 
         fragmentAllFilesRv.layoutManager = LinearLayoutManager(requireActivity())
         fragmentAllFilesRv.adapter = mAdapter
+
+
         //取消
         cancelTv.setOnClickListener{
             selectToNormal(titleBar, bottomButtons, titleSelectBar, bottomSelectButtons)
+            mAdapter.apply {
+                cancel()
+                notifyDataSetChanged()
+            }
+            ifLongClick  = false
+        }
+        //全选
+        selectAll.setOnClickListener{
+            mAdapter.apply {
+                addAll(fileNameList)
+                notifyDataSetChanged()
+
+            }
         }
         //删除
         deleteButton.setOnClickListener{
@@ -66,18 +88,32 @@ class TabAllFilesFragment: BaseFragment() {
 
         //listView的长按事件
         mAdapter.setOnItemLongClickListener(OnItemLongClickListener { adapter, view, position ->
-            ToastUtil.showToast("长按事件")
+            ifLongClick = true
             normalToSelect(titleBar, bottomButtons, titleSelectBar, bottomSelectButtons)
+            mAdapter.apply {
+                setCheck(mList[position].filename)
+                notifyDataSetChanged()
+                homeTitle.text = "已选中${getCheckedSize()}个文件"
+            }
 
             true
         })
         mAdapter.setOnItemClickListener{ adapter, view, position ->
-            val filename = mList[position].filename
-            if (filename.endsWith("jpg")||filename.endsWith("png")||filename.endsWith("jpeg")){
-                val intent = Intent()
-                intent.putExtra("filename", filename)
-                intent.setClass(requireActivity(), PreviewPictureActivity::class.java)
-                requireActivity().startActivity(intent)
+            if(ifLongClick){  // 长按后的点击事件
+                mAdapter.apply {
+                    setCheck(mList[position].filename)
+                    notifyDataSetChanged()
+                    homeTitle.text = "已选中${getCheckedSize()}个文件"
+
+                }
+            }else{
+                val filename = mList[position].filename
+                if (filename.endsWith("jpg")||filename.endsWith("png")||filename.endsWith("jpeg")){
+                    val intent = Intent()
+                    intent.putExtra("filename", filename)
+                    intent.setClass(requireActivity(), PreviewPictureActivity::class.java)
+                    requireActivity().startActivity(intent)
+                }
             }
         }
 
@@ -133,12 +169,19 @@ class TabAllFilesFragment: BaseFragment() {
             if (it.showEnd) {
                 mList = it.data!!
                 mAdapter.setNewInstance(mList)
+                for (list in mList){
+                    fileNameList.add(list.filename)
+                }
+                var i:Int = 0
+                for ( i in fileNameList){
+                    Timber.d("数组文件名--------->"+i)
+                }
                 Timber.d(mList[0].filename)
+
             }
             it.showError?.let { errorMsg ->        //请求失败
-                ToastUtil.showToast(it.showError)
+                ToastUtil.showToast(errorMsg)
             }
-            dismissProgressDialog()
         }
     }
 
@@ -150,7 +193,6 @@ class TabAllFilesFragment: BaseFragment() {
     @Subscribe
     fun updateUi(event: String) {
         Timber.d(event)
-        ToastUtil.showToast(event)
         viewModel.getFileList()
     }
 

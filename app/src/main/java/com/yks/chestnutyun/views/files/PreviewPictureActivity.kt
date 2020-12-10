@@ -8,6 +8,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.gyf.immersionbar.ImmersionBar
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.customView.CustomDialog
+import com.yks.chestnutyun.utils.ActivityHelper
 import com.yks.chestnutyun.utils.ListModel
 import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.viewmodels.FilesViewModel
@@ -68,7 +69,7 @@ class PreviewPictureActivity: BaseActivity() {
                 ToastUtil.showToast(it.data!!)
                 //事件的发送
                 EventBus.getDefault().post("删除了文件");
-                finish()
+                ActivityHelper.finishActivity(this)
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtil.showToast(errorMsg)
@@ -86,8 +87,7 @@ class PreviewPictureActivity: BaseActivity() {
             mDialog.dismiss()
         }, {
             //确认
-            viewModel.deleteFile(name)
-
+            viewModel.deleteFile(arrayOf(name))
             mDialog.dismiss()
 
         },"取消","确认")
