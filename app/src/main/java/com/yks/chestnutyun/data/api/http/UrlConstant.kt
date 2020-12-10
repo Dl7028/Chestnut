@@ -30,4 +30,6 @@ const val FILE_MANAGER_LS = "file/manager/ls"
 const val FILE_MANAGER_SHOW_PICTURE = "file/manager/show/picture"
 //删除文件
 const val FILE_MANAGER_DELETE_FILE = "file/manager/file"
+//更改文件名
+const val FILE_MANAGER_RENAME = "file/manager/rename"
 

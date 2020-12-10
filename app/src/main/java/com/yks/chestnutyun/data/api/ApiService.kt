@@ -116,6 +116,7 @@ interface ApiService {
      * @param newName
      * @return
      */
+    @PUT(FILE_MANAGER_RENAME)
     suspend fun renameFile(@Query("oldName")oldName:String, @Query("newName")newName:String):BaseBean<String>
 
 }

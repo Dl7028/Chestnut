@@ -31,6 +31,7 @@ class PreviewPictureActivity: BaseActivity() {
     private val viewModel: FilesViewModel by viewModels()
     private  lateinit var mDialog:CustomDialog
     private lateinit var name:String
+    private lateinit var newName:String
 
 
     override fun setLayoutId(): Int = R.layout.activity_preview_image
@@ -47,33 +48,46 @@ class PreviewPictureActivity: BaseActivity() {
         }
         //返回
         bigImageBack.setOnClickListener{
-            finish()
+            ActivityHelper.finishActivity(this)
         }
         //重命名
         bigImageRenameButton.setOnClickListener{
-            val renamePopupWindow = RenamePopupWindow(this, name)
-            //点击事件
-            renamePopupWindow.setOnItemClickListener(object : RenamePopupWindow.OnItemClickListener {
-                override fun onOkClick(nickName: String?) {
-                    renamePopupWindow.dismiss()
-                }
+            showPopupWindow()
+        }
+    }
 
-            })
-            //设置动画
-            renamePopupWindow.showAtLocation(
-                findViewById(R.id.big_image_layout),  // 设置layout在PopupWindow中显示的位置
-                Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 0
-            )
-            //取消
-            renamePopupWindow.setOnDismissListener {
-                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-
+    /**
+     *
+     *重命名的PopupWindow
+     */
+    private fun showPopupWindow() {
+        val renamePopupWindow = RenamePopupWindow(this, name)
+        //点击事件
+        renamePopupWindow.setOnItemClickListener(object : RenamePopupWindow.OnItemClickListener {
+            override fun onOkClick(nickName: String?) {
+                Timber.d(name.substring(name.lastIndexOf(".") + 1))
+                viewModel.renameFile(name,nickName!!)
+                newName = nickName
+                renamePopupWindow.dismiss()
             }
+
+        })
+        //设置动画
+        renamePopupWindow.showAtLocation(
+            findViewById(R.id.big_image_layout),  // 设置layout在PopupWindow中显示的位置
+            Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 0
+        )
+        //取消
+        renamePopupWindow.setOnDismissListener {
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
         }
     }
 
     override fun startObserve() {
         viewModel.mGetPreviewPictureResultStatus.observe(this) {
+            if(it.showLoading) showProgressDialog(R.string.loading)  else dismissProgressDialog()  //显示/隐藏 进度条
+
             if (it.showEnd) {
                 Glide.with(this)
                     .load(it.data)
@@ -88,11 +102,26 @@ class PreviewPictureActivity: BaseActivity() {
             }
         }
         viewModel.mDeleteFileResultStatus.observe(this) {
+            if(it.showLoading) showProgressDialog(R.string.delete_loading)  else dismissProgressDialog()  //显示/隐藏 进度条
+
             if (it.showEnd) {
                 ToastUtil.showToast(it.data!!)
                 //事件的发送
                 EventBus.getDefault().post("删除了文件");
                 ActivityHelper.finishActivity(this)
+            }
+            it.showError?.let { errorMsg ->        //请求失败
+                ToastUtil.showToast(errorMsg)
+                Timber.d(errorMsg)
+            }
+        }
+        viewModel.mRenameFileResultStatus.observe(this) {
+            if(it.showLoading) showProgressDialog(R.string.rename_loading)  else dismissProgressDialog()  //显示/隐藏 进度条
+            if (it.showEnd) {
+                ToastUtil.showToast(it.data!!)
+                bigImageName.text = newName
+                //事件的发送
+                EventBus.getDefault().post("更改了文件名");
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtil.showToast(errorMsg)
@@ -127,5 +156,11 @@ class PreviewPictureActivity: BaseActivity() {
         mDialog.setCanotBackPress()
         mDialog.setCanceledOnTouchOutside(false)
         mDialog.show()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        ActivityHelper.finishActivity(this)
+
     }
 }

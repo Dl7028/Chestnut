@@ -49,7 +49,7 @@ class ProgressDialogFragment : DialogFragment() {
         this.messageResId = messageResId
         this.isCancelable = isCancelable
         try {
-            fragmentManager.beginTransaction().remove(this).commit()  //每次show 之前移除之前的fragment
+//            fragmentManager.beginTransaction().remove(this).commit()  //每次show 之前移除之前的fragment
             show(fragmentManager, "progressDialogFragment")
         } catch (e: Exception) {
             e.printStackTrace()

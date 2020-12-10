@@ -52,6 +52,10 @@ class RenamePopupWindow(context: Activity, fileName: String?) : PopupWindow(cont
                 ToastUtil.showToast("请输入新的文件名!")
                 return@OnClickListener
             }
+            if (fileName!!.substring(fileName.lastIndexOf(".") + 1)!=newName.text.substring(newName.text.lastIndexOf(".") + 1)){
+                ToastUtil.showToast("不能更改文件格式!")
+                return@OnClickListener
+            }
             onItemClickListener!!.onOkClick(newName.text.toString().trim {
                 it <= ' '
             })
