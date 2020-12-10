@@ -1,15 +1,16 @@
 package com.yks.chestnutyun.views.files
 
 import android.os.Bundle
+import android.view.Gravity
+import android.view.WindowManager
 import androidx.activity.viewModels
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.gyf.immersionbar.ImmersionBar
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.customView.CustomDialog
+import com.yks.chestnutyun.customView.RenamePopupWindow
 import com.yks.chestnutyun.utils.ActivityHelper
-import com.yks.chestnutyun.utils.ListModel
 import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.viewmodels.FilesViewModel
 import com.yks.chestnutyun.views.base.BaseActivity
@@ -44,8 +45,30 @@ class PreviewPictureActivity: BaseActivity() {
         bigImageDeleteButton.setOnClickListener{
             showLayoutDialog()
         }
+        //返回
         bigImageBack.setOnClickListener{
             finish()
+        }
+        //重命名
+        bigImageRenameButton.setOnClickListener{
+            val renamePopupWindow = RenamePopupWindow(this, name)
+            //点击事件
+            renamePopupWindow.setOnItemClickListener(object : RenamePopupWindow.OnItemClickListener {
+                override fun onOkClick(nickName: String?) {
+                    renamePopupWindow.dismiss()
+                }
+
+            })
+            //设置动画
+            renamePopupWindow.showAtLocation(
+                findViewById(R.id.big_image_layout),  // 设置layout在PopupWindow中显示的位置
+                Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 0
+            )
+            //取消
+            renamePopupWindow.setOnDismissListener {
+                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
+            }
         }
     }
 
@@ -82,15 +105,25 @@ class PreviewPictureActivity: BaseActivity() {
      * 自定义对话框
      */
     private  fun showLayoutDialog() {
-        mDialog = CustomDialog(this,"提示","是否删除此图片?", {
+        mDialog = CustomDialog(this, "提示", "是否删除此图片?", {
             //取消
             mDialog.dismiss()
         }, {
             //确认
-            viewModel.deleteFile(arrayOf(name))
+            val list = ArrayList<String>()
+            list.add(name)
+            val array = list.toTypedArray()  //list转为数组
+            val str = list.joinToString(",")
+
+
+            for (s in array) {
+
+                Timber.d("数组-------------->" + s)
+            }
+            viewModel.deleteFile(str)
             mDialog.dismiss()
 
-        },"取消","确认")
+        }, "取消", "确认")
         mDialog.setCanotBackPress()
         mDialog.setCanceledOnTouchOutside(false)
         mDialog.show()

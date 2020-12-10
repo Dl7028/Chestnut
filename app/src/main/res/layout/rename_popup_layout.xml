@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#99000000">
+
+    <LinearLayout
+        android:id="@+id/rename_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/top_radiu_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/rename_cannel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/ds15"
+                android:paddingTop="@dimen/ds18"
+                android:textStyle="bold"
+                android:text="取消"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp14"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/ds16"
+                android:text="重命名"
+                android:textStyle="bold"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/sp18"/>
+
+            <TextView
+                android:id="@+id/rename_sure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingTop="@dimen/ds18"
+                android:paddingEnd="@dimen/ds15"
+                android:text="确定"
+                android:textStyle="bold"
+                android:textColor="@color/color_1689FF"
+                android:textSize="@dimen/sp14"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/ds15"
+            android:layout_marginLeft="@dimen/ds15"
+            android:layout_marginBottom="@dimen/ds25"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/rename_input"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ds45"
+                android:layout_marginTop="@dimen/ds18"
+                android:layout_marginBottom="@dimen/ds18"
+                android:background="@drawable/gray_radiu_8_bg"
+                android:paddingLeft="@dimen/ds15"
+                android:hint="请输入新的文件名"
+                android:textColor="@color/color_333333"
+                android:textColorHighlight="@color/color_999999"
+                android:textSize="@dimen/sp14" >
+                <requestFocus/>
+            </EditText>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

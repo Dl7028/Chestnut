@@ -8,10 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.listener.OnItemLongClickListener
-import com.yks.chestnutyun.MainActivity
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.adaper.FileListAdapter
 import com.yks.chestnutyun.data.bean.FileItem
@@ -21,10 +18,8 @@ import com.yks.chestnutyun.views.base.BaseFragment
 import com.yks.chestnutyun.views.files.PreviewPictureActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_all_files_tab.*
-import kotlinx.android.synthetic.main.fragment_login.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import timber.log.Timber
 
 
@@ -68,7 +63,7 @@ class TabAllFilesFragment: BaseFragment() {
         cancelTv.setOnClickListener{
             selectToNormal(titleBar, bottomButtons, titleSelectBar, bottomSelectButtons)
             mAdapter.apply {
-                cancel()
+                removeAll()
                 notifyDataSetChanged()
             }
             ifLongClick  = false
@@ -77,6 +72,7 @@ class TabAllFilesFragment: BaseFragment() {
         selectAll.setOnClickListener{
             mAdapter.apply {
                 addAll(fileNameList)
+                homeTitle.text = "已选中${getCheckedSize()}个文件"
                 notifyDataSetChanged()
 
             }

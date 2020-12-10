@@ -78,13 +78,30 @@ class FilesRepository @Inject constructor(
      * @param filename
      * @param listModel
      */
-    suspend fun deleteFile(filename:Array<String>,listModel: MutableLiveData<ListModel<String>>){
+    suspend fun deleteFile(filename:String,listModel: MutableLiveData<ListModel<String>>){
         listModel.postValue(ListModel(showLoading = true))
         val deleteResult = remoteDataSource.deleteFile(filename)
         if (deleteResult is ResultData.Success) {
             listModel.postValue(ListModel(showLoading = false, showEnd = true,data = deleteResult.data))
         } else if (deleteResult is ResultData.ErrorMessage) {
             listModel.postValue(ListModel(showLoading = false, showError = deleteResult.message))
+        }
+    }
+
+    /**
+     * 修改文件名
+     *
+     * @param oldName
+     * @param newName
+     * @param listModel
+     */
+    suspend fun renameFile(oldName: String, newName: String,listModel: MutableLiveData<ListModel<String>>) {
+        listModel.postValue(ListModel(showLoading = true))
+        val renameResult = remoteDataSource.renameFile(oldName,newName)
+        if (renameResult is ResultData.Success) {
+            listModel.postValue(ListModel(showLoading = false, showEnd = true,data = renameResult.data))
+        } else if (renameResult is ResultData.ErrorMessage) {
+            listModel.postValue(ListModel(showLoading = false, showError = renameResult.message))
         }
     }
 

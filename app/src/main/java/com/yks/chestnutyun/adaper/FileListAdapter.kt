@@ -96,7 +96,7 @@ class FileListAdapter(layoutResId: Int) : BaseQuickAdapter<FileItem, BaseViewHol
      * 取消时清空，map
      *
      */
-    fun cancel(){
+    fun removeAll(){
         map.clear()
     }
 

@@ -37,4 +37,10 @@
         <item name="android:button">@drawable/checkbox_bg</item>
     </style>
 
+    <!--popupWindow动画-->
+    <style name="AnimBottomPopup" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+
 </resources>

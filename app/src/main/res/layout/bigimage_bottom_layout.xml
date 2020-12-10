@@ -57,7 +57,7 @@
 
 
     <LinearLayout
-        android:id="@+id/big_image_rename_button"
+        android:id="@+id/bigImageRenameButton"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

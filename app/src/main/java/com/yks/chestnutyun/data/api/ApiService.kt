@@ -106,6 +106,16 @@ interface ApiService {
      * @return
      */
     @DELETE(FILE_MANAGER_DELETE_FILE)
-    suspend fun deleteFile(@Query("filenames") filename:kotlin.Array<String>):BaseBean<String>
+    suspend fun deleteFile(@Query("filenames") filename:String):BaseBean<String>
+
+
+    /**
+     * 修改文件名
+     *
+     * @param oldName
+     * @param newName
+     * @return
+     */
+    suspend fun renameFile(@Query("oldName")oldName:String, @Query("newName")newName:String):BaseBean<String>
 
 }

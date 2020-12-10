@@ -188,19 +188,37 @@ class RemoteDataSource@Inject constructor() {
         return ResultData.ErrorMessage("预览失败")
     }
 
-    suspend fun deleteFile(filename:Array<String>) = safeApiCall(call = {toDeleteFile(filename)})
+    suspend fun deleteFile(filename:String) = safeApiCall(call = {toDeleteFile(filename)})
     /**
      * 删除文件
      *
      * @param filename
      * @return
      */
-    private suspend fun toDeleteFile(filename: Array<String>):ResultData<String>{
+    private suspend fun toDeleteFile(filename: String):ResultData<String>{
         val deleteResult =apiImpl.deleteFile(filename)
         if (deleteResult.code==1){
             return ResultData.Success(deleteResult.message)
         }
         return ResultData.ErrorMessage(deleteResult.message)
+    }
+
+    suspend fun renameFile(oldName:String,newName:String) = safeApiCall(call = {toRenameFile(oldName,newName)})
+
+    /**
+     * 修改文件名
+     *
+     * @param oldName
+     * @param newName
+     * @return
+     */
+    private suspend fun toRenameFile(oldName:String,newName:String):ResultData<String>{
+
+        val renameResult =apiImpl.renameFile(oldName,newName)
+        if (renameResult.code==1){
+            return ResultData.Success(renameResult.message)
+        }
+        return ResultData.ErrorMessage(renameResult.message)
     }
 
 }
