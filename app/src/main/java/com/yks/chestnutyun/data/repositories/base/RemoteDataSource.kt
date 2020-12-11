@@ -10,7 +10,9 @@ import com.yks.chestnutyun.utils.ActivityHelper
 import com.yks.chestnutyun.utils.FileUtils
 import com.yks.chestnutyun.utils.safeApiCall
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
+import retrofit2.http.Body
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
@@ -188,15 +190,15 @@ class RemoteDataSource@Inject constructor() {
         return ResultData.ErrorMessage("预览失败")
     }
 
-    suspend fun deleteFile(filename:String) = safeApiCall(call = {toDeleteFile(filename)})
+    suspend fun deleteFile(body: RequestBody) = safeApiCall(call = {toDeleteFile(body)})
     /**
      * 删除文件
      *
      * @param filename
      * @return
      */
-    private suspend fun toDeleteFile(filename: String):ResultData<String>{
-        val deleteResult =apiImpl.deleteFile(filename)
+    private suspend fun toDeleteFile( body: RequestBody):ResultData<String>{
+        val deleteResult =apiImpl.deleteFile(body)
         if (deleteResult.code==1){
             return ResultData.Success(deleteResult.message)
         }

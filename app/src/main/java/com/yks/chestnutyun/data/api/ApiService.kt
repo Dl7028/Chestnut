@@ -5,6 +5,7 @@ import com.yks.chestnutyun.data.bean.FileItem
 import com.yks.chestnutyun.data.bean.base.BaseBean
 import com.yks.chestnutyun.data.bean.User
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -105,8 +106,9 @@ interface ApiService {
      * @param filename
      * @return
      */
-    @DELETE(FILE_MANAGER_DELETE_FILE)
-    suspend fun deleteFile(@Query("filenames") filename:String):BaseBean<String>
+
+    @HTTP(method = "DELETE", path = FILE_MANAGER_DELETE_FILE, hasBody = true)
+    suspend fun deleteFile(@Body body: RequestBody):BaseBean<String>
 
 
     /**

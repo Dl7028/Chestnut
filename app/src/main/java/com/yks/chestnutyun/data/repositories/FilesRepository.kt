@@ -6,6 +6,7 @@ import com.yks.chestnutyun.data.bean.base.ResultData
 import com.yks.chestnutyun.data.repositories.base.RemoteDataSource
 import com.yks.chestnutyun.utils.ListModel
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -78,9 +79,9 @@ class FilesRepository @Inject constructor(
      * @param filename
      * @param listModel
      */
-    suspend fun deleteFile(filename:String,listModel: MutableLiveData<ListModel<String>>){
+    suspend fun deleteFile(body: RequestBody, listModel: MutableLiveData<ListModel<String>>){
         listModel.postValue(ListModel(showLoading = true))
-        val deleteResult = remoteDataSource.deleteFile(filename)
+        val deleteResult = remoteDataSource.deleteFile(body)
         if (deleteResult is ResultData.Success) {
             listModel.postValue(ListModel(showLoading = false, showEnd = true,data = deleteResult.data))
         } else if (deleteResult is ResultData.ErrorMessage) {

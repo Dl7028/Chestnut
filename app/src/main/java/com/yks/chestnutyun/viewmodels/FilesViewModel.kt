@@ -10,6 +10,7 @@ import com.yks.chestnutyun.utils.ListModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 
 /**
@@ -72,10 +73,10 @@ class FilesViewModel @ViewModelInject constructor(
      *
      * @param filename
      */
-    fun deleteFile(filename:String){
+    fun deleteFile(body: RequestBody){
         viewModelScope.launch(Dispatchers.IO) {
             filesRepository.deleteFile(
-                filename,
+                body,
                 mDeleteFileResultStatus
             )
         }

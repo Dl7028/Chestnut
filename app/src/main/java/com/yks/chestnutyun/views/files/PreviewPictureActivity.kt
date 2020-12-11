@@ -6,6 +6,7 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.customView.CustomDialog
@@ -17,8 +18,13 @@ import com.yks.chestnutyun.views.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_preview_image.*
 import kotlinx.android.synthetic.main.bigimage_bottom_layout.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
+
 
 /**
  * @Description:
@@ -66,7 +72,7 @@ class PreviewPictureActivity: BaseActivity() {
         renamePopupWindow.setOnItemClickListener(object : RenamePopupWindow.OnItemClickListener {
             override fun onOkClick(nickName: String?) {
                 Timber.d(name.substring(name.lastIndexOf(".") + 1))
-                viewModel.renameFile(name,nickName!!)
+                viewModel.renameFile(name, nickName!!)
                 newName = nickName
                 renamePopupWindow.dismiss()
             }
@@ -142,14 +148,11 @@ class PreviewPictureActivity: BaseActivity() {
             val list = ArrayList<String>()
             list.add(name)
             val array = list.toTypedArray()  //list转为数组
-            val str = list.joinToString(",")
+            val gson = Gson()
+            val obj = gson.toJson(list)
+            val body = obj.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
 
-
-            for (s in array) {
-
-                Timber.d("数组-------------->" + s)
-            }
-            viewModel.deleteFile(str)
+            viewModel.deleteFile(body)
             mDialog.dismiss()
 
         }, "取消", "确认")

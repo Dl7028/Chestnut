@@ -78,7 +78,7 @@ class LoginFragment : BaseFragment() {
 
     override fun startObserve() {
         viewModel.mLoginStatus.observe(this) {
-            if (it.showLoading) showProgressDialog(R.string.login_loading) else dismissProgressDialog()  //显示/隐藏 进度条
+//            if (it.showLoading) showProgressDialog(R.string.login_loading) else dismissProgressDialog()  //显示/隐藏 进度条
             if (it.showEnd) {
                 //登录成功
                 //1.保存用户信息
