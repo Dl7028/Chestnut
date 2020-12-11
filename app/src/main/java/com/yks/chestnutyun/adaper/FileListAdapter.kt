@@ -65,7 +65,9 @@ class FileListAdapter(layoutResId: Int) : BaseQuickAdapter<FileItem, BaseViewHol
 
 
             if(name.endsWith("jpeg")||name.endsWith("phg")||name.endsWith("jpg")){
-                Glide.with(ActivityHelper.getCurrentActivity()).load(R.mipmap.picture).into(imageView)
+                Glide.with(ActivityHelper.getCurrentActivity()).load(R.mipmap.picture).into(
+                    imageView
+                )
             }
             if(name.endsWith("docx")||name.endsWith("doc")){
                 Glide.with(ActivityHelper.getCurrentActivity()).load(R.mipmap.doc).into(imageView)
@@ -111,9 +113,36 @@ class FileListAdapter(layoutResId: Int) : BaseQuickAdapter<FileItem, BaseViewHol
      * 全选
      *
      */
-    fun addAll(filenames:ArrayList<String>){
+    fun addAll(filenames: ArrayList<String>){
         for (filename in filenames) {
             map[filename] =true
+        }
+    }
+
+    /**
+     * 获取所有选中的文件名
+     *
+     * @return
+     */
+    fun getCheckedList():ArrayList<String>{
+         val checkedFileList = ArrayList<String>()
+
+        for ((key, value) in map) {
+            if (value) {
+                checkedFileList.add(key)
+            }
+        }
+        return checkedFileList
+    }
+
+    /**
+     * 多选删除后，设移除map中的删除的文件名
+     *
+     * @param list
+     */
+    fun setNotChecked(lists: ArrayList<String>){
+        for(filename in lists){
+            map.remove(filename)
         }
     }
 }

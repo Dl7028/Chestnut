@@ -9,8 +9,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemLongClickListener
+import com.google.gson.Gson
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.adaper.FileListAdapter
+import com.yks.chestnutyun.customView.CustomDialog
 import com.yks.chestnutyun.data.bean.FileItem
 import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.viewmodels.FilesViewModel
@@ -18,6 +20,8 @@ import com.yks.chestnutyun.views.base.BaseFragment
 import com.yks.chestnutyun.views.files.PreviewPictureActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_all_files_tab.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import timber.log.Timber
@@ -34,7 +38,14 @@ class TabAllFilesFragment: BaseFragment() {
     private val  viewModel: FilesViewModel by viewModels()
     private val mAdapter: FileListAdapter = FileListAdapter(R.layout.item_file)
     private lateinit var mList:MutableList<FileItem>
-    private  var fileNameList: ArrayList<String> = ArrayList<String>()
+    private  var fileNameList: ArrayList<String> = ArrayList<String>() //获取的文件列表
+    private var isCheckedList: ArrayList<String> = ArrayList<String>()  //被选中的文件名字list
+    private  lateinit var mDialog:CustomDialog
+
+    private lateinit var titleBar:ConstraintLayout
+    private lateinit var titleSelectBar:ConstraintLayout
+    private lateinit var bottomButtons:ConstraintLayout
+    private lateinit var bottomSelectButtons:LinearLayout
 
     private var ifLongClick = false
 
@@ -45,10 +56,10 @@ class TabAllFilesFragment: BaseFragment() {
         //注册
         EventBus.getDefault().register(this);
         //获取MainActivity中的控件
-        val titleBar = requireActivity().findViewById<ConstraintLayout>(R.id.mainTitleBar)
-        val titleSelectBar = requireActivity().findViewById<ConstraintLayout>(R.id.mainSelectBar)
-        val bottomButtons = requireActivity().findViewById<ConstraintLayout>(R.id.mainBottomButton)
-        val bottomSelectButtons = requireActivity().findViewById<LinearLayout>(R.id.mainBottomSelect)
+         titleBar = requireActivity().findViewById<ConstraintLayout>(R.id.mainTitleBar)
+         titleSelectBar = requireActivity().findViewById<ConstraintLayout>(R.id.mainSelectBar)
+         bottomButtons = requireActivity().findViewById<ConstraintLayout>(R.id.mainBottomButton)
+         bottomSelectButtons = requireActivity().findViewById<LinearLayout>(R.id.mainBottomSelect)
         val cancelTv = requireActivity().findViewById<TextView>(R.id.home_cancel)
         val homeTitle = requireActivity().findViewById<TextView>(R.id.homeTitle)
         val selectAll = requireActivity().findViewById<TextView>(R.id.home_right_button)
@@ -73,13 +84,14 @@ class TabAllFilesFragment: BaseFragment() {
             mAdapter.apply {
                 addAll(fileNameList)
                 homeTitle.text = "已选中${getCheckedSize()}个文件"
+                isCheckedList = fileNameList
                 notifyDataSetChanged()
 
             }
         }
         //删除
         deleteButton.setOnClickListener{
-            ToastUtil.showToast("点击了删除")
+            showLayoutDialog()
         }
 
         //listView的长按事件
@@ -172,8 +184,24 @@ class TabAllFilesFragment: BaseFragment() {
                 for ( i in fileNameList){
                     Timber.d("数组文件名--------->"+i)
                 }
-                Timber.d(mList[0].filename)
+//                Timber.d(mList[0].filename)
 
+            }
+            it.showError?.let { errorMsg ->        //请求失败
+                ToastUtil.showToast(errorMsg)
+            }
+        }
+        //删除事件观察
+        viewModel.mDeleteFileResultStatus.observe(this) {
+            if (it.showLoading) showProgressDialog(R.string.delete_loading) else dismissProgressDialog()  //显示/隐藏 进度条
+            if (it.showEnd) {
+                selectToNormal(titleBar, bottomButtons, titleSelectBar, bottomSelectButtons)
+                ToastUtil.showToast(it.data!!)
+                mAdapter.apply{
+                    setNotChecked(isCheckedList)
+                    notifyDataSetChanged()
+                }
+                viewModel.getFileList()
             }
             it.showError?.let { errorMsg ->        //请求失败
                 ToastUtil.showToast(errorMsg)
@@ -196,5 +224,29 @@ class TabAllFilesFragment: BaseFragment() {
         //取消注册
         EventBus.getDefault().unregister(this);
         super.onDestroyView()
+    }
+
+
+    /**
+     * 提示框
+     *
+     */
+    private  fun showLayoutDialog() {
+        mDialog = CustomDialog(requireActivity(), "提示", "是否删除选中的图片?", {
+            //取消
+            mDialog.dismiss()
+        }, {
+            //确认
+            isCheckedList = mAdapter.getCheckedList()
+            val gson = Gson()
+            val obj = gson.toJson(isCheckedList)
+            val body = obj.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+            viewModel.deleteFile(body)
+            mDialog.dismiss()
+
+        }, "取消", "确认")
+        mDialog.setCanotBackPress()
+        mDialog.setCanceledOnTouchOutside(false)
+        mDialog.show()
     }
 }
