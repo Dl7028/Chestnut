@@ -145,4 +145,14 @@ class FileListAdapter(layoutResId: Int) : BaseQuickAdapter<FileItem, BaseViewHol
             map.remove(filename)
         }
     }
+
+    /**
+     * 移除map中重命名的文件
+     *
+     * @param filename
+     */
+    fun setNotCheckedRename(filename: String){
+        map.remove(filename)
+
+    }
 }

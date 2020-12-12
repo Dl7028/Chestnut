@@ -2,7 +2,9 @@ package com.yks.chestnutyun.views.files.allfiles
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -13,12 +15,16 @@ import com.google.gson.Gson
 import com.yks.chestnutyun.R
 import com.yks.chestnutyun.adaper.FileListAdapter
 import com.yks.chestnutyun.customView.CustomDialog
+import com.yks.chestnutyun.customView.RenamePopupWindow
 import com.yks.chestnutyun.data.bean.FileItem
+import com.yks.chestnutyun.ext.setOnClickWithFilter
+import com.yks.chestnutyun.utils.ActivityHelper
 import com.yks.chestnutyun.utils.ToastUtil
 import com.yks.chestnutyun.viewmodels.FilesViewModel
 import com.yks.chestnutyun.views.base.BaseFragment
 import com.yks.chestnutyun.views.files.PreviewPictureActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_preview_image.*
 import kotlinx.android.synthetic.main.fragment_all_files_tab.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -46,6 +52,10 @@ class TabAllFilesFragment: BaseFragment() {
     private lateinit var titleSelectBar:ConstraintLayout
     private lateinit var bottomButtons:ConstraintLayout
     private lateinit var bottomSelectButtons:LinearLayout
+    private lateinit var newName:String
+    private lateinit var homeTitle:TextView
+
+    private lateinit var isLongClickedFileName:String
 
     private var ifLongClick = false
 
@@ -61,17 +71,17 @@ class TabAllFilesFragment: BaseFragment() {
          bottomButtons = requireActivity().findViewById<ConstraintLayout>(R.id.mainBottomButton)
          bottomSelectButtons = requireActivity().findViewById<LinearLayout>(R.id.mainBottomSelect)
         val cancelTv = requireActivity().findViewById<TextView>(R.id.home_cancel)
-        val homeTitle = requireActivity().findViewById<TextView>(R.id.homeTitle)
+         homeTitle = requireActivity().findViewById<TextView>(R.id.homeTitle)
         val selectAll = requireActivity().findViewById<TextView>(R.id.home_right_button)
         val deleteButton = requireActivity().findViewById<LinearLayout>(R.id.main_delete_ll)
-
+        val renameBtn = requireActivity().findViewById<LinearLayout>(R.id.main_rename_ll)
 
         fragmentAllFilesRv.layoutManager = LinearLayoutManager(requireActivity())
         fragmentAllFilesRv.adapter = mAdapter
 
 
         //取消
-        cancelTv.setOnClickListener{
+        cancelTv.setOnClickWithFilter{
             selectToNormal(titleBar, bottomButtons, titleSelectBar, bottomSelectButtons)
             mAdapter.apply {
                 removeAll()
@@ -80,7 +90,7 @@ class TabAllFilesFragment: BaseFragment() {
             ifLongClick  = false
         }
         //全选
-        selectAll.setOnClickListener{
+        selectAll.setOnClickWithFilter{
             mAdapter.apply {
                 addAll(fileNameList)
                 homeTitle.text = "已选中${getCheckedSize()}个文件"
@@ -90,8 +100,17 @@ class TabAllFilesFragment: BaseFragment() {
             }
         }
         //删除
-        deleteButton.setOnClickListener{
+        deleteButton.setOnClickWithFilter{
             showLayoutDialog()
+        }
+
+        //重命名
+        renameBtn.setOnClickWithFilter{
+            if(mAdapter.getCheckedList().size==1){
+                showPopupWindow()
+            }else{
+                ToastUtil.showToast("请选择一个文件夹或文件")
+            }
         }
 
         //listView的长按事件
@@ -99,7 +118,8 @@ class TabAllFilesFragment: BaseFragment() {
             ifLongClick = true
             normalToSelect(titleBar, bottomButtons, titleSelectBar, bottomSelectButtons)
             mAdapter.apply {
-                setCheck(mList[position].filename)
+                isLongClickedFileName = mList[position].filename
+                setCheck(isLongClickedFileName)
                 notifyDataSetChanged()
                 homeTitle.text = "已选中${getCheckedSize()}个文件"
             }
@@ -207,6 +227,27 @@ class TabAllFilesFragment: BaseFragment() {
                 ToastUtil.showToast(errorMsg)
             }
         }
+
+        viewModel.mRenameFileResultStatus.observe(this) {
+            if(it.showLoading) showProgressDialog(R.string.rename_loading)  else dismissProgressDialog()  //显示/隐藏 进度条
+            if (it.showEnd) {
+                ToastUtil.showToast(it.data!!)
+
+                //刷新文件列表
+                viewModel.getFileList()
+                selectToNormal(titleBar, bottomButtons, titleSelectBar, bottomSelectButtons)
+                mAdapter.apply{
+                    setNotCheckedRename(isLongClickedFileName)
+                    notifyDataSetChanged()
+                }
+
+
+            }
+            it.showError?.let { errorMsg ->        //请求失败
+                ToastUtil.showToast(errorMsg)
+                Timber.d(errorMsg)
+            }
+        }
     }
 
     /**
@@ -248,5 +289,35 @@ class TabAllFilesFragment: BaseFragment() {
         mDialog.setCanotBackPress()
         mDialog.setCanceledOnTouchOutside(false)
         mDialog.show()
+    }
+
+
+    /**
+     *
+     *重命名的PopupWindow
+     */
+    private fun showPopupWindow() {
+        val renamePopupWindow = RenamePopupWindow(requireActivity(), isLongClickedFileName)
+        //点击事件
+        renamePopupWindow.setOnItemClickListener(object : RenamePopupWindow.OnItemClickListener {
+            override fun onOkClick(nickName: String?) {
+
+                viewModel.renameFile(isLongClickedFileName, nickName!!)
+                newName = nickName
+
+                renamePopupWindow.dismiss()
+            }
+
+        })
+        //设置动画
+        renamePopupWindow.showAtLocation(
+            requireActivity().findViewById(R.id.fragment_all_files),  // 设置layout在PopupWindow中显示的位置
+            Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 0
+        )
+        //取消
+        renamePopupWindow.setOnDismissListener {
+            requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
+        }
     }
 }
