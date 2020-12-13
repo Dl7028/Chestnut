@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation.findNavController
 import com.gyf.immersionbar.ImmersionBar
 import com.yks.chestnutyun.databinding.ActivityMainBinding
+import com.yks.chestnutyun.utils.ActivityHelper
+import com.yks.chestnutyun.views.files.TransferListActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -28,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         ImmersionBar.with(this).titleBar(toolbar).init()
+        mainBinding.mainDownloadBtn.setOnClickListener{
+            ActivityHelper.startActivity(TransferListActivity::class.java,false)
+        }
 
     }
 

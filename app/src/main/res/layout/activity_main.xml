@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/find_push"
+                        android:id="@+id/mainDownloadBtn"
                         android:layout_width="@dimen/ds50"
                         android:layout_height="@dimen/ds50"
                         android:gravity="center_vertical"
@@ -73,7 +73,7 @@
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/find_push"
+                        app:layout_constraintStart_toStartOf="@+id/mainDownloadBtn"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatImageView

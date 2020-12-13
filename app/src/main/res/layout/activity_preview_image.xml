@@ -10,12 +10,11 @@
     <RelativeLayout
         android:id="@+id/previewPictureTitle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/ds80">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/ds50"
-            android:layout_marginTop="@dimen/ds30">
+            android:layout_height="@dimen/ds50">
 
             <ImageView
                 android:id="@+id/bigImageBack"
